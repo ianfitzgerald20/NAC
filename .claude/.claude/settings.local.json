@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Read(//c/Users/ipfit/Downloads/BulldogConnect/**)",
+      "Bash(mkdir -p frontend/assets/images backend/data backend/routes)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ]
+  }
+}

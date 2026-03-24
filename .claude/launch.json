@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "BulldogConnect Static Server (index.html)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "3000", "--directory", "C:\\Users\\ipfit\\Downloads\\BulldogConnect"],
+      "port": 3000
+    },
+    {
+      "name": "BulldogConnect v3 Static Server (bulldogconnect-v3.html)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "3001", "--directory", "C:\\Users\\ipfit\\Downloads\\BulldogConnect"],
+      "port": 3001
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "BulldogConnect Backend (Flask)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["C:\\Users\\ipfit\\Downloads\\BulldogConnect\\backend\\app.py"],
+      "port": 8081,
+      "autoPort": true
+    }
+  ]
+}

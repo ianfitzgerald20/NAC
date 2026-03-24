@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/bulldogconnect-v3.html)",
+      "Bash(python -m http.server 8080)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 2240 /F)",
+      "Bash(cmd /c \"taskkill /PID 2240 /F & taskkill /PID 28712 /F\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:53069/bulldogconnect-v3.html)",
+      "Bash(cmd /c \"taskkill /F /PID 2240\")",
+      "Bash(cmd /c \"taskkill /F /PID 28712\")",
+      "Bash(cmd /c \"tasklist /FI \"\"PID eq 2240\"\" /FI \"\"PID eq 28712\"\"\")",
+      "Bash(cmd /c \"tasklist\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/bulldogconnect-v3.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/bulldogconnect-v3.html)",
+      "WebSearch",
+      "WebFetch(domain:www.linkedin.com)",
+      "Bash(timeout /t 2 /nobreak)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(jpg)",
+      "Bash(jpeg)",
+      "Bash(webp \")",
+      "Bash(find /c/Users/ipfit/AppData/Local/Temp -name *.png -o -name *.jpg -o -name *.jpeg)",
+      "Bash(sort -t/ -k1)",
+      "Bash(curl -L -o /c/Users/ipfit/Downloads/BulldogConnect/na-logo.png https://www.norfolkacademy.org/wp-content/themes/norfolk-academy/assets/img/logo.png -w %{http_code})",
+      "Bash(curl -L -o /c/Users/ipfit/Downloads/BulldogConnect/na-logo.png https://resources.finalsite.net/images/f_auto,q_auto/v1566488035/norfolkacademyorg/r6bxpkznvcxhmictkpdf/seal275x275.jpg -w %{http_code})",
+      "Bash(curl -L -o /c/Users/ipfit/Downloads/BulldogConnect/na-logo.svg https://www.norfolkacademy.org/uploaded/themes/default_19/images/horizantal_logo.svg -w %{http_code})",
+      "Bash(sed -i 's/BulldogConnect/AcademyConnect/g' \"/c/Users/ipfit/Downloads/BulldogConnect/bulldogconnect-v3.html\")",
+      "Bash(sed -i 's/BulldogConnect/AcademyConnect/g' \"/c/Users/ipfit/Downloads/BulldogConnect/index.html\")",
+      "Bash(find /c/Users/ipfit/AppData -name *.png)",
+      "Bash(sort -t'/' --key=1)",
+      "Bash(find /c/Users/ipfit/AppData/Local/Temp -maxdepth 4 \\\\\\(-name *.png -o -name *.jpg -o -name *.jpeg \\\\\\))",
+      "Bash(find /c/Users/ipfit -maxdepth 6 \\\\\\(-name *.png -o -name *.jpg \\\\\\) -newer /c/Users/ipfit/Downloads/BulldogConnect/bulldogconnect-v3.html)",
+      "Bash(pip install:*)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3 -m pip install Pillow -q)"
+    ]
+  }
+}
