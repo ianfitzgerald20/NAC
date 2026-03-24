@@ -1,0 +1,2424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademyConnect — Norfolk Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#faf8f4;
+  --bg2:#f3efe8;
+  --bg3:#ebe5d8;
+  --accent:#1a3a6e;
+  --accent2:#2a5298;
+  --accent-dim:rgba(26,58,110,0.08);
+  --crimson:#d4620a;
+  --crimson2:#e07010;
+  --crimson-dim:rgba(212,98,10,0.08);
+  --gold:#b8860b;
+  --gold-dim:rgba(184,134,11,0.10);
+  --navy:#0d1b2a;
+  --text:#1a1208;
+  --text2:#5c4a2a;
+  --text3:#9c8866;
+  --border:rgba(90,65,30,0.12);
+  --border2:rgba(90,65,30,0.22);
+  --card:#faf8f4;
+  --r:4px;
+  --rl:6px;
+  --shadow:0 1px 6px rgba(26,18,8,0.08);
+  --shadow2:0 4px 20px rgba(26,18,8,0.13);
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:16px;line-height:1.6}
+
+/* ── PARCHMENT TEXTURE ── */
+body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(90,65,30,0.04) 28px);pointer-events:none;z-index:0}
+body>*{position:relative;z-index:1}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.5rem;border-bottom:2px solid var(--accent);background:var(--accent);position:sticky;top:0;z-index:200;overflow:visible}
+.nav-logo{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:1.35rem;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;line-height:1.4;letter-spacing:.01em}
+.nav-logo svg{display:block;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-link-btn{background:none;border:none;font-family:'Source Serif 4',serif;font-size:.82rem;color:rgba(255,255,255,.7);cursor:pointer;padding:.4rem .85rem;border-radius:0;transition:all .15s;font-weight:400;letter-spacing:.02em;border-bottom:2px solid transparent}
+.nav-link-btn:hover{color:#fff;border-bottom-color:rgba(255,255,255,.4)}
+.nav-link-btn.active{color:#fff;border-bottom-color:var(--gold);font-weight:500}
+.nav-cta{display:flex;gap:8px}
+.btn{font-family:'Source Serif 4',serif;font-size:.83rem;font-weight:500;padding:.5rem 1.15rem;border-radius:var(--r);cursor:pointer;transition:all .18s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border:none;letter-spacing:.02em}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-primary{background:var(--crimson);color:#fff;border:1px solid var(--crimson)}
+.btn-primary:hover{background:var(--crimson2)}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.btn-outline:hover{background:var(--accent-dim)}
+.btn-accent{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.btn-accent:hover{background:var(--accent2)}
+.btn-lg{padding:.7rem 1.75rem;font-size:.92rem}
+.btn-sm{padding:.3rem .7rem;font-size:.75rem}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SHARED ── */
+.section{padding:4rem 2.5rem}
+.section-inner{max-width:1180px;margin:0 auto}
+.section-label{font-family:'EB Garamond',serif;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--crimson);margin-bottom:.5rem}
+.section-title{font-family:'EB Garamond',Georgia,serif;font-size:2.4rem;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-bottom:.9rem;font-style:italic}
+.section-sub{font-family:'Source Serif 4',serif;font-size:.95rem;color:var(--text2);max-width:500px;line-height:1.75;font-weight:300}
+.tag{font-family:'Source Serif 4',serif;font-size:.68rem;padding:.25rem .6rem;border-radius:2px;font-weight:400;letter-spacing:.04em}
+.tag-blue{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(26,58,110,.18)}
+.tag-orange{background:var(--crimson-dim);color:var(--crimson);border:1px solid rgba(139,26,47,.18)}
+.tag-green{background:rgba(26,90,50,.08);color:#1a5a32;border:1px solid rgba(26,90,50,.2)}
+.tag-gray{background:var(--bg2);color:var(--text2);border:1px solid var(--border2)}
+.card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.5rem;box-shadow:var(--shadow)}
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-weight:700;flex-shrink:0}
+.divider{height:1px;background:var(--border);margin:1.25rem 0}
+
+/* ════════════════════════════════════════
+   PAGE 1 — HOME (condensed hero + grid)
+════════════════════════════════════════ */
+.hero{padding:5rem 2.5rem 4rem;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);border:1px solid rgba(184,134,11,.28);border-radius:2px;padding:.3rem .9rem;font-family:"EB Garamond",serif;font-size:.8rem;color:var(--gold);font-weight:600;margin-bottom:1.3rem;letter-spacing:.12em;text-transform:uppercase}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:'EB Garamond',Georgia,serif;font-size:3.5rem;font-weight:700;line-height:1.2;letter-spacing:-.01em;margin-bottom:1.2rem;padding-bottom:.1em;overflow:visible;font-style:normal}
+.hero h1 span{color:var(--crimson);font-style:normal}
+.hero-sub{font-size:1rem;color:var(--text2);line-height:1.7;margin-bottom:2rem;font-weight:300;max-width:440px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-num{font-family:'EB Garamond',Georgia,serif;font-size:1.7rem;font-weight:700;letter-spacing:-.02em}
+.stat-label{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.hero-visual{position:relative;height:420px}
+.preview-card{background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);padding:1.4rem;position:absolute;width:100%;box-shadow:var(--shadow2);transition:transform .3s}
+.preview-card:nth-child(2){transform:rotate(-3deg) scale(.95) translateY(12px);opacity:.5;z-index:0;top:18px}
+.preview-card:nth-child(1){z-index:2;top:0}
+.hero-visual:hover .preview-card:nth-child(2){transform:rotate(-5deg) scale(.93) translateY(22px)}
+.pcp-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
+.pcp-av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700}
+.li-badge{font-size:.65rem;padding:.2rem .55rem;background:var(--accent-dim);border:1px solid rgba(37,99,235,.18);border-radius:5px;color:var(--accent);font-weight:500}
+.li-badge .li-sq{width:10px;height:10px;background:#0077b5;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;margin-right:4px;font-family:'EB Garamond',Georgia,serif;vertical-align:middle}
+.pcp-name{font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:2px}
+.pcp-role{font-size:.8rem;color:var(--text2);margin-bottom:2px}
+.pcp-co{font-size:.74rem;color:var(--text3)}
+.pcp-tags{display:flex;gap:5px;flex-wrap:wrap;margin:.9rem 0}
+.pcp-college{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text3);border-top:1px solid var(--border);padding-top:.75rem;margin-top:.5rem}
+.pcp-actions{display:flex;gap:7px;margin-top:.9rem}
+.pcp-actions .btn{flex:1;justify-content:center;font-size:.78rem;padding:.45rem .7rem}
+.float-badge{position:absolute;bottom:-24px;right:-16px;background:var(--bg);border:1px solid rgba(249,115,22,.35);border-radius:3px;padding:.65rem .9rem;display:flex;align-items:center;gap:9px;font-size:.74rem;z-index:10;box-shadow:var(--shadow2);max-width:210px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.float-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.float-text{color:var(--text2);line-height:1.4}
+.float-text strong{color:var(--text);display:block;font-weight:500;font-size:.75rem}
+
+/* SEARCH SECTION */
+.search-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.search-bar{display:flex;gap:10px;margin:1.75rem 0;flex-wrap:wrap;align-items:center}
+.search-wrap{flex:1;min-width:240px;position:relative}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.9rem;pointer-events:none}
+.search-input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:.65rem 1rem .65rem 2.5rem;color:var(--text);font-family:'Source Serif 4',serif;font-size:.875rem;outline:none;transition:border-color .2s}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{border-color:var(--accent)}
+.filter-sel{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:.65rem 2rem .65rem .9rem;color:var(--text2);font-family:'Source Serif 4',serif;font-size:.83rem;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;transition:border-color .2s}
+.filter-sel:focus{border-color:var(--accent)}
+.alumni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.1rem;margin-top:1.75rem}
+.alum-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.3rem;transition:all .22s;cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.alum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--crimson),var(--accent));opacity:0;transition:opacity .22s}
+.alum-card:hover{border-top-color:var(--crimson);box-shadow:var(--shadow2);transform:translateY(-2px)}
+.alum-card:hover::before{opacity:1}
+.ac-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:.9rem}
+.ac-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.9rem;font-weight:700;flex-shrink:0}
+.ac-name{font-family:'EB Garamond',Georgia,serif;font-size:.93rem;font-weight:700;margin-bottom:1px;letter-spacing:-.01em}
+.ac-role{font-size:.76rem;color:var(--text2);margin-bottom:2px}
+.ac-co{font-size:.72rem;color:var(--text3)}
+.li-sync{display:inline-flex;align-items:center;gap:5px;font-size:.63rem;padding:.22rem .55rem;background:#fff;border:1px solid rgba(0,119,181,.35);border-radius:4px;color:#0077b5;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(0,119,181,.1)}
+.li-sync-sq{width:13px;height:13px;background:#0077b5;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#fff;font-family:'EB Garamond',Georgia,serif;flex-shrink:0;letter-spacing:0}
+.li-sync-check{font-size:.6rem;color:#2d6a3f;font-weight:700}
+.ac-college{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--text3);margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.ac-college span{color:var(--text2);font-weight:500}
+.ac-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.9rem}
+.ac-foot{display:flex;gap:7px;align-items:center}
+.ac-avail{font-size:.7rem;color:var(--text3);display:flex;align-items:center;gap:4px}
+.avail-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.av-on{background:#2d6a3f;box-shadow:0 0 5px rgba(45,106,63,.5)}
+.av-busy{background:var(--crimson)}
+.av-off{background:var(--text3)}
+
+/* ════════════════════════════════════════
+   PAGE 2 — ALUMNI PROFILE
+════════════════════════════════════════ */
+.profile-hero{background:linear-gradient(160deg,#0d1b2a 0%,#1a1208 100%);padding:3.5rem 2.5rem 0;position:relative;overflow:hidden}
+.profile-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:50px 50px}
+.profile-hero-inner{max-width:1180px;margin:0 auto;position:relative}
+.profile-back{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:.35rem .75rem;cursor:pointer;transition:all .15s;margin-bottom:2rem}
+.profile-back:hover{background:rgba(255,255,255,.14);color:#fff}
+.profile-top{display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:flex-end;padding-bottom:2rem}
+.profile-av-wrap{position:relative}
+.profile-av{width:100px;height:100px;border-radius:50%;background:rgba(249,115,22,.2);border:3px solid rgba(249,115,22,.5);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:2rem;font-weight:700;color:var(--crimson)}
+.profile-li-badge{position:absolute;bottom:2px;right:2px;background:#0077b5;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:'EB Garamond',Georgia,serif;border:2px solid white}
+.profile-name{font-family:'EB Garamond',Georgia,serif;font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:.3rem}
+.profile-title{font-size:1rem;color:rgba(255,255,255,.7);margin-bottom:.6rem}
+.profile-meta{display:flex;gap:1.2rem;flex-wrap:wrap}
+.profile-meta-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:rgba(255,255,255,.55)}
+.profile-meta-item span{color:rgba(255,255,255,.8)}
+.profile-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.profile-tabs{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.1);margin-top:1rem}
+.profile-tab{padding:.75rem 1.3rem;font-size:.82rem;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;font-weight:400;background:none;border-left:none;border-right:none;border-top:none;font-family:'Source Serif 4',serif}
+.profile-tab:hover{color:rgba(255,255,255,.8)}
+.profile-tab.active{color:#fff;border-bottom-color:var(--gold);font-weight:500}
+.profile-body{max-width:1180px;margin:0 auto;padding:2rem 2.5rem;display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start}
+.profile-main{}
+.profile-sidebar{}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative}
+.timeline::before{content:'';position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--crimson),var(--accent));opacity:.25}
+.tl-item{display:flex;gap:1.2rem;padding-bottom:1.75rem;position:relative}
+.tl-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;font-weight:700;position:relative;z-index:1}
+.tl-dot-school{background:var(--crimson-dim);border:2px solid rgba(249,115,22,.3);color:var(--crimson)}
+.tl-dot-uni{background:var(--accent-dim);border:2px solid rgba(37,99,235,.3);color:var(--accent)}
+.tl-dot-work{background:rgba(45,106,63,.1);border:2px solid rgba(45,106,63,.25);color:#1a5a32}
+.tl-content{}
+.tl-year{font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.tl-title{font-family:'EB Garamond',Georgia,serif;font-size:.95rem;font-weight:700;margin-bottom:2px}
+.tl-org{font-size:.8rem;color:var(--text2);margin-bottom:.4rem}
+.tl-desc{font-size:.78rem;color:var(--text3);line-height:1.6}
+.sidebar-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow)}
+.sidebar-card-title{font-family:'EB Garamond',Georgia,serif;font-size:.85rem;font-weight:700;margin-bottom:1rem;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;font-size:.7rem}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.stat-row:last-child{border-bottom:none}
+.stat-row-label{color:var(--text2)}
+.stat-row-val{font-weight:500;color:var(--text)}
+.avail-slot{display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;border:1px solid var(--border2);border-radius:7px;margin-bottom:.5rem;font-size:.78rem;cursor:pointer;transition:all .15s}
+.avail-slot:hover{border-color:var(--crimson);background:var(--crimson-dim)}
+.avail-slot.picked{background:var(--crimson);border-color:var(--crimson);color:#fff}
+.avail-slot-time{font-weight:500}
+.avail-slot-type{color:var(--text3);font-size:.7rem}
+.avail-slot.picked .avail-slot-type{color:rgba(255,255,255,.7)}
+.expertise-bar{margin-bottom:.75rem}
+.exp-label{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:4px}
+.exp-label span{color:var(--text3)}
+.exp-track{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.exp-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--crimson),var(--accent))}
+
+/* ════════════════════════════════════════
+   PAGE 3 — STUDENT ONBOARDING
+════════════════════════════════════════ */
+.onboard-wrap{min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;background:var(--bg2)}
+.onboard-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;width:100%;max-width:520px;overflow:hidden;box-shadow:var(--shadow2)}
+.onboard-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);padding:2rem 2rem 1.5rem;position:relative;overflow:hidden}
+.onboard-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px}
+.onboard-header-inner{position:relative}
+.onboard-logo{font-family:'EB Garamond',Georgia,serif;font-weight:800;font-size:1.1rem;color:#fff;display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.onboard-step-pills{display:flex;gap:6px;margin-bottom:1.5rem}
+.step-pill{height:4px;border-radius:2px;flex:1;background:rgba(255,255,255,.2);transition:background .3s}
+.step-pill.done{background:var(--crimson)}
+.step-pill.active{background:rgba(249,115,22,.6)}
+.onboard-step-label{font-size:.7rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem}
+.onboard-step-title{font-family:'EB Garamond',Georgia,serif;font-size:1.4rem;font-weight:800;color:#fff}
+.onboard-body{padding:1.75rem 2rem}
+.form-field{margin-bottom:1.1rem}
+.form-label{font-size:.75rem;font-weight:500;color:var(--text2);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:.65rem .9rem;color:var(--text);font-family:'Source Serif 4',serif;font-size:.875rem;outline:none;transition:border-color .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent);background:var(--bg)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3)}
+.form-textarea{resize:none;min-height:80px}
+.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.interest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.5rem}
+.interest-btn{padding:.5rem .4rem;border:1px solid var(--border2);border-radius:7px;font-size:.72rem;font-family:'Source Serif 4',serif;cursor:pointer;text-align:center;transition:all .15s;background:var(--bg2);color:var(--text2);font-weight:400}
+.interest-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.interest-btn.selected{border-color:var(--crimson);color:var(--crimson);background:var(--crimson-dim);font-weight:500}
+.onboard-footer{padding:1.25rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2)}
+.step-counter{font-size:.75rem;color:var(--text3)}
+.onboard-nav{display:flex;gap:8px}
+.success-screen{text-align:center;padding:2.5rem 2rem}
+.success-icon{width:64px;height:64px;border-radius:50%;background:rgba(45,106,63,.1);border:2px solid rgba(45,106,63,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.5rem}
+.success-title{font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;font-weight:800;margin-bottom:.6rem}
+.success-sub{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:1.5rem}
+.match-preview{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.9rem;text-align:left}
+.match-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.8rem;font-weight:700;flex-shrink:0}
+.match-name{font-size:.85rem;font-weight:500;margin-bottom:1px}
+.match-role{font-size:.73rem;color:var(--text2)}
+.match-pct{margin-left:auto;font-size:.7rem;font-weight:600;color:var(--accent)}
+
+/* ════════════════════════════════════════
+   PAGE 4 — ADMIN DASHBOARD
+════════════════════════════════════════ */
+.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 60px)}
+.admin-sidebar{background:var(--navy);padding:1.5rem 0;border-right:none}
+.admin-sidebar-logo{font-family:'EB Garamond',Georgia,serif;font-weight:800;font-size:1rem;color:#fff;padding:.5rem 1.5rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.admin-nav-section{font-size:.62rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.12em;padding:.5rem 1.5rem .3rem;margin-top:.5rem}
+.admin-nav-item{display:flex;align-items:center;gap:9px;padding:.6rem 1.5rem;font-size:.82rem;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;border-left:3px solid transparent}
+.admin-nav-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.05)}
+.admin-nav-item.active{color:#fff;background:rgba(249,115,22,.12);border-left-color:var(--crimson)}
+.admin-nav-icon{font-size:.9rem;width:16px;text-align:center}
+.admin-main{background:var(--bg2);padding:2rem 2.5rem;overflow-y:auto}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
+.admin-page-title{font-family:'EB Garamond',Georgia,serif;font-size:1.6rem;font-weight:800;letter-spacing:-.02em}
+.admin-page-sub{font-size:.8rem;color:var(--text2);margin-top:2px}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.metric-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.metric-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.metric-orange::after{background:var(--crimson)}
+.metric-blue::after{background:var(--accent)}
+.metric-green::after{background:#2d6a3f}
+.metric-purple::after{background:var(--gold)}
+.metric-label{font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;font-weight:500}
+.metric-val{font-family:'EB Garamond',Georgia,serif;font-size:1.9rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.25rem}
+.metric-change{font-size:.73rem;display:flex;align-items:center;gap:4px}
+.metric-up{color:#1a5a32}
+.metric-down{color:#dc2626}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.admin-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;box-shadow:var(--shadow)}
+.admin-card-title{font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:1.1rem;display:flex;align-items:center;justify-content:space-between}
+.admin-card-title .btn-sm{font-size:.68rem}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.78rem}
+thead th{text-align:left;font-size:.67rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500;padding:.5rem .75rem;border-bottom:1px solid var(--border)}
+tbody td{padding:.65rem .75rem;border-bottom:1px solid var(--border);color:var(--text)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--bg2)}
+.td-name{font-weight:500;display:flex;align-items:center;gap:8px}
+.td-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.6rem;font-weight:700;flex-shrink:0}
+.status-pill{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;padding:.22rem .55rem;border-radius:2px;font-weight:500}
+.sp-active{background:rgba(45,106,63,.1);color:#1a5a32;border:1px solid rgba(45,106,63,.2)}
+.sp-pending{background:var(--crimson-dim);color:var(--crimson);border:1px solid rgba(249,115,22,.2)}
+.sp-inactive{background:var(--bg2);color:var(--text3);border:1px solid var(--border2)}
+.sp-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.activity-item{display:flex;gap:.9rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.activity-text{flex:1}
+.activity-main{font-size:.8rem;color:var(--text);margin-bottom:2px}
+.activity-main strong{font-weight:500}
+.activity-time{font-size:.7rem;color:var(--text3)}
+.chart-bars{display:flex;align-items:flex-end;gap:6px;height:100px;margin-top:1rem}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.bar{width:100%;border-radius:4px 4px 0 0;transition:height .3s;min-height:4px}
+.bar-label{font-size:.63rem;color:var(--text3)}
+.bar-blue{background:var(--accent)}
+.bar-orange{background:var(--crimson)}
+.pending-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.9rem}
+.pending-info{flex:1}
+.pending-name{font-size:.85rem;font-weight:500;margin-bottom:2px}
+.pending-detail{font-size:.73rem;color:var(--text2)}
+.pending-actions{display:flex;gap:6px;flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:2.5rem}
+  .hero-visual{height:320px}
+  .profile-top{grid-template-columns:auto 1fr;gap:1.2rem}
+  .profile-actions{grid-column:1/-1;flex-direction:row;align-items:flex-start}
+  .profile-body{grid-template-columns:1fr}
+  .admin-layout{grid-template-columns:1fr}
+  .admin-sidebar{display:none}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .admin-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  nav{padding:.8rem 1.2rem}
+  .section{padding:3rem 1.2rem}
+  .hero{padding:3rem 1.2rem 2.5rem}
+  .section-title{font-size:1.9rem}
+  .hero h1{font-size:2.5rem}
+  .metrics-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .mob-nav-bar{display:flex}
+  .profile-top{grid-template-columns:auto 1fr;gap:1rem}
+  .profile-actions{grid-column:1/-1;flex-direction:row}
+  .profile-body{grid-template-columns:1fr;padding:1.5rem 1.2rem}
+  .msg-layout{grid-template-columns:1fr;height:auto}
+  .msg-sidebar-panel{display:none}
+  .msg-sidebar-panel.mob-show{display:flex}
+  .msg-main-panel{min-height:520px}
+  .alum-reg-grid{grid-template-columns:1fr}
+}
+
+/* ════════════════════════════════════════
+   MOBILE BOTTOM NAV BAR
+════════════════════════════════════════ */
+.mob-nav-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(250,248,244,0.97);border-top:2px solid var(--accent);z-index:300;padding:.4rem 0 .5rem}
+.mob-nav-inner{display:flex;justify-content:space-around;align-items:center;max-width:500px;margin:0 auto}
+.mob-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:.3rem .6rem;border-radius:8px;transition:all .15s;flex:1}
+.mob-nav-item:hover,.mob-nav-item.active{background:var(--gold-dim)}
+.mob-nav-icon{font-size:1.1rem;line-height:1}
+.mob-nav-label{font-size:.6rem;color:var(--text3);font-weight:400;letter-spacing:.02em}
+.mob-nav-item.active .mob-nav-label{color:var(--crimson);font-weight:600}
+@media(max-width:600px){
+  .mob-nav-bar{display:flex}
+  body{padding-bottom:64px}
+}
+
+/* ════════════════════════════════════════
+   PAGE 5 — MESSAGING INBOX
+════════════════════════════════════════ */
+.msg-layout{display:grid;grid-template-columns:300px 1fr;height:calc(100vh - 61px);overflow:hidden;background:var(--bg)}
+.msg-sidebar-panel{flex-direction:column;border-right:1px solid var(--border);background:var(--bg);display:flex}
+.msg-sidebar-top{padding:1.1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.msg-sidebar-title{font-family:'EB Garamond',Georgia,serif;font-weight:800;font-size:1rem;letter-spacing:-.01em}
+.msg-search-wrap{padding:.75rem 1.1rem;border-bottom:1px solid var(--border)}
+.msg-search{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.5rem .85rem .5rem 2.1rem;font-family:'Source Serif 4',serif;font-size:.8rem;outline:none;color:var(--text)}
+.msg-search::placeholder{color:var(--text3)}
+.msg-search-icon{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:.8rem}
+.msg-filter-tabs{display:flex;padding:.5rem .75rem;gap:.4rem;border-bottom:1px solid var(--border)}
+.msg-filter-tab{font-size:.72rem;padding:.28rem .65rem;border-radius:2px;cursor:pointer;font-weight:400;border:1px solid transparent;color:var(--text3);transition:all .15s;font-family:'Source Serif 4',serif}
+.msg-filter-tab.active{background:var(--accent-dim);color:var(--accent);border-color:rgba(37,99,235,.18);font-weight:500}
+.msg-thread-list{overflow-y:auto;flex:1}
+.msg-thread{display:flex;gap:.75rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;align-items:flex-start}
+.msg-thread:hover{background:var(--bg2)}
+.msg-thread.active{background:var(--accent-dim);border-left:3px solid var(--accent)}
+.msg-thread.unread .msg-thread-name{font-weight:600}
+.msg-thread-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.85rem;font-weight:700;flex-shrink:0;position:relative}
+.msg-thread-unread-dot{position:absolute;top:0;right:0;width:10px;height:10px;border-radius:50%;background:var(--crimson);border:2px solid #fff}
+.msg-thread-info{flex:1;min-width:0}
+.msg-thread-name{font-size:.83rem;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-thread-preview{font-size:.74rem;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-thread-meta{text-align:right;flex-shrink:0}
+.msg-thread-time{font-size:.67rem;color:var(--text3);margin-bottom:4px}
+.msg-unread-badge{background:var(--crimson);color:#fff;border-radius:2px;font-size:.62rem;font-weight:700;padding:.15rem .45rem;display:inline-block}
+.msg-main-panel{display:flex;flex-direction:column;background:var(--bg)}
+.msg-main-header{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.5rem;border-bottom:1px solid var(--border);background:var(--bg)}
+.msg-header-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.85rem;font-weight:700;flex-shrink:0}
+.msg-header-name{font-size:.9rem;font-weight:600;margin-bottom:1px}
+.msg-header-role{font-size:.72rem;color:var(--text3)}
+.msg-header-actions{margin-left:auto;display:flex;gap:6px}
+.msg-body{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem;background:var(--bg2)}
+.msg-date-divider{text-align:center;font-size:.68rem;color:var(--text3);padding:.25rem 0;display:flex;align-items:center;gap:.75rem}
+.msg-date-divider::before,.msg-date-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.msg-row{display:flex;gap:.6rem;align-items:flex-end;max-width:78%}
+.msg-row.mine{margin-left:auto;flex-direction:row-reverse}
+.bubble-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.58rem;font-weight:700;flex-shrink:0}
+.bubble{padding:.7rem .95rem;border-radius:14px;font-size:.83rem;line-height:1.55;max-width:320px}
+.bubble.theirs{background:var(--bg);border:1px solid var(--border);border-radius:14px 14px 14px 3px;color:var(--text);box-shadow:var(--shadow)}
+.bubble.mine{background:var(--accent);color:#fff;border-radius:14px 14px 3px 14px}
+.bubble-time{font-size:.62rem;color:var(--text3);margin-top:3px;text-align:right}
+.bubble-time.mine{color:rgba(255,255,255,.65)}
+.msg-input-bar{padding:.85rem 1.25rem;border-top:1px solid var(--border);display:flex;gap:.65rem;align-items:flex-end;background:var(--bg)}
+.msg-input-wrap{flex:1;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;display:flex;align-items:flex-end;gap:.5rem;padding:.55rem .85rem}
+.msg-textarea{flex:1;background:none;border:none;outline:none;font-family:'Source Serif 4',serif;font-size:.85rem;color:var(--text);resize:none;max-height:120px;min-height:22px;line-height:1.45}
+.msg-textarea::placeholder{color:var(--text3)}
+.msg-attach-btn{width:28px;height:28px;border-radius:7px;background:none;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;color:var(--text3);transition:all .15s;flex-shrink:0}
+.msg-attach-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.msg-send-btn{width:40px;height:40px;border-radius:4px;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;flex-shrink:0}
+.msg-send-btn:hover{background:var(--accent2)}
+.msg-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;color:var(--text3);padding:3rem}
+.msg-empty-icon{font-size:2.5rem;margin-bottom:.75rem;opacity:.4}
+.msg-empty-title{font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700;color:var(--text2);margin-bottom:.35rem}
+.msg-empty-sub{font-size:.78rem;line-height:1.6}
+
+/* ════════════════════════════════════════
+   PAGE — JOB BOARD
+════════════════════════════════════════ */
+.jobs-wrap{min-height:calc(100vh - 61px);background:var(--bg2);padding:3rem 2.5rem}
+.jobs-inner{max-width:1100px;margin:0 auto}
+.jobs-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;gap:1rem;flex-wrap:wrap}
+.jobs-title{font-family:'EB Garamond',Georgia,serif;font-size:2.2rem;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+.jobs-sub{font-size:.85rem;color:var(--text2);margin-top:.3rem}
+.jobs-filters{display:flex;gap:.6rem;margin-bottom:1.75rem;flex-wrap:wrap;align-items:center}
+.jobs-filter-select{font-family:'Source Serif 4',serif;font-size:.78rem;padding:.4rem .8rem;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);cursor:pointer;outline:none}
+.jobs-filter-select:focus{border-color:var(--accent)}
+.jobs-search{font-family:'Source Serif 4',serif;font-size:.78rem;padding:.4rem .9rem;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);outline:none;min-width:200px}
+.jobs-search:focus{border-color:var(--accent)}
+.jobs-grid{display:flex;flex-direction:column;gap:1rem}
+.job-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:1.4rem 1.6rem;box-shadow:var(--shadow);transition:box-shadow .18s}
+.job-card:hover{box-shadow:var(--shadow2)}
+.job-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
+.job-card-left{display:flex;align-items:flex-start;gap:.9rem}
+.job-card-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-weight:700;font-size:.95rem;flex-shrink:0}
+.job-card-info{}
+.job-card-title{font-family:'EB Garamond',Georgia,serif;font-size:1.15rem;font-weight:700;letter-spacing:-.01em;line-height:1.2;margin-bottom:.25rem}
+.job-card-company{font-size:.8rem;color:var(--text2)}
+.job-card-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.85rem}
+.job-card-note{font-size:.82rem;color:var(--text2);line-height:1.65;border-left:2px solid var(--border2);padding-left:.8rem;margin-bottom:1rem;font-style:italic}
+.job-card-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+.job-card-poster{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--text3)}
+.job-card-poster-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',serif;font-weight:700;font-size:.55rem;flex-shrink:0}
+.job-card-actions{display:flex;gap:.5rem}
+.job-type-pill{font-size:.68rem;padding:.2rem .55rem;border-radius:2px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.job-type-internship{background:rgba(26,90,50,.08);color:#1a5a32;border:1px solid rgba(26,90,50,.2)}
+.job-type-fulltime{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(26,58,110,.18)}
+.job-type-contract{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(184,134,11,.2)}
+
+/* Post Form Panel */
+.jobs-post-overlay{display:none;position:fixed;inset:0;background:rgba(13,27,42,.45);z-index:300;align-items:center;justify-content:center}
+.jobs-post-overlay.open{display:flex}
+.jobs-post-panel{background:var(--bg);border-radius:var(--rl);padding:2rem;width:100%;max-width:520px;box-shadow:var(--shadow2);max-height:90vh;overflow-y:auto}
+.jobs-post-title{font-family:'EB Garamond',Georgia,serif;font-size:1.35rem;font-weight:700;margin-bottom:1.25rem}
+.jobs-post-close{float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text3);margin-top:-4px}
+
+/* ════════════════════════════════════════
+   PAGE 6 — ALUMNI REGISTRATION
+════════════════════════════════════════ */
+.alum-reg-wrap{min-height:calc(100vh - 61px);display:flex;align-items:flex-start;justify-content:center;padding:3rem 1.5rem;background:var(--bg2)}
+.alum-reg-layout{display:grid;grid-template-columns:280px 1fr;gap:2rem;width:100%;max-width:900px;align-items:start}
+.alum-reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.alum-reg-sidebar{background:linear-gradient(160deg,#0d1b2a,#3a0a14);border-radius:4px;padding:2rem;position:sticky;top:80px;color:#fff}
+.alum-reg-sidebar-logo{font-family:'EB Garamond',Georgia,serif;font-weight:800;font-size:1rem;display:flex;align-items:center;gap:8px;margin-bottom:2rem;opacity:.9}
+.alum-reg-sidebar-title{font-family:'EB Garamond',Georgia,serif;font-size:1.3rem;font-weight:800;line-height:1.25;margin-bottom:.75rem}
+.alum-reg-sidebar-sub{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:1.75rem}
+.alum-reg-why-item{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:1.1rem}
+.alum-reg-why-icon{width:30px;height:30px;border-radius:8px;background:rgba(249,115,22,.2);border:1px solid rgba(249,115,22,.3);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.alum-reg-why-title{font-size:.82rem;font-weight:500;margin-bottom:2px}
+.alum-reg-why-desc{font-size:.73rem;color:rgba(255,255,255,.45);line-height:1.55}
+.alum-reg-alumni-strip{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1)}
+.alum-reg-strip-label{font-size:.65rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
+.alum-strip-item{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.alum-strip-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:.6rem;font-weight:700;flex-shrink:0}
+.alum-strip-name{font-size:.76rem;font-weight:500}
+.alum-strip-role{font-size:.67rem;color:rgba(255,255,255,.4)}
+.alum-reg-main{background:var(--bg);border:1px solid var(--border);border-radius:4px;overflow:hidden;box-shadow:var(--shadow2)}
+.alum-reg-main-header{padding:1.75rem 2rem 1.25rem;border-bottom:1px solid var(--border)}
+.alum-reg-main-title{font-family:'EB Garamond',Georgia,serif;font-size:1.3rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.25rem}
+.alum-reg-main-sub{font-size:.8rem;color:var(--text2)}
+.alum-reg-progress{display:flex;gap:4px;padding:1rem 2rem;border-bottom:1px solid var(--border);background:var(--bg2)}
+.alum-reg-prog-step{display:flex;align-items:center;gap:.5rem;font-size:.72rem;flex:1}
+.alum-reg-prog-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;transition:all .2s}
+.alum-reg-prog-num.done{background:var(--accent);color:#fff}
+.alum-reg-prog-num.active{background:var(--crimson);color:#fff}
+.alum-reg-prog-num.future{background:var(--bg3);color:var(--text3);border:1px solid var(--border2)}
+.alum-reg-prog-label{color:var(--text3);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.alum-reg-prog-label.active{color:var(--text);font-weight:500}
+.alum-reg-prog-label.done{color:var(--accent)}
+.alum-reg-prog-line{height:1px;background:var(--border);flex:1;margin:0 .25rem}
+.alum-reg-section{padding:1.75rem 2rem;border-bottom:1px solid var(--border)}
+.alum-reg-section:last-of-type{border-bottom:none}
+.alum-reg-section-title{font-family:'EB Garamond',Georgia,serif;font-size:.9rem;font-weight:700;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem}
+.alum-reg-section-icon{font-size:.85rem}
+.expertise-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .75rem;border:1px solid var(--border2);border-radius:2px;font-size:.73rem;cursor:pointer;transition:all .15s;margin:.25rem;font-family:'Source Serif 4',serif;background:var(--bg2);color:var(--text2)}
+.expertise-chip:hover{border-color:var(--crimson);color:var(--crimson);background:var(--crimson-dim)}
+.expertise-chip.selected{border-color:var(--crimson);color:var(--crimson);background:var(--crimson-dim);font-weight:500}
+.avail-day{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.avail-day:last-child{border-bottom:none}
+.avail-day-label{width:80px;color:var(--text2);font-weight:500;font-size:.8rem;flex-shrink:0}
+.avail-time-chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.avail-chip{padding:.28rem .65rem;border:1px solid var(--border2);border-radius:6px;font-size:.72rem;cursor:pointer;transition:all .15s;color:var(--text2);font-family:'Source Serif 4',serif}
+.avail-chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.avail-chip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);font-weight:500}
+.alum-reg-footer{padding:1.25rem 2rem;border-top:1px solid var(--border);background:var(--bg2);display:flex;justify-content:space-between;align-items:center}
+.alum-reg-success{text-align:center;padding:3rem 2rem}
+.alum-reg-success-icon{width:72px;height:72px;border-radius:50%;background:rgba(45,106,63,.1);border:2px solid rgba(45,106,63,.3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 1.25rem}
+.alum-reg-success-title{font-family:'EB Garamond',Georgia,serif;font-size:1.5rem;font-weight:800;margin-bottom:.5rem}
+.alum-reg-success-sub{font-size:.85rem;color:var(--text2);line-height:1.65;max-width:340px;margin:0 auto 2rem}
+.preview-profile-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;display:flex;gap:.9rem;align-items:center;max-width:380px;margin:0 auto 1rem;text-align:left}
+
+/* ── JOB ROLE TABS ── */
+.jobs-role-tabs{display:none;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.75rem}
+.jobs-role-tab{font-family:'Source Serif 4',serif;font-size:.85rem;padding:.65rem 1.25rem;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;color:var(--text3);font-weight:400;margin-bottom:-2px;transition:all .15s;letter-spacing:.01em}
+.jobs-role-tab:hover{color:var(--text)}
+.jobs-role-tab.active{color:var(--text);border-bottom-color:var(--crimson);font-weight:500}
+
+/* ════════════════════════════════════════
+   MY PROFILE PAGE
+════════════════════════════════════════ */
+.myprof-wrap{min-height:calc(100vh - 61px);background:var(--bg2);padding:3rem 2.5rem}
+.myprof-inner{max-width:860px;margin:0 auto}
+.myprof-hero{background:linear-gradient(160deg,#0d1b2a 0%,#1a3a6e 100%);border-radius:var(--rl);padding:2.5rem 2.25rem 2rem;position:relative;overflow:hidden;margin-bottom:1.75rem}
+.myprof-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:44px 44px}
+.myprof-hero-inner{position:relative;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.myprof-av{width:78px;height:78px;border-radius:50%;background:rgba(212,98,10,.25);border:3px solid rgba(212,98,10,.5);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:1.6rem;font-weight:700;color:#fff;flex-shrink:0}
+.myprof-hero-text{flex:1;min-width:0}
+.myprof-name{font-family:'EB Garamond',Georgia,serif;font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:.25rem}
+.myprof-sub{font-size:.85rem;color:rgba(255,255,255,.6)}
+.myprof-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.65rem}
+.myprof-badge{font-size:.68rem;padding:.22rem .6rem;border-radius:2px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);font-family:'Source Serif 4',serif;letter-spacing:.04em;text-transform:uppercase}
+.myprof-edit-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r);padding:.45rem 1rem;font-size:.78rem;cursor:pointer;font-family:'Source Serif 4',serif;transition:all .15s;white-space:nowrap}
+.myprof-edit-btn:hover{background:rgba(255,255,255,.22)}
+.myprof-section{background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);padding:1.5rem 1.75rem;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.myprof-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.myprof-section-title{font-family:'EB Garamond',Georgia,serif;font-size:.95rem;font-weight:700;letter-spacing:.01em;color:var(--text)}
+.myprof-section-action{font-size:.75rem;color:var(--crimson);cursor:pointer;background:none;border:none;font-family:'Source Serif 4',serif;padding:0;font-weight:500}
+.myprof-section-action:hover{text-decoration:underline}
+.myprof-field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+.myprof-field{display:flex;flex-direction:column;gap:.35rem}
+.myprof-field-full{grid-column:1/-1}
+.myprof-label{font-size:.72rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.07em}
+.myprof-input{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:.55rem .8rem;font-size:.875rem;color:var(--text);font-family:'Source Serif 4',serif;outline:none;transition:border-color .2s;width:100%}
+.myprof-input:focus{border-color:var(--accent)}
+.myprof-input::placeholder{color:var(--text3)}
+.myprof-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;cursor:pointer}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.3rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .65rem;border:1px solid var(--border2);border-radius:2px;font-size:.72rem;background:var(--bg2);color:var(--text2);font-family:'Source Serif 4',serif}
+.chip-remove{cursor:pointer;color:var(--text3);font-size:.7rem;line-height:1;padding:0 .1rem}
+.chip-remove:hover{color:var(--crimson)}
+.chip-add-row{display:flex;gap:.5rem;align-items:center;margin-top:.4rem}
+.chip-add-input{flex:1;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:.4rem .7rem;font-size:.8rem;color:var(--text);font-family:'Source Serif 4',serif;outline:none}
+.chip-add-input:focus{border-color:var(--accent)}
+.chip-add-btn{padding:.38rem .75rem;font-size:.78rem;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;font-family:'Source Serif 4',serif;white-space:nowrap}
+.chip-add-btn:hover{background:var(--accent2)}
+.rec-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.15rem;margin-bottom:.75rem;position:relative}
+.rec-card:last-child{margin-bottom:0}
+.rec-advisor-tag{position:absolute;top:.7rem;right:.75rem;font-size:.64rem;padding:.18rem .55rem;border-radius:2px;background:rgba(184,134,11,.12);color:var(--gold);border:1px solid rgba(184,134,11,.28);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.rec-name{font-family:'EB Garamond',Georgia,serif;font-size:.92rem;font-weight:700;margin-bottom:2px}
+.rec-title{font-size:.75rem;color:var(--text2);margin-bottom:.6rem}
+.rec-text{font-size:.8rem;color:var(--text3);line-height:1.65;font-style:italic}
+/* Alumni profile extras */
+.exp-timeline{display:flex;flex-direction:column;gap:.5rem}
+.exp-entry{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.85rem}
+.exp-dot{width:30px;height:30px;border-radius:50%;background:var(--accent-dim);border:2px solid rgba(26,58,110,.25);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;margin-top:2px;font-family:'EB Garamond',Georgia,serif}
+.exp-content{flex:1;min-width:0}
+.exp-role{font-family:'EB Garamond',Georgia,serif;font-size:.9rem;font-weight:700;margin-bottom:1px}
+.exp-org{font-size:.78rem;color:var(--text2);margin-bottom:2px}
+.exp-dates{font-size:.7rem;color:var(--text3)}
+.exp-add-btn{display:flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border:1.5px dashed var(--border2);border-radius:var(--r);background:none;cursor:pointer;font-size:.8rem;color:var(--text3);font-family:'Source Serif 4',serif;width:100%;margin-top:.5rem;transition:all .15s;justify-content:center}
+.exp-add-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.li-upload-zone{border:1.5px dashed var(--border2);border-radius:var(--r);padding:1.5rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--bg2)}
+.li-upload-zone:hover{border-color:var(--accent);background:var(--accent-dim)}
+.li-upload-icon{font-size:1.5rem;margin-bottom:.5rem;opacity:.5}
+.li-upload-title{font-family:'EB Garamond',Georgia,serif;font-size:.9rem;font-weight:700;margin-bottom:.25rem;color:var(--text)}
+.li-upload-sub{font-size:.75rem;color:var(--text3);line-height:1.55}
+.li-upload-badge{display:inline-flex;align-items:center;gap:.4rem;margin-top:.75rem;padding:.3rem .7rem;border-radius:4px;background:#0077b5;color:#fff;font-size:.72rem;font-weight:600;font-family:'Source Serif 4',serif;cursor:pointer}
+.li-sq-sm{width:12px;height:12px;background:#fff;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#0077b5;font-family:'EB Garamond',serif}
+.exp-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,10,.55);z-index:500;align-items:center;justify-content:center}
+.exp-overlay.open{display:flex}
+.exp-panel{background:var(--bg);border-radius:var(--rl);padding:2rem;width:100%;max-width:440px;position:relative;box-shadow:var(--shadow2)}
+.exp-panel-title{font-family:'EB Garamond',Georgia,serif;font-size:1.15rem;font-weight:700;margin-bottom:1.25rem}
+.exp-panel-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--text3);padding:.2rem .4rem}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="NA Logo Transparent.png" alt="Norfolk Academy" style="height:38px;width:38px;object-fit:contain;display:block">
+    AcademyConnect
+  </a>
+  <ul class="nav-links">
+    <li><button class="nav-link-btn active" id="nav-home" onclick="showPage('home')">Alumni Directory</button></li>
+    <li><button class="nav-link-btn" id="nav-messages" onclick="showPage('messages')">Messages</button></li>
+    <li><button class="nav-link-btn" id="nav-jobs" onclick="showPage('jobs')">Careers</button></li>
+    <li><button class="nav-link-btn" id="nav-admin" onclick="showPage('admin')">Admin</button></li>
+    <li><button class="nav-link-btn" id="nav-my-profile" onclick="showPage('my-profile')">Profile</button></li>
+  </ul>
+</nav>
+
+<!-- MOBILE BOTTOM NAV -->
+<div class="mob-nav-bar">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-item active" id="mob-home" onclick="showPage('home');setMobNav('home')">
+      <span class="mob-nav-icon">🔍</span><span class="mob-nav-label">Browse</span>
+    </div>
+    <div class="mob-nav-item" id="mob-messages" onclick="showPage('messages');setMobNav('messages')">
+      <span class="mob-nav-icon">💬</span><span class="mob-nav-label">Messages</span>
+    </div>
+    <div class="mob-nav-item" id="mob-my-profile" onclick="showPage('my-profile');setMobNav('my-profile')">
+      <span class="mob-nav-icon">👤</span><span class="mob-nav-label">Profile</span>
+    </div>
+    <div class="mob-nav-item" id="mob-admin" onclick="showPage('admin');setMobNav('admin')">
+      <span class="mob-nav-icon">⚙️</span><span class="mob-nav-label">Admin</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="search-section section">
+    <div class="section-inner">
+      <div class="section-label">Alumni Directory</div>
+      <div class="section-title" id="browse-section-title">Browse Alumni</div>
+      <p class="section-sub">Search by name, industry, career, or college. All Norfolk Academy alumni profiles are automatically kept up-to-date via LinkedIn.</p>
+      <div class="search-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" type="text" placeholder="Search by name, company, or career path…" id="alumni-search" oninput="filterAlumni()">
+        </div>
+        <select class="filter-sel" id="ind-filter" onchange="filterAlumni()">
+          <option value="">All Industries</option>
+          <option>Finance & Banking</option>
+          <option>Medicine & Health</option>
+          <option>Law</option>
+          <option>Design & Creative</option>
+          <option>Education</option>
+          <option>Technology</option>
+        </select>
+        <select class="filter-sel" id="col-filter" onchange="filterAlumni()">
+          <option value="">All Colleges</option>
+          <option>Harvard University</option>
+          <option>Davidson College</option>
+          <option>UVA</option>
+          <option>Yale University</option>
+          <option>Duke University</option>
+          <option>Georgetown University</option>
+          <option>Wake Forest University</option>
+          <option>Haverford College</option>
+          <option>NYU</option>
+        </select>
+        <select class="filter-sel" id="av-filter" onchange="filterAlumni()">
+          <option value="">Any Availability</option>
+          <option value="available">Available now</option>
+          <option value="busy">Busy this week</option>
+        </select>
+      </div>
+      <div class="alumni-grid" id="alumni-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ALUMNI PROFILE
+══════════════════════════════════════ -->
+<div id="page-profile" class="page">
+  <div class="profile-hero">
+    <div class="profile-hero-inner">
+      <button class="profile-back" onclick="showPage('home')">← Back to Directory</button>
+      <div class="profile-top">
+        <div class="profile-av-wrap">
+          <div class="profile-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+          <div class="profile-li-badge">in</div>
+        </div>
+        <div>
+          <div class="profile-name">Ray Fitzgerald</div>
+          <div class="profile-title">Data Scientist & Quantum Physicist · Booz Allen Hamilton</div>
+          <div class="profile-meta">
+            <div class="profile-meta-item">🎓 <span>Harvard University, B.S. Physics</span></div>
+            <div class="profile-meta-item">📍 <span>Charlotte, NC</span></div>
+            <div class="profile-meta-item">🏫 <span>Norfolk Academy, Class of 2019</span></div>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <button class="btn btn-primary">📅 Book Session</button>
+          <button class="btn btn-ghost" style="border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8);">💬 Message</button>
+        </div>
+      </div>
+      <div class="profile-tabs">
+        <button class="profile-tab active" onclick="switchProfileTab(this,'overview')">Overview</button>
+        <button class="profile-tab" onclick="switchProfileTab(this,'career')">Career Timeline</button>
+        <button class="profile-tab" onclick="switchProfileTab(this,'book')">Book a Session</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-body">
+    <div class="profile-main" id="profile-content">
+
+      <!-- OVERVIEW TAB -->
+      <div id="tab-overview">
+        <div class="card" style="margin-bottom:1.1rem">
+          <h3 style="font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:700;margin-bottom:.75rem">About Ray</h3>
+          <p style="font-size:.85rem;color:var(--text2);line-height:1.75;margin-bottom:.75rem">Ray Fitzgerald is a Data Scientist and Quantum Physicist at Booz Allen Hamilton, where he works on Post-Quantum Cryptography and national security applications of quantum computing. A Norfolk, Virginia native, Ray graduated from Norfolk Academy in 2019 and went on to Harvard University, where he studied Physics — driven by a fascination with how fundamental science translates into real-world impact.</p>
+          <p style="font-size:.85rem;color:var(--text2);line-height:1.75">"Norfolk Academy gave me the intellectual curiosity and discipline to tackle genuinely hard problems. The culture of the school pushes you to think rigorously and take ownership of your own path — that's exactly the mindset you need in a field like quantum computing." Ray is one of the youngest alumni on AcademyConnect and offers a direct window into STEM careers, defense tech, and breaking into a field that barely existed when he was a student.</p>
+        </div>
+        <div class="card" style="margin-bottom:1.1rem">
+          <h3 style="font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:700;margin-bottom:1rem">Areas of Expertise</h3>
+          <div class="expertise-bar"><div class="exp-label"><span>STEM & Physics Career Paths</span><span>97%</span></div><div class="exp-track"><div class="exp-fill" style="width:97%"></div></div></div>
+          <div class="expertise-bar"><div class="exp-label"><span>Breaking into Defense / Gov Tech</span><span>93%</span></div><div class="exp-track"><div class="exp-fill" style="width:93%"></div></div></div>
+          <div class="expertise-bar"><div class="exp-label"><span>College Application Strategy</span><span>88%</span></div><div class="exp-track"><div class="exp-fill" style="width:88%"></div></div></div>
+          <div class="expertise-bar"><div class="exp-label"><span>Quantum Computing & Research</span><span>95%</span></div><div class="exp-track"><div class="exp-fill" style="width:95%"></div></div></div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem">
+            <span class="tag tag-blue">Quantum Computing</span><span class="tag tag-blue">Post-Quantum Cryptography</span><span class="tag tag-orange">Defense</span><span class="tag tag-orange">Harvard</span><span class="tag tag-gray">Physics</span><span class="tag tag-gray">Mentorship</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAREER TIMELINE TAB -->
+      <div id="tab-career" style="display:none">
+        <div class="card">
+          <h3 style="font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:700;margin-bottom:1.25rem">Career Timeline</h3>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot tl-dot-school">🏫</div>
+              <div class="tl-content">
+                <div class="tl-year">2015 – 2019</div>
+                <div class="tl-title">Norfolk Academy</div>
+                <div class="tl-org">High School · Norfolk, VA</div>
+                <div class="tl-desc">Graduated with honors. Captained the Science Olympiad team and competed in the Virginia Science & Engineering Fair. Developed a deep interest in physics and computational problem-solving.</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot tl-dot-uni">🎓</div>
+              <div class="tl-content">
+                <div class="tl-year">2019 – 2023</div>
+                <div class="tl-title">Harvard University</div>
+                <div class="tl-org">B.S. Physics · Cambridge, MA</div>
+                <div class="tl-desc">Focused on quantum mechanics and computational physics. Conducted undergraduate research in quantum information theory and co-authored a paper on quantum error correction during senior year.</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot tl-dot-work">💼</div>
+              <div class="tl-content">
+                <div class="tl-year">2023 – Present</div>
+                <div class="tl-title">Data Scientist & Quantum Physicist</div>
+                <div class="tl-org">Booz Allen Hamilton · Charlotte, NC</div>
+                <div class="tl-desc">Works on Post-Quantum Cryptography (PQC) and quantum algorithm development for national security applications. Co-moderated the Rising Leaders Forum and published research on PQC implementation for government systems.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- BOOK TAB -->
+      <div id="tab-book" style="display:none">
+        <div class="card">
+          <h3 style="font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem">Book a Session with Ray</h3>
+          <p style="font-size:.8rem;color:var(--text2);margin-bottom:1.25rem">Choose a time slot, select your session goal, and send a brief note. Ray typically responds within 24 hours.</p>
+          <div style="font-size:.72rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:.75rem">Available Slots — April 2025</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:1.25rem">
+            <div class="avail-slot" onclick="pickSlot(this)"><span class="avail-slot-time">Mon 9am</span><span class="avail-slot-type">Video</span></div>
+            <div class="avail-slot" style="opacity:.35;pointer-events:none"><span class="avail-slot-time">Mon 11am</span><span class="avail-slot-type">Full</span></div>
+            <div class="avail-slot" onclick="pickSlot(this)"><span class="avail-slot-time">Mon 2pm</span><span class="avail-slot-type">Video</span></div>
+            <div class="avail-slot picked" onclick="pickSlot(this)"><span class="avail-slot-time">Thu 4pm</span><span class="avail-slot-type">Video</span></div>
+            <div class="avail-slot" onclick="pickSlot(this)"><span class="avail-slot-time">Fri 10am</span><span class="avail-slot-type">Phone</span></div>
+            <div class="avail-slot" onclick="pickSlot(this)"><span class="avail-slot-time">Fri 3pm</span><span class="avail-slot-type">Video</span></div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Session Goal</label>
+            <select class="form-select">
+              <option>Breaking into Quantum Computing / Defense Tech</option>
+              <option>College Application Advice</option>
+              <option>STEM Internship & Recruiting Strategy</option>
+              <option>General Career Mentorship</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Message to Ray</label>
+            <textarea class="form-textarea" placeholder="Introduce yourself and tell Ray what you'd like to discuss…"></textarea>
+          </div>
+          <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Confirm Booking →</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="profile-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Quick Stats</div>
+
+        <div class="stat-row"><span class="stat-row-label">Grad year</span><span class="stat-row-val">Class of 2019</span></div>
+        <div class="stat-row"><span class="stat-row-label">Location</span><span class="stat-row-val">Charlotte, NC</span></div>
+        <div class="stat-row"><span class="stat-row-label">LinkedIn</span><span class="stat-row-val" style="color:var(--accent)">Synced ✓</span></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Next Available</div>
+        <div class="avail-slot picked" style="margin-bottom:.5rem"><span class="avail-slot-time">Thu Apr 17, 4pm</span><span class="avail-slot-type" style="color:rgba(255,255,255,.7)">Selected</span></div>
+        <div class="avail-slot" onclick="pickSlot(this)"><span class="avail-slot-time">Fri Apr 18, 10am</span><span class="avail-slot-type">Video call</span></div>
+        <div class="avail-slot" onclick="pickSlot(this)"><span class="avail-slot-time">Mon Apr 21, 9am</span><span class="avail-slot-type">Video call</span></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.75rem" onclick="switchProfileTab(document.querySelector('.profile-tab:last-child'),'book')">Book a Session →</button>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Similar Mentors</div>
+        <div style="display:flex;flex-direction:column;gap:.6rem">
+          <div style="display:flex;align-items:center;gap:.7rem;cursor:pointer" onclick="showPage('profile')">
+            <div class="ac-av" style="width:34px;height:34px;font-size:.72rem;background:var(--crimson-dim);color:var(--crimson)">NB</div>
+            <div style="flex:1"><div style="font-size:.8rem;font-weight:500">Neil Barr '93</div><div style="font-size:.72rem;color:var(--text2)">Corporate Attorney, Debevoise</div></div>
+            <span class="tag tag-blue" style="font-size:.62rem">Law</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.7rem;cursor:pointer" onclick="showPage('profile')">
+            <div class="ac-av" style="width:34px;height:34px;font-size:.72rem;background:var(--accent-dim);color:var(--accent)">MG</div>
+            <div style="flex:1"><div style="font-size:.8rem;font-weight:500">Mark Gul '02</div><div style="font-size:.72rem;color:var(--text2)">U.S. State Department</div></div>
+            <span class="tag tag-orange" style="font-size:.62rem">Gov</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: STUDENT ONBOARDING
+══════════════════════════════════════ -->
+<div id="page-onboard" class="page">
+  <div class="onboard-wrap">
+    <div class="onboard-card" id="onboard-card">
+
+      <!-- STEP 1 -->
+      <div id="onboard-step-1">
+        <div class="onboard-header">
+          <div class="onboard-header-inner">
+            <div class="onboard-logo">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.5)" stroke-width="1.4" fill="none"/><polygon points="9,17.5 18,10.2 27,17.5" fill="white"/><rect x="8.5" y="17.5" width="19" height="1.9" fill="white"/><rect x="9.6" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="12.3" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="15.1" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="17.9" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="20.7" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="23.5" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="8.5" y="26.1" width="19" height="1.1" fill="white"/></svg>
+              AcademyConnect
+            </div>
+            <div class="onboard-step-pills">
+              <div class="step-pill active" id="pill-1"></div>
+              <div class="step-pill" id="pill-2"></div>
+              <div class="step-pill" id="pill-3"></div>
+              <div class="step-pill" id="pill-4"></div>
+            </div>
+            <div class="onboard-step-label">Step 1 of 4</div>
+            <div class="onboard-step-title">Create your account</div>
+          </div>
+        </div>
+        <div class="onboard-body">
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="e.g. James"></div>
+            <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="e.g. Thompson"></div>
+          </div>
+          <div class="form-field"><label class="form-label">NA Email Address</label><input class="form-input" type="email" placeholder="jthompson@norfolkacademy.org"></div>
+          <div class="form-field"><label class="form-label">Create Password</label><input class="form-input" type="password" placeholder="Min. 8 characters"></div>
+          <div class="form-row">
+            <div class="form-field"><label class="form-label">Grade</label>
+              <select class="form-select"><option>9th Grade</option><option>10th Grade</option><option selected>11th Grade</option><option>12th Grade</option></select>
+            </div>
+            <div class="form-field"><label class="form-label">Grad Year</label>
+              <select class="form-select"><option>2025</option><option selected>2026</option><option>2027</option><option>2028</option></select>
+            </div>
+          </div>
+        </div>
+        <div class="onboard-footer">
+          <span class="step-counter">Step 1 of 4</span>
+          <div class="onboard-nav">
+            <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="onboard-step-2" style="display:none">
+        <div class="onboard-header">
+          <div class="onboard-header-inner">
+            <div class="onboard-logo">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.5)" stroke-width="1.4" fill="none"/><polygon points="9,17.5 18,10.2 27,17.5" fill="white"/><rect x="8.5" y="17.5" width="19" height="1.9" fill="white"/><rect x="9.6" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="12.3" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="15.1" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="17.9" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="20.7" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="23.5" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="8.5" y="26.1" width="19" height="1.1" fill="white"/></svg>
+              AcademyConnect
+            </div>
+            <div class="onboard-step-pills">
+              <div class="step-pill done" id="pill-1b"></div>
+              <div class="step-pill active" id="pill-2b"></div>
+              <div class="step-pill" id="pill-3b"></div>
+              <div class="step-pill" id="pill-4b"></div>
+            </div>
+            <div class="onboard-step-label">Step 2 of 4</div>
+            <div class="onboard-step-title">Your interests</div>
+          </div>
+        </div>
+        <div class="onboard-body">
+          <p style="font-size:.83rem;color:var(--text2);margin-bottom:1rem;line-height:1.6">Select the career fields you're curious about. We'll use this to recommend the best alumni mentors for you.</p>
+          <label class="form-label">Career Interests (pick all that apply)</label>
+          <div class="interest-grid">
+            <button class="interest-btn selected" onclick="toggleInterest(this)">💰 Finance</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">⚖️ Law</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">🏥 Medicine</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">💻 Technology</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">🎨 Design</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">🌍 Diplomacy</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">🎬 Media</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">🔬 Research</button>
+            <button class="interest-btn" onclick="toggleInterest(this)">🚀 Startups</button>
+          </div>
+          <div class="form-field" style="margin-top:1.1rem">
+            <label class="form-label">What are you hoping to get from AcademyConnect?</label>
+            <textarea class="form-textarea" placeholder="e.g. I want to understand what it's really like to work in finance and how to position myself for internships…"></textarea>
+          </div>
+        </div>
+        <div class="onboard-footer">
+          <span class="step-counter">Step 2 of 4</span>
+          <div class="onboard-nav">
+            <button class="btn btn-ghost" onclick="nextStep(1)">← Back</button>
+            <button class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="onboard-step-3" style="display:none">
+        <div class="onboard-header">
+          <div class="onboard-header-inner">
+            <div class="onboard-logo">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.5)" stroke-width="1.4" fill="none"/><polygon points="9,17.5 18,10.2 27,17.5" fill="white"/><rect x="8.5" y="17.5" width="19" height="1.9" fill="white"/><rect x="9.6" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="12.3" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="15.1" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="17.9" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="20.7" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="23.5" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="8.5" y="26.1" width="19" height="1.1" fill="white"/></svg>
+              AcademyConnect
+            </div>
+            <div class="onboard-step-pills">
+              <div class="step-pill done"></div>
+              <div class="step-pill done"></div>
+              <div class="step-pill active"></div>
+              <div class="step-pill"></div>
+            </div>
+            <div class="onboard-step-label">Step 3 of 4</div>
+            <div class="onboard-step-title">Set your goals</div>
+          </div>
+        </div>
+        <div class="onboard-body">
+          <div class="form-field">
+            <label class="form-label">What college are you hoping to attend?</label>
+            <input class="form-input" type="text" placeholder="e.g. Harvard, UVA, Duke — or still deciding">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Intended Major or Field of Study</label>
+            <input class="form-input" type="text" placeholder="e.g. Economics, Pre-Med, Undecided">
+          </div>
+          <div class="form-field">
+            <label class="form-label">What's your biggest challenge right now?</label>
+            <select class="form-select">
+              <option>Deciding on a career path</option>
+              <option>College application strategy</option>
+              <option>Finding internships or opportunities</option>
+              <option>Understanding what different careers are actually like</option>
+              <option>Building a network and making connections</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">How often would you like to meet with a mentor?</label>
+            <select class="form-select">
+              <option>Once (just a single conversation)</option>
+              <option selected>Monthly check-ins</option>
+              <option>Every few weeks</option>
+              <option>As needed</option>
+            </select>
+          </div>
+        </div>
+        <div class="onboard-footer">
+          <span class="step-counter">Step 3 of 4</span>
+          <div class="onboard-nav">
+            <button class="btn btn-ghost" onclick="nextStep(2)">← Back</button>
+            <button class="btn btn-primary" onclick="nextStep(4)">See My Matches →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 — MATCHES -->
+      <div id="onboard-step-4" style="display:none">
+        <div class="onboard-header">
+          <div class="onboard-header-inner">
+            <div class="onboard-logo">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.5)" stroke-width="1.4" fill="none"/><polygon points="9,17.5 18,10.2 27,17.5" fill="white"/><rect x="8.5" y="17.5" width="19" height="1.9" fill="white"/><rect x="9.6" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="12.3" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="15.1" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="17.9" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="20.7" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="23.5" y="20.3" width="1.4" height="5.8" rx=".3" fill="white"/><rect x="8.5" y="26.1" width="19" height="1.1" fill="white"/></svg>
+              AcademyConnect
+            </div>
+            <div class="onboard-step-pills">
+              <div class="step-pill done"></div><div class="step-pill done"></div><div class="step-pill done"></div><div class="step-pill done"></div>
+            </div>
+            <div class="onboard-step-label">You're all set!</div>
+            <div class="onboard-step-title">Your top matches</div>
+          </div>
+        </div>
+        <div class="onboard-body">
+          <p style="font-size:.82rem;color:var(--text2);margin-bottom:1.1rem;line-height:1.6">Based on your interests in Finance and your goal of understanding career paths, here are your top 3 alumni matches.</p>
+          <div class="match-preview">
+            <div class="match-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div>
+              <div class="match-name">Ray Fitzgerald '19</div>
+              <div class="match-role">Data Scientist & Quantum Physicist · Booz Allen</div>
+            </div>
+            <div class="match-pct">98% match</div>
+          </div>
+          <div class="match-preview">
+            <div class="match-av" style="background:var(--crimson-dim);color:var(--crimson)">NB</div>
+            <div>
+              <div class="match-name">Neil Barr '93</div>
+              <div class="match-role">Corporate Attorney · Debevoise</div>
+            </div>
+            <div class="match-pct">84% match</div>
+          </div>
+          <div class="match-preview">
+            <div class="match-av" style="background:var(--accent-dim);color:var(--accent)">MG</div>
+            <div>
+              <div class="match-name">Mark Gul '02</div>
+              <div class="match-role">Foreign Service · U.S. State Dept.</div>
+            </div>
+            <div class="match-pct">76% match</div>
+          </div>
+        </div>
+        <div class="onboard-footer" style="flex-direction:column;gap:.75rem;align-items:stretch">
+          <button class="btn btn-primary btn-lg" style="justify-content:center" onclick="showPage('profile')">Message Ray Fitzgerald →</button>
+          <button class="btn btn-ghost" style="justify-content:center" onclick="showPage('home')">Browse all alumni</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ADMIN DASHBOARD
+══════════════════════════════════════ -->
+<div id="page-admin" class="page">
+  <div class="admin-layout">
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-logo">
+        <svg width="20" height="20" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.3)" stroke-width="1.4" fill="none"/><polygon points="9,17.5 18,10.2 27,17.5" fill="white" opacity=".8"/><rect x="8.5" y="17.5" width="19" height="1.9" fill="white" opacity=".8"/><rect x="9.6" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="12.3" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="15.1" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="17.9" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="20.7" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="23.5" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="8.5" y="26.1" width="19" height="1.1" fill="white" opacity=".8"/></svg>
+        AcademyConnect
+      </div>
+      <div class="admin-nav-section">Overview</div>
+      <div class="admin-nav-item active"><span class="admin-nav-icon">📊</span>Dashboard</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">📅</span>Sessions</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">💬</span>Messages</div>
+      <div class="admin-nav-section">Management</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">🎓</span>Alumni Roster</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">🧑‍🎓</span>Student Roster</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">⏳</span>Pending Approvals</div>
+      <div class="admin-nav-section">Settings</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">🔗</span>LinkedIn Sync</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">⚙️</span>Platform Settings</div>
+      <div class="admin-nav-item"><span class="admin-nav-icon">📧</span>Email Notifications</div>
+    </div>
+
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div>
+          <div class="admin-page-title">Admin Dashboard</div>
+          <div class="admin-page-sub">Norfolk Academy · AcademyConnect · Spring 2025</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:.75rem;color:var(--text3)">Last synced: 2 hrs ago</span>
+          <button class="btn btn-outline btn-sm">🔗 Sync LinkedIn</button>
+          <button class="btn btn-primary btn-sm">+ Invite Alumni</button>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card metric-orange">
+          <div class="metric-label">Registered Alumni</div>
+          <div class="metric-val">247</div>
+          <div class="metric-change metric-up">↑ 12 this month</div>
+        </div>
+        <div class="metric-card metric-blue">
+          <div class="metric-label">Active Students</div>
+          <div class="metric-val">183</div>
+          <div class="metric-change metric-up">↑ 28 this month</div>
+        </div>
+        <div class="metric-card metric-green">
+          <div class="metric-label">Sessions Booked</div>
+          <div class="metric-val">1,847</div>
+          <div class="metric-change metric-up">↑ 94 this month</div>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <!-- SESSIONS CHART -->
+        <div class="admin-card">
+          <div class="admin-card-title">Sessions This Month <button class="btn btn-ghost btn-sm">View all</button></div>
+          <div style="display:flex;gap:1.5rem;margin-bottom:.75rem">
+            <div style="display:flex;align-items:center;gap:5px;font-size:.73rem;color:var(--text2)"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent)"></div>Booked</div>
+            <div style="display:flex;align-items:center;gap:5px;font-size:.73rem;color:var(--text2)"><div style="width:8px;height:8px;border-radius:2px;background:var(--crimson)"></div>Completed</div>
+          </div>
+          <div class="chart-bars">
+            <div class="bar-col"><div class="bar bar-blue" style="height:55px"></div><div class="bar-label">Jan</div></div>
+            <div class="bar-col"><div class="bar bar-orange" style="height:42px"></div><div class="bar-label">Jan</div></div>
+            <div class="bar-col"><div class="bar bar-blue" style="height:70px"></div><div class="bar-label">Feb</div></div>
+            <div class="bar-col"><div class="bar bar-orange" style="height:60px"></div><div class="bar-label">Feb</div></div>
+            <div class="bar-col"><div class="bar bar-blue" style="height:88px"></div><div class="bar-label">Mar</div></div>
+            <div class="bar-col"><div class="bar bar-orange" style="height:75px"></div><div class="bar-label">Mar</div></div>
+            <div class="bar-col"><div class="bar bar-blue" style="height:95px"></div><div class="bar-label">Apr</div></div>
+            <div class="bar-col"><div class="bar bar-orange" style="height:62px"></div><div class="bar-label">Apr</div></div>
+          </div>
+        </div>
+
+        <!-- PENDING APPROVALS -->
+        <div class="admin-card">
+          <div class="admin-card-title">Pending Alumni Approvals <span class="status-pill sp-pending" style="font-size:.65rem">3 new</span></div>
+          <div class="pending-card">
+            <div class="td-av" style="width:36px;height:36px;background:var(--accent-dim);color:var(--accent);font-size:.72rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-weight:700">CH</div>
+            <div class="pending-info">
+              <div class="pending-name">Cecelia Howard '14</div>
+              <div class="pending-detail">Varsity Softball Coach · NA Campus</div>
+            </div>
+            <div class="pending-actions">
+              <button class="btn btn-ghost btn-sm">Deny</button>
+              <button class="btn btn-accent btn-sm">Approve</button>
+            </div>
+          </div>
+          <div class="pending-card">
+            <div class="td-av" style="width:36px;height:36px;background:var(--crimson-dim);color:var(--crimson);font-size:.72rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-weight:700">BL</div>
+            <div class="pending-info">
+              <div class="pending-name">Bobby Beasley '06</div>
+              <div class="pending-detail">Alumni Board President</div>
+            </div>
+            <div class="pending-actions">
+              <button class="btn btn-ghost btn-sm">Deny</button>
+              <button class="btn btn-accent btn-sm">Approve</button>
+            </div>
+          </div>
+          <div class="pending-card">
+            <div class="td-av" style="width:36px;height:36px;background:var(--accent-dim);color:var(--accent);font-size:.72rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-weight:700">NF</div>
+            <div class="pending-info">
+              <div class="pending-name">Nate Fine '11</div>
+              <div class="pending-detail">Alumni Board Member</div>
+            </div>
+            <div class="pending-actions">
+              <button class="btn btn-ghost btn-sm">Deny</button>
+              <button class="btn btn-accent btn-sm">Approve</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALUMNI TABLE -->
+      <div class="admin-card" style="margin-bottom:1.5rem">
+        <div class="admin-card-title">Alumni Roster <button class="btn btn-ghost btn-sm">Export CSV</button></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th><th>Class</th><th>Industry</th><th>LinkedIn</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>Ray Fitzgerald</div></td>
+                <td>2001</td><td>Finance</td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Synced</span></td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Active</span></td>
+                <td><button class="btn btn-ghost btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:var(--crimson-dim);color:var(--crimson)">ML</div>Meghan Lawrence</div></td>
+                <td>2020</td><td>Finance</td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Synced</span></td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Active</span></td>
+                <td><button class="btn btn-ghost btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:var(--accent-dim);color:var(--accent)">RF</div>Ramin Fatehi</div></td>
+                <td>1996</td><td>Law</td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Synced</span></td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Active</span></td>
+                <td><button class="btn btn-ghost btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:var(--crimson-dim);color:var(--crimson)">NB</div>Neil Barr</div></td>
+                <td>1993</td><td>Law</td><td>18</td><td>4.7★</td>
+                <td><span class="status-pill sp-pending"><span class="sp-dot"></span>Pending</span></td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Active</span></td>
+                <td><button class="btn btn-ghost btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:var(--accent-dim);color:var(--accent)">AG</div>Amy Gravitt</div></td>
+                <td>1991</td><td>Media</td><td>9</td><td>5.0★</td>
+                <td><span class="status-pill sp-inactive"><span class="sp-dot"></span>Not linked</span></td>
+                <td><span class="status-pill sp-pending"><span class="sp-dot"></span>Inactive</span></td>
+                <td><button class="btn btn-ghost btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="td-name"><div class="td-av" style="background:var(--crimson-dim);color:var(--crimson)">MG</div>Mark Gul</div></td>
+                <td>2019</td><td>Physics</td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Synced</span></td>
+                <td><span class="status-pill sp-active"><span class="sp-dot"></span>Active</span></td>
+                <td><button class="btn btn-ghost btn-sm">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <div class="admin-card">
+        <div class="admin-card-title">Recent Activity</div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:var(--accent-dim)">📅</div>
+          <div class="activity-text">
+            <div class="activity-main"><strong>Session booked:</strong> James T. (11th) with Ray Fitzgerald — Thu Apr 17, 4pm</div>
+            <div class="activity-time">2 hours ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:var(--crimson-dim)">🔗</div>
+          <div class="activity-text">
+            <div class="activity-main"><strong>LinkedIn sync:</strong> Ray Fitzgerald's profile updated — published Post-Quantum Cryptography research</div>
+            <div class="activity-time">3 hours ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:rgba(45,106,63,.1)">🧑‍🎓</div>
+          <div class="activity-text">
+            <div class="activity-main"><strong>New student signup:</strong> Sophie K., Class of 2026 completed onboarding</div>
+            <div class="activity-time">Yesterday at 6:14pm</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:var(--gold-dim)">⭐</div>
+          <div class="activity-text">
+            <div class="activity-main"><strong>New review:</strong> Marcus A. left a 4-star review for Ray Fitzgerald</div>
+            <div class="activity-time">Yesterday at 3:40pm</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon" style="background:var(--crimson-dim)">✅</div>
+          <div class="activity-text">
+            <div class="activity-main"><strong>Alumni approved:</strong> Ray Fitzgerald '19 — profile now live</div>
+            <div class="activity-time">2 days ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: MESSAGES
+══════════════════════════════════════ -->
+<div id="page-messages" class="page">
+  <div class="msg-layout">
+
+    <!-- SIDEBAR -->
+    <div class="msg-sidebar-panel" id="msg-sidebar">
+      <div class="msg-sidebar-top">
+        <div class="msg-sidebar-title">Messages</div>
+        <button class="btn btn-primary btn-sm">+ New</button>
+      </div>
+      <div class="msg-search-wrap" style="position:relative">
+        <span class="msg-search-icon">🔍</span>
+        <input class="msg-search" placeholder="Search conversations…">
+      </div>
+      <div class="msg-filter-tabs">
+        <button class="msg-filter-tab active">All</button>
+        <button class="msg-filter-tab">Unread</button>
+        <button class="msg-filter-tab">Sessions</button>
+      </div>
+      <div class="msg-thread-list">
+
+        <div class="msg-thread active" onclick="openThread('dm')">
+          <div class="msg-thread-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+          <div class="msg-thread-info">
+            <div class="msg-thread-name">Ray Fitzgerald</div>
+            <div class="msg-thread-preview">Sounds great! See you Thursday at 4pm 👍</div>
+          </div>
+          <div class="msg-thread-meta">
+            <div class="msg-thread-time">2h ago</div>
+          </div>
+        </div>
+
+        <div class="msg-thread unread" onclick="openThread('rf')">
+          <div class="msg-thread-av" style="background:var(--crimson-dim);color:var(--crimson)">RF<div class="msg-thread-unread-dot"></div></div>
+          <div class="msg-thread-info">
+            <div class="msg-thread-name">Ray Fitzgerald</div>
+            <div class="msg-thread-preview">Happy to chat about the physics PhD path — it's a long road but worth it…</div>
+          </div>
+          <div class="msg-thread-meta">
+            <div class="msg-thread-time">5h ago</div>
+            <span class="msg-unread-badge">2</span>
+          </div>
+        </div>
+
+        <div class="msg-thread" onclick="openThread('ml')">
+          <div class="msg-thread-av" style="background:var(--crimson-dim);color:var(--crimson)">ML</div>
+          <div class="msg-thread-info">
+            <div class="msg-thread-name">Meghan Lawrence</div>
+            <div class="msg-thread-preview">Breaking into banking — here's what I'd focus on…</div>
+          </div>
+          <div class="msg-thread-meta">
+            <div class="msg-thread-time">1d ago</div>
+          </div>
+        </div>
+
+        <div class="msg-thread unread" onclick="openThread('rf2')">
+          <div class="msg-thread-av" style="background:var(--accent-dim);color:var(--accent)">RF<div class="msg-thread-unread-dot"></div></div>
+          <div class="msg-thread-info">
+            <div class="msg-thread-name">Ramin Fatehi</div>
+            <div class="msg-thread-preview">Criminal justice reform is a passion of mine — let's talk about how law school really works</div>
+          </div>
+          <div class="msg-thread-meta">
+            <div class="msg-thread-time">2d ago</div>
+            <span class="msg-unread-badge">1</span>
+          </div>
+        </div>
+
+        <div class="msg-thread" onclick="openThread('nb')">
+          <div class="msg-thread-av" style="background:var(--crimson-dim);color:var(--crimson)">NB</div>
+          <div class="msg-thread-info">
+            <div class="msg-thread-name">Neil Barr</div>
+            <div class="msg-thread-preview">Corporate law is very different from what you see on TV — here's what a typical week looks like</div>
+          </div>
+          <div class="msg-thread-meta">
+            <div class="msg-thread-time">3d ago</div>
+          </div>
+        </div>
+
+        <div class="msg-thread" onclick="openThread('mg')">
+          <div class="msg-thread-av" style="background:var(--accent-dim);color:var(--accent)">MG</div>
+          <div class="msg-thread-info">
+            <div class="msg-thread-name">Mark Gul</div>
+            <div class="msg-thread-preview">The Foreign Service exam is tough but very doable with the right prep</div>
+          </div>
+          <div class="msg-thread-meta">
+            <div class="msg-thread-time">1w ago</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MAIN CHAT -->
+    <div class="msg-main-panel" id="msg-main">
+
+      <!-- Active thread: Ray Fitzgerald -->
+      <div id="thread-dm" style="display:flex;flex-direction:column;height:100%">
+        <div class="msg-main-header">
+          <div class="msg-header-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+          <div>
+            <div class="msg-header-name">Ray Fitzgerald</div>
+            <div class="msg-header-role">Data Scientist & Quantum Physicist · Booz Allen Hamilton · Class of 2019</div>
+          </div>
+          <div class="msg-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="showPage('profile')">View Profile</button>
+            <button class="btn btn-primary btn-sm">📅 Book Session</button>
+          </div>
+        </div>
+        <div class="msg-body">
+          <div class="msg-date-divider">Monday, April 14</div>
+          <div class="msg-row">
+            <div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div>
+              <div class="bubble theirs">Hey! I saw you wanted to chat about quantum computing and defense tech careers. Happy to help — what specifically are you curious about?</div>
+              <div class="bubble-time">9:12am</div>
+            </div>
+          </div>
+          <div class="msg-row mine">
+            <div class="bubble-av" style="background:var(--bg3);color:var(--text2)">Me</div>
+            <div>
+              <div class="bubble mine">Thanks so much! I'm mainly wondering how you ended up at Booz Allen doing quantum work straight out of Harvard, and what I should be doing now to set myself up for something similar.</div>
+              <div class="bubble-time mine">9:34am</div>
+            </div>
+          </div>
+          <div class="msg-row">
+            <div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div>
+              <div class="bubble theirs">Great question. Booz Allen has a really strong quantum practice and they recruit directly from physics programs. The key was doing research during undergrad and being able to talk concretely about quantum error correction and PQC. Curiosity + hands-on projects gets you further than grades alone.</div>
+              <div class="bubble-time">9:41am</div>
+            </div>
+          </div>
+          <div class="msg-row">
+            <div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div>
+              <div class="bubble theirs">Want to hop on a call this week? I can walk you through what to focus on in college apps and how to build the right foundation for a STEM career in defense tech.</div>
+              <div class="bubble-time">9:42am</div>
+            </div>
+          </div>
+          <div class="msg-row mine">
+            <div class="bubble-av" style="background:var(--bg3);color:var(--text2)">Me</div>
+            <div>
+              <div class="bubble mine">Yes, that would be amazing! I'm free Thursday afternoon.</div>
+              <div class="bubble-time mine">10:05am</div>
+            </div>
+          </div>
+          <div class="msg-date-divider">Today</div>
+          <div class="msg-row">
+            <div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div>
+              <div class="bubble theirs">Sounds great! See you Thursday at 4pm 👍 I'll send a calendar invite to your school email.</div>
+              <div class="bubble-time">8:17am</div>
+            </div>
+          </div>
+          <!-- Session booked card -->
+          <div style="display:flex;justify-content:center">
+            <div style="background:var(--bg);border:1px solid rgba(45,106,63,.25);border-radius:var(--r);padding:.9rem 1.2rem;font-size:.78rem;display:flex;align-items:center;gap:.75rem;max-width:320px;box-shadow:var(--shadow)">
+              <span style="font-size:1.1rem">✅</span>
+              <div>
+                <div style="font-weight:600;color:#1a5a32;margin-bottom:1px">Session Confirmed</div>
+                <div style="color:var(--text2)">Thu Apr 17, 4:00pm · Google Meet · Ray Fitzgerald</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="msg-input-bar">
+          <div class="msg-input-wrap">
+            <textarea class="msg-textarea" placeholder="Write a message to Ray…" rows="1"></textarea>
+            <button class="msg-attach-btn" title="Attach file">📎</button>
+          </div>
+          <button class="msg-send-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2L10 14L7 9M14 2L2 6L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Placeholder for other threads -->
+      <div id="thread-rf" style="display:none;flex-direction:column;height:100%">
+        <div class="msg-main-header">
+          <div class="msg-header-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+          <div><div class="msg-header-name">Ray Fitzgerald</div><div class="msg-header-role">Quantum Physicist · Booz Allen Hamilton · Class of 2019</div></div>
+          <div class="msg-header-actions"><button class="btn btn-outline btn-sm">View Profile</button><button class="btn btn-primary btn-sm">📅 Book</button></div>
+        </div>
+        <div class="msg-body">
+          <div class="msg-date-divider">Today</div>
+          <div class="msg-row">
+            <div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div><div class="bubble theirs">Hey! Saw you're interested in physics research. What's drawing you toward it — more the theoretical side or applied?</div><div class="bubble-time">11:20am</div></div>
+          </div>
+          <div class="msg-row">
+            <div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div><div class="bubble theirs">Happy to chat about the physics PhD path — it's a long road but worth it if research is what drives you.</div><div class="bubble-time">11:21am</div></div>
+          </div>
+        </div>
+        <div class="msg-input-bar"><div class="msg-input-wrap"><textarea class="msg-textarea" placeholder="Write a message to Ray…" rows="1"></textarea><button class="msg-attach-btn">📎</button></div><button class="msg-send-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2L10 14L7 9M14 2L2 6L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      </div>
+
+      <div id="thread-ml" style="display:none;flex-direction:column;height:100%">
+        <div class="msg-main-header"><div class="msg-header-av" style="background:var(--crimson-dim);color:var(--crimson)">ML</div><div><div class="msg-header-name">Meghan Lawrence</div><div class="msg-header-role">Healthcare Services Banking Analyst · J.P. Morgan · Class of 2020</div></div><div class="msg-header-actions"><button class="btn btn-outline btn-sm">View Profile</button><button class="btn btn-primary btn-sm">📅 Book</button></div></div>
+        <div class="msg-body"><div class="msg-date-divider">Yesterday</div><div class="msg-row"><div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">ML</div><div><div class="bubble theirs">Breaking into banking is very doable — start with your network and target summer analyst programs early. What area of finance interests you most?</div><div class="bubble-time">3:15pm</div></div></div></div>
+        <div class="msg-input-bar"><div class="msg-input-wrap"><textarea class="msg-textarea" placeholder="Write a message to Meghan…" rows="1"></textarea><button class="msg-attach-btn">📎</button></div><button class="msg-send-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2L10 14L7 9M14 2L2 6L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      </div>
+
+      <div id="thread-rf2" style="display:none;flex-direction:column;height:100%">
+        <div class="msg-main-header"><div class="msg-header-av" style="background:var(--accent-dim);color:var(--accent)">RF</div><div><div class="msg-header-name">Ramin Fatehi</div><div class="msg-header-role">Commonwealth's Attorney · City of Norfolk · Class of 1996</div></div><div class="msg-header-actions"><button class="btn btn-outline btn-sm">View Profile</button><button class="btn btn-primary btn-sm">📅 Book</button></div></div>
+        <div class="msg-body"><div class="msg-date-divider">2 days ago</div><div class="msg-row"><div class="bubble-av" style="background:var(--accent-dim);color:var(--accent)">RF</div><div><div class="bubble theirs">Criminal justice reform is a passion of mine — let's talk about how law school really works and what kind of law you'd want to practice.</div><div class="bubble-time">4:02pm</div></div></div></div>
+        <div class="msg-input-bar"><div class="msg-input-wrap"><textarea class="msg-textarea" placeholder="Write a message to Ramin…" rows="1"></textarea><button class="msg-attach-btn">📎</button></div><button class="msg-send-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2L10 14L7 9M14 2L2 6L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      </div>
+
+      <div id="thread-nb" style="display:none;flex-direction:column;height:100%">
+        <div class="msg-main-header"><div class="msg-header-av" style="background:var(--crimson-dim);color:var(--crimson)">NB</div><div><div class="msg-header-name">Neil Barr</div><div class="msg-header-role">Corporate Attorney · Debevoise & Plimpton · Class of 1993</div></div><div class="msg-header-actions"><button class="btn btn-outline btn-sm">View Profile</button><button class="btn btn-primary btn-sm">📅 Book</button></div></div>
+        <div class="msg-body"><div class="msg-date-divider">3 days ago</div><div class="msg-row"><div class="bubble-av" style="background:var(--crimson-dim);color:var(--crimson)">NB</div><div><div class="bubble theirs">Corporate law is very different from what you see on TV. My day is mostly client calls, drafting, and negotiating M&A deals. Here's what a typical week looks like…</div><div class="bubble-time">2:30pm</div></div></div></div>
+        <div class="msg-input-bar"><div class="msg-input-wrap"><textarea class="msg-textarea" placeholder="Write a message to Neil…" rows="1"></textarea><button class="msg-attach-btn">📎</button></div><button class="msg-send-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2L10 14L7 9M14 2L2 6L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      </div>
+
+      <div id="thread-mg" style="display:none;flex-direction:column;height:100%">
+        <div class="msg-main-header"><div class="msg-header-av" style="background:var(--accent-dim);color:var(--accent)">MG</div><div><div class="msg-header-name">Mark Gul</div><div class="msg-header-role">Foreign Service Officer · U.S. State Department · Class of 2002</div></div><div class="msg-header-actions"><button class="btn btn-outline btn-sm">View Profile</button><button class="btn btn-primary btn-sm">📅 Book</button></div></div>
+        <div class="msg-body"><div class="msg-date-divider">Last week</div><div class="msg-row"><div class="bubble-av" style="background:var(--accent-dim);color:var(--accent)">MG</div><div><div class="bubble theirs">The Foreign Service exam is tough but very doable with the right prep. Georgetown's BSFS gave me a great foundation — what are you thinking about for college?</div><div class="bubble-time">10:45am</div></div></div></div>
+        <div class="msg-input-bar"><div class="msg-input-wrap"><textarea class="msg-textarea" placeholder="Write a message to Mark…" rows="1"></textarea><button class="msg-attach-btn">📎</button></div><button class="msg-send-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2L10 14L7 9M14 2L2 6L7 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: JOB BOARD
+══════════════════════════════════════ -->
+<div id="page-jobs" class="page">
+  <div class="jobs-wrap">
+    <div class="jobs-inner">
+
+      <!-- Header -->
+      <div class="jobs-header">
+        <div>
+          <div class="section-label">Opportunities</div>
+          <div class="jobs-title">Careers</div>
+          <div class="jobs-sub">Internships and jobs posted directly by Norfolk Academy alumni — real connections, real opportunities.</div>
+        </div>
+        <button class="btn btn-primary" id="jobs-post-btn" onclick="document.getElementById('jobs-post-overlay').classList.add('open')">+ Post an Opportunity</button>
+      </div>
+
+      <!-- Alumni role tabs (hidden for students, shown for alumni via JS) -->
+      <div class="jobs-role-tabs" id="jobs-role-tabs">
+        <button class="jobs-role-tab active" id="tab-my-postings" onclick="switchJobsTab('my')">My Postings</button>
+        <button class="jobs-role-tab" id="tab-browse-opps" onclick="switchJobsTab('browse')">Browse Opportunities</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="jobs-filters">
+        <input class="jobs-search" type="text" placeholder="Search roles, companies…" oninput="filterJobs()">
+        <select class="jobs-filter-select" id="jobs-filter-type" onchange="filterJobs()">
+          <option value="">All Types</option>
+          <option value="internship">Internship</option>
+          <option value="fulltime">Full-Time</option>
+          <option value="contract">Contract</option>
+        </select>
+        <select class="jobs-filter-select" id="jobs-filter-ind" onchange="filterJobs()">
+          <option value="">All Industries</option>
+          <option>Technology</option>
+          <option>Finance</option>
+          <option>Law</option>
+          <option>Medicine & Health</option>
+          <option>Government</option>
+          <option>Design & Creative</option>
+          <option>Education</option>
+        </select>
+      </div>
+
+      <!-- Job Listings -->
+      <div class="jobs-grid" id="jobs-grid"></div>
+
+      <!-- Alumni hiring CTA (shown below My Postings for alumni role) -->
+      <div id="jobs-alumni-cta" style="display:none;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:var(--rl);padding:1.75rem 2rem;margin-top:1.75rem;color:#fff">
+        <div style="font-family:'EB Garamond',Georgia,serif;font-size:1.25rem;font-weight:700;margin-bottom:.4rem">Hiring? Share your job opening.</div>
+        <div style="font-size:.875rem;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:1.1rem;max-width:560px">Reach motivated current students and recent grads who embody integrity, leadership, and excellence. Posting only takes a minute.</div>
+        <button class="btn" style="background:#fff;color:var(--accent);font-weight:600;border:none" onclick="document.getElementById('jobs-post-overlay').classList.add('open')">+ Post an Opportunity</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Post Opportunity Overlay -->
+  <div class="jobs-post-overlay" id="jobs-post-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="jobs-post-panel">
+      <button class="jobs-post-close" onclick="document.getElementById('jobs-post-overlay').classList.remove('open')">✕</button>
+      <div class="jobs-post-title">Post an Opportunity</div>
+      <div class="form-field">
+        <label class="form-label">Role Title</label>
+        <input class="form-input" type="text" placeholder="e.g. Summer Analyst — Investment Banking">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+        <div class="form-field">
+          <label class="form-label">Type</label>
+          <select class="form-select">
+            <option>Internship</option>
+            <option>Full-Time</option>
+            <option>Contract</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Industry</label>
+          <select class="form-select">
+            <option>Technology</option>
+            <option>Finance</option>
+            <option>Law</option>
+            <option>Medicine & Health</option>
+            <option>Government</option>
+            <option>Design & Creative</option>
+            <option>Education</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Location</label>
+        <input class="form-input" type="text" placeholder="e.g. Charlotte, NC · Remote">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Application Link</label>
+        <input class="form-input" type="url" placeholder="https://…">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Your Note <span style="color:var(--text3);font-weight:400">(shown on the listing)</span></label>
+        <textarea class="form-textarea" rows="3" placeholder="Give students a heads-up — what's the role like, who's a good fit, or why you'd recommend it…"></textarea>
+      </div>
+      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-top:.5rem" onclick="document.getElementById('jobs-post-overlay').classList.remove('open')">Post Opportunity →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ALUMNI REGISTRATION
+══════════════════════════════════════ -->
+<div id="page-alumreg" class="page">
+  <div class="alum-reg-wrap">
+    <div class="alum-reg-layout">
+
+      <!-- LEFT SIDEBAR -->
+      <div class="alum-reg-sidebar">
+        <div class="alum-reg-sidebar-logo">
+          <svg width="20" height="20" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.3)" stroke-width="1.4" fill="none"/><polygon points="9,17.5 18,10.2 27,17.5" fill="white" opacity=".8"/><rect x="8.5" y="17.5" width="19" height="1.9" fill="white" opacity=".8"/><rect x="9.6" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="12.3" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="15.1" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="17.9" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="20.7" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="23.5" y="20.3" width="1.4" height="5.8" rx=".3" fill="white" opacity=".8"/><rect x="8.5" y="26.1" width="19" height="1.1" fill="white" opacity=".8"/></svg>
+          AcademyConnect
+        </div>
+        <div class="alum-reg-sidebar-title">Give back to the next generation of Bulldogs.</div>
+        <div class="alum-reg-sidebar-sub">It only takes a few minutes to register. Share your story, set your availability, and start making an impact for current NA students.</div>
+        <div class="alum-reg-why-item">
+          <div class="alum-reg-why-icon">⏱️</div>
+          <div><div class="alum-reg-why-title">Takes 5 minutes</div><div class="alum-reg-why-desc">Quick setup, no lengthy forms. Just the essentials to get your profile live.</div></div>
+        </div>
+        <div class="alum-reg-why-item">
+          <div class="alum-reg-why-icon">📅</div>
+          <div><div class="alum-reg-why-title">You set your availability</div><div class="alum-reg-why-desc">Choose exactly when you're open. One session a month or ten — it's up to you.</div></div>
+        </div>
+        <div class="alum-reg-why-item">
+          <div class="alum-reg-why-icon">🔗</div>
+          <div><div class="alum-reg-why-title">LinkedIn auto-updates your profile</div><div class="alum-reg-why-desc">Connect once and your career info stays current automatically.</div></div>
+        </div>
+        <div class="alum-reg-alumni-strip">
+          <div class="alum-reg-strip-label">Already registered</div>
+          <div class="alum-strip-item">
+            <div class="alum-strip-av" style="background:var(--crimson-dim);color:var(--crimson)">RF</div>
+            <div><div class="alum-strip-name">Ray Fitzgerald '19</div><div class="alum-strip-role">Booz Allen Hamilton · 47 sessions</div></div>
+          </div>
+          <div class="alum-strip-item">
+            <div class="alum-strip-av" style="background:var(--crimson-dim);color:var(--crimson)">ML</div>
+            <div><div class="alum-strip-name">Meghan Lawrence '20</div><div class="alum-strip-role">J.P. Morgan · 31 sessions</div></div>
+          </div>
+          <div class="alum-strip-item">
+            <div class="alum-strip-av" style="background:var(--accent-dim);color:var(--accent)">RF</div>
+            <div><div class="alum-strip-name">Ramin Fatehi '96</div><div class="alum-strip-role">City of Norfolk · 22 sessions</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN FORM -->
+      <div class="alum-reg-main" id="alum-reg-main">
+
+        <!-- PROGRESS BAR -->
+        <div class="alum-reg-progress">
+          <div class="alum-reg-prog-step">
+            <div class="alum-reg-prog-num active" id="rp1">1</div>
+            <div class="alum-reg-prog-label active" id="rl1">Your Info</div>
+          </div>
+          <div class="alum-reg-prog-line"></div>
+          <div class="alum-reg-prog-step">
+            <div class="alum-reg-prog-num future" id="rp2">2</div>
+            <div class="alum-reg-prog-label" id="rl2">Career</div>
+          </div>
+          <div class="alum-reg-prog-line"></div>
+          <div class="alum-reg-prog-step">
+            <div class="alum-reg-prog-num future" id="rp3">3</div>
+            <div class="alum-reg-prog-label" id="rl3">Mentoring</div>
+          </div>
+          <div class="alum-reg-prog-line"></div>
+          <div class="alum-reg-prog-step">
+            <div class="alum-reg-prog-num future" id="rp4">4</div>
+            <div class="alum-reg-prog-label" id="rl4">Go Live</div>
+          </div>
+        </div>
+
+        <!-- STEP 1: YOUR INFO -->
+        <div id="areg-step-1">
+          <div class="alum-reg-main-header">
+            <div class="alum-reg-main-title">Welcome back, Bulldog 🐾</div>
+            <div class="alum-reg-main-sub">Let's start with the basics. Your NA email verifies your alumni status automatically.</div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">👤</span> Personal Details</div>
+            <div class="alum-reg-grid">
+              <div class="form-field"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="e.g. Ray"></div>
+              <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="e.g. Fitzgerald"></div>
+            </div>
+            <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="rfitzgerald@alumni.norfolkacademy.org"></div>
+            <div class="form-field"><label class="form-label">NA Graduation Year</label>
+              <select class="form-select">
+                <option>2024</option><option>2022</option><option selected>2019</option><option>2015</option><option>2010</option><option>2005</option><option>2001</option><option>1999</option><option>1996</option><option>1993</option><option>1991</option><option>1985</option><option>Other</option>
+              </select>
+            </div>
+            <div class="alum-reg-grid">
+              <div class="form-field"><label class="form-label">City</label><input class="form-input" type="text" placeholder="e.g. Charlotte"></div>
+              <div class="form-field"><label class="form-label">State</label><input class="form-input" type="text" placeholder="e.g. NC"></div>
+            </div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">🔗</span> Connect LinkedIn <span class="tag tag-blue" style="font-size:.62rem;margin-left:.35rem">Recommended</span></div>
+            <p style="font-size:.8rem;color:var(--text2);margin-bottom:1rem;line-height:1.6">Connect your LinkedIn profile to auto-fill your career info and keep your profile updated automatically whenever you change jobs or get promoted.</p>
+            <button class="btn btn-accent" style="gap:8px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" fill="white"/></svg>
+              Connect with LinkedIn
+            </button>
+            <div style="font-size:.72rem;color:var(--text3);margin-top:.6rem">Or fill in your career details manually on the next step.</div>
+          </div>
+          <div class="alum-reg-footer">
+            <span style="font-size:.75rem;color:var(--text3)">Step 1 of 4</span>
+            <button class="btn btn-primary" onclick="alumRegStep(2)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: CAREER -->
+        <div id="areg-step-2" style="display:none">
+          <div class="alum-reg-main-header">
+            <div class="alum-reg-main-title">Your Career Path</div>
+            <div class="alum-reg-main-sub">Tell students where you went after NA. This is what they'll see on your profile.</div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">🎓</span> Education</div>
+            <div class="form-field"><label class="form-label">College / University</label><input class="form-input" type="text" placeholder="e.g. Harvard University"></div>
+            <div class="alum-reg-grid">
+              <div class="form-field"><label class="form-label">Degree</label><select class="form-select"><option>B.A.</option><option>B.S.</option><option>M.A.</option><option>M.S.</option><option>M.B.A.</option><option>J.D.</option><option>M.D.</option><option>Ph.D.</option></select></div>
+              <div class="form-field"><label class="form-label">Field of Study</label><input class="form-input" type="text" placeholder="e.g. Physics"></div>
+            </div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">💼</span> Current Role</div>
+            <div class="form-field"><label class="form-label">Job Title</label><input class="form-input" type="text" placeholder="e.g. Data Scientist & Quantum Physicist"></div>
+            <div class="form-field"><label class="form-label">Company / Organization</label><input class="form-input" type="text" placeholder="e.g. Booz Allen Hamilton"></div>
+            <div class="form-field"><label class="form-label">Industry</label>
+              <select class="form-select">
+                <option selected>Finance & Banking</option><option>Medicine & Health</option><option>Law</option><option>Technology</option><option>Government & Diplomacy</option><option>Media & Entertainment</option><option>Education</option><option>Entrepreneurship</option><option>Engineering</option><option>Non-Profit</option>
+              </select>
+            </div>
+            <div class="form-field"><label class="form-label">Short Bio (shown on your profile)</label><textarea class="form-textarea" placeholder="e.g. I'm a Data Scientist & Quantum Physicist at Booz Allen Hamilton working on post-quantum cryptography for national security. I graduated from Norfolk Academy in 2019 and studied Physics at Harvard. Happy to talk about STEM careers, defense tech, and quantum computing…"></textarea></div>
+          </div>
+          <div class="alum-reg-footer">
+            <button class="btn btn-ghost" onclick="alumRegStep(1)">← Back</button>
+            <button class="btn btn-primary" onclick="alumRegStep(3)">Continue →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: MENTORING PREFS -->
+        <div id="areg-step-3" style="display:none">
+          <div class="alum-reg-main-header">
+            <div class="alum-reg-main-title">Your Mentoring Style</div>
+            <div class="alum-reg-main-sub">Help students know what to expect from a session with you.</div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">🎯</span> Areas You Can Help With</div>
+            <p style="font-size:.78rem;color:var(--text2);margin-bottom:.75rem">Select all that apply — students will see these on your profile.</p>
+            <div>
+              <button class="expertise-chip selected" onclick="this.classList.toggle('selected')">💰 Breaking into Finance</button>
+              <button class="expertise-chip selected" onclick="this.classList.toggle('selected')">📝 College Application Strategy</button>
+              <button class="expertise-chip selected" onclick="this.classList.toggle('selected')">🤝 Networking & Career Nav</button>
+              <button class="expertise-chip" onclick="this.classList.toggle('selected')">📊 Internship Strategy</button>
+              <button class="expertise-chip" onclick="this.classList.toggle('selected')">🏛️ Graduate School Advice</button>
+              <button class="expertise-chip" onclick="this.classList.toggle('selected')">🌍 Working Internationally</button>
+              <button class="expertise-chip" onclick="this.classList.toggle('selected')">🚀 Entrepreneurship</button>
+              <button class="expertise-chip" onclick="this.classList.toggle('selected')">⚖️ Law School Path</button>
+              <button class="expertise-chip" onclick="this.classList.toggle('selected')">🏥 Pre-Med Journey</button>
+            </div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">📅</span> Your Availability</div>
+            <p style="font-size:.78rem;color:var(--text2);margin-bottom:.9rem">Select the time slots when you're typically available for sessions. Students can only book during these windows.</p>
+            <div class="avail-day"><div class="avail-day-label">Monday</div><div class="avail-time-chips"><span class="avail-chip on" onclick="this.classList.toggle('on')">Morning</span><span class="avail-chip" onclick="this.classList.toggle('on')">Afternoon</span><span class="avail-chip" onclick="this.classList.toggle('on')">Evening</span></div></div>
+            <div class="avail-day"><div class="avail-day-label">Tuesday</div><div class="avail-time-chips"><span class="avail-chip" onclick="this.classList.toggle('on')">Morning</span><span class="avail-chip" onclick="this.classList.toggle('on')">Afternoon</span><span class="avail-chip" onclick="this.classList.toggle('on')">Evening</span></div></div>
+            <div class="avail-day"><div class="avail-day-label">Wednesday</div><div class="avail-time-chips"><span class="avail-chip" onclick="this.classList.toggle('on')">Morning</span><span class="avail-chip" onclick="this.classList.toggle('on')">Afternoon</span><span class="avail-chip on" onclick="this.classList.toggle('on')">Evening</span></div></div>
+            <div class="avail-day"><div class="avail-day-label">Thursday</div><div class="avail-time-chips"><span class="avail-chip" onclick="this.classList.toggle('on')">Morning</span><span class="avail-chip on" onclick="this.classList.toggle('on')">Afternoon</span><span class="avail-chip on" onclick="this.classList.toggle('on')">Evening</span></div></div>
+            <div class="avail-day"><div class="avail-day-label">Friday</div><div class="avail-time-chips"><span class="avail-chip on" onclick="this.classList.toggle('on')">Morning</span><span class="avail-chip" onclick="this.classList.toggle('on')">Afternoon</span><span class="avail-chip" onclick="this.classList.toggle('on')">Evening</span></div></div>
+            <div class="avail-day"><div class="avail-day-label">Weekend</div><div class="avail-time-chips"><span class="avail-chip" onclick="this.classList.toggle('on')">Saturday</span><span class="avail-chip" onclick="this.classList.toggle('on')">Sunday</span></div></div>
+          </div>
+          <div class="alum-reg-section">
+            <div class="alum-reg-section-title"><span class="alum-reg-section-icon">⚙️</span> Session Preferences</div>
+            <div class="alum-reg-grid">
+              <div class="form-field"><label class="form-label">Max Sessions Per Month</label><select class="form-select"><option>1–2</option><option selected>3–5</option><option>5–10</option><option>Unlimited</option></select></div>
+              <div class="form-field"><label class="form-label">Session Format</label><select class="form-select"><option selected>Video Call (Google Meet)</option><option>Phone Call</option><option>Either</option></select></div>
+            </div>
+          </div>
+          <div class="alum-reg-footer">
+            <button class="btn btn-ghost" onclick="alumRegStep(2)">← Back</button>
+            <button class="btn btn-primary" onclick="alumRegStep(4)">Preview & Submit →</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: SUCCESS -->
+        <div id="areg-step-4" style="display:none">
+          <div class="alum-reg-success">
+            <div class="alum-reg-success-icon">🎉</div>
+            <div class="alum-reg-success-title">You're live, Bulldog!</div>
+            <div class="alum-reg-success-sub">Your profile is now visible to Norfolk Academy students. You'll receive an email confirmation and a notification any time a student books a session with you.</div>
+            <div class="preview-profile-card">
+              <div style="width:48px;height:48px;border-radius:50%;background:var(--crimson-dim);color:var(--crimson);display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700;flex-shrink:0">RF</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-family:'EB Garamond',Georgia,serif;font-size:.9rem;font-weight:700;margin-bottom:2px">Ray Fitzgerald</div>
+                <div style="font-size:.75rem;color:var(--text2)">Data Scientist & Quantum Physicist · Booz Allen Hamilton</div>
+                <div style="font-size:.72rem;color:var(--text3);margin-top:2px">Class of 2019 · Harvard University</div>
+              </div>
+              <span class="tag tag-green" style="font-size:.63rem">Live ✓</span>
+            </div>
+            <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+              <button class="btn btn-primary btn-lg" onclick="showPage('profile')">View My Profile →</button>
+              <button class="btn btn-ghost btn-lg" onclick="showPage('home')">Browse Students</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ══════════════════════════════════════
+     PAGE: MY PROFILE
+══════════════════════════════════════ -->
+<div id="page-my-profile" class="page">
+  <div class="myprof-wrap">
+    <div class="myprof-inner">
+
+      <!-- Hero banner -->
+      <div class="myprof-hero">
+        <div class="myprof-hero-inner">
+          <div class="myprof-av" id="myprof-av-initials">AC</div>
+          <div class="myprof-hero-text">
+            <div class="myprof-name" id="myprof-display-name">Alex Carter</div>
+            <div class="myprof-sub" id="myprof-display-sub">Norfolk Academy · Class of 2026</div>
+            <div class="myprof-badges" id="myprof-display-badges">
+              <span class="myprof-badge">Student</span>
+            </div>
+          </div>
+          <button class="myprof-edit-btn" onclick="toggleProfileEdit()">✏ Edit Profile</button>
+        </div>
+      </div>
+
+      <!-- ══ STUDENT PROFILE SECTIONS ══ -->
+      <div id="myprof-student-sections">
+
+        <!-- Basic Info -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Basic Information</div>
+          </div>
+          <div class="myprof-field-row">
+            <div class="myprof-field">
+              <div class="myprof-label">First Name</div>
+              <input class="myprof-input" id="stu-first" type="text" value="Alex" onchange="updateStudentDisplay()">
+            </div>
+            <div class="myprof-field">
+              <div class="myprof-label">Last Name</div>
+              <input class="myprof-input" id="stu-last" type="text" value="Carter" onchange="updateStudentDisplay()">
+            </div>
+          </div>
+          <div class="myprof-field-row">
+            <div class="myprof-field">
+              <div class="myprof-label">Graduation Year</div>
+              <select class="myprof-input myprof-select" id="stu-grad-year" onchange="updateStudentDisplay()">
+                <option>2025</option>
+                <option selected>2026</option>
+                <option>2027</option>
+                <option>2028</option>
+                <option>2029</option>
+              </select>
+            </div>
+            <div class="myprof-field">
+              <div class="myprof-label">Grade</div>
+              <select class="myprof-input myprof-select">
+                <option>9th Grade</option>
+                <option>10th Grade</option>
+                <option selected>11th Grade</option>
+                <option>12th Grade</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sports Teams -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Sports Teams</div>
+          </div>
+          <div class="chip-wrap" id="sports-chips">
+            <span class="chip">Varsity Lacrosse <span class="chip-remove" onclick="removeChip(this,'sports-chips')">✕</span></span>
+            <span class="chip">JV Tennis <span class="chip-remove" onclick="removeChip(this,'sports-chips')">✕</span></span>
+          </div>
+          <div class="chip-add-row">
+            <input class="chip-add-input" id="sports-input" type="text" placeholder="Add a sport…" onkeydown="if(event.key==='Enter')addChip('sports-input','sports-chips')">
+            <button class="chip-add-btn" onclick="addChip('sports-input','sports-chips')">+ Add</button>
+          </div>
+        </div>
+
+        <!-- Extracurriculars -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Extracurriculars</div>
+          </div>
+          <div class="chip-wrap" id="extra-chips">
+            <span class="chip">Student Government <span class="chip-remove" onclick="removeChip(this,'extra-chips')">✕</span></span>
+            <span class="chip">Debate Team <span class="chip-remove" onclick="removeChip(this,'extra-chips')">✕</span></span>
+            <span class="chip">Key Club <span class="chip-remove" onclick="removeChip(this,'extra-chips')">✕</span></span>
+          </div>
+          <div class="chip-add-row">
+            <input class="chip-add-input" id="extra-input" type="text" placeholder="Add an activity…" onkeydown="if(event.key==='Enter')addChip('extra-input','extra-chips')">
+            <button class="chip-add-btn" onclick="addChip('extra-input','extra-chips')">+ Add</button>
+          </div>
+        </div>
+
+        <!-- Faculty Recommendations -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Faculty Recommendations</div>
+          </div>
+
+          <div class="rec-card">
+            <span class="rec-advisor-tag">Advisor</span>
+            <div class="rec-name">Dr. Margaret Ellis</div>
+            <div class="rec-title">AP U.S. History · Faculty Advisor</div>
+            <div class="rec-text">"Alex is a remarkably self-directed student who brings intellectual curiosity and genuine leadership to every discussion. Their work this year has exceeded what I expect of any upperclassman."</div>
+          </div>
+
+          <div class="rec-card">
+            <div class="rec-name">Mr. James Holloway</div>
+            <div class="rec-title">AP Computer Science · Math Department</div>
+            <div class="rec-text">"Consistently one of the most engaged students in class. Alex approaches problems with a level of persistence and creativity that sets them apart."</div>
+          </div>
+
+          <div class="rec-card">
+            <div class="rec-name">Coach Sarah Tindall</div>
+            <div class="rec-title">Varsity Lacrosse Coach · Physical Education</div>
+            <div class="rec-text">"As a team captain, Alex leads by example both on and off the field. They demonstrate the kind of integrity and character that reflects the best of Norfolk Academy."</div>
+          </div>
+        </div>
+
+      </div><!-- /student sections -->
+
+      <!-- ══ ALUMNI PROFILE SECTIONS ══ -->
+      <div id="myprof-alumni-sections" style="display:none">
+
+        <!-- Basic Info -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Your Information</div>
+          </div>
+          <div class="myprof-field-row">
+            <div class="myprof-field">
+              <div class="myprof-label">First Name</div>
+              <input class="myprof-input" id="alum-first" type="text" value="Ray" onchange="updateAlumDisplay()">
+            </div>
+            <div class="myprof-field">
+              <div class="myprof-label">Last Name</div>
+              <input class="myprof-input" id="alum-last" type="text" value="Fitzgerald" onchange="updateAlumDisplay()">
+            </div>
+          </div>
+          <div class="myprof-field-row">
+            <div class="myprof-field">
+              <div class="myprof-label">Year Graduated NA</div>
+              <input class="myprof-input" id="alum-na-year" type="text" value="2019" placeholder="e.g. 2019" onchange="updateAlumDisplay()">
+            </div>
+            <div class="myprof-field">
+              <div class="myprof-label">College / University</div>
+              <input class="myprof-input" id="alum-college" type="text" value="Harvard University" placeholder="e.g. UVA, W&amp;M…" onchange="updateAlumDisplay()">
+            </div>
+          </div>
+          <div class="myprof-field-row">
+            <div class="myprof-field">
+              <div class="myprof-label">Industry</div>
+              <select class="myprof-input myprof-select" id="alum-industry" onchange="updateAlumDisplay()">
+                <option>Technology</option>
+                <option selected>Defense & Government</option>
+                <option>Finance</option>
+                <option>Law</option>
+                <option>Medicine & Health</option>
+                <option>Design & Creative</option>
+                <option>Education</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="myprof-field">
+              <div class="myprof-label">Current Role</div>
+              <input class="myprof-input" id="alum-role" type="text" value="Data Scientist & Quantum Physicist" placeholder="e.g. Software Engineer" onchange="updateAlumDisplay()">
+            </div>
+          </div>
+          <div class="myprof-field-row">
+            <div class="myprof-field myprof-field-full">
+              <div class="myprof-label">Current Company</div>
+              <input class="myprof-input" id="alum-company" type="text" value="Booz Allen Hamilton" placeholder="e.g. Google, Morgan Stanley…" onchange="updateAlumDisplay()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Experience</div>
+            <button class="myprof-section-action" onclick="document.getElementById('exp-add-overlay').classList.add('open')">+ Add</button>
+          </div>
+          <div class="exp-timeline" id="exp-timeline">
+            <div class="exp-entry">
+              <div class="exp-dot">BA</div>
+              <div class="exp-content">
+                <div class="exp-role">Data Scientist & Quantum Physicist</div>
+                <div class="exp-org">Booz Allen Hamilton</div>
+                <div class="exp-dates">2023 – Present</div>
+              </div>
+            </div>
+            <div class="exp-entry">
+              <div class="exp-dot">RA</div>
+              <div class="exp-content">
+                <div class="exp-role">Research Associate — Quantum Information Science</div>
+                <div class="exp-org">Harvard Quantum Initiative</div>
+                <div class="exp-dates">2021 – 2023</div>
+              </div>
+            </div>
+            <div class="exp-entry">
+              <div class="exp-dot">IN</div>
+              <div class="exp-content">
+                <div class="exp-role">Summer Analyst — Quantum Computing</div>
+                <div class="exp-org">IBM Research</div>
+                <div class="exp-dates">Summer 2021</div>
+              </div>
+            </div>
+          </div>
+          <button class="exp-add-btn" onclick="document.getElementById('exp-add-overlay').classList.add('open')">+ Add Experience</button>
+        </div>
+
+        <!-- LinkedIn Upload -->
+        <div class="myprof-section">
+          <div class="myprof-section-head">
+            <div class="myprof-section-title">Import from LinkedIn</div>
+          </div>
+          <div class="li-upload-zone" onclick="document.getElementById('li-file-input').click()">
+            <div class="li-upload-icon">💼</div>
+            <div class="li-upload-title">Upload your LinkedIn Experience</div>
+            <div class="li-upload-sub">Export your LinkedIn data (PDF or CSV) and upload it here — we'll automatically populate your experience timeline.</div>
+            <div class="li-upload-badge"><span class="li-sq-sm">in</span> Import from LinkedIn</div>
+            <input type="file" id="li-file-input" accept=".pdf,.csv" style="display:none" onchange="handleLinkedInUpload(this)">
+          </div>
+          <div style="margin-top:.65rem;font-size:.73rem;color:var(--text3);line-height:1.6">To export: LinkedIn → Me → Settings &amp; Privacy → Data Privacy → Get a copy of your data → select <strong>Posts and Activities</strong> or <strong>Profile</strong> → Request archive.</div>
+        </div>
+
+      </div><!-- /alumni sections -->
+
+    </div><!-- /myprof-inner -->
+  </div><!-- /myprof-wrap -->
+</div><!-- /page-my-profile -->
+
+<!-- Add Experience Overlay -->
+<div class="exp-overlay" id="exp-add-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="exp-panel">
+    <button class="exp-panel-close" onclick="document.getElementById('exp-add-overlay').classList.remove('open')">✕</button>
+    <div class="exp-panel-title">Add Experience</div>
+    <div class="myprof-field" style="margin-bottom:.75rem">
+      <div class="myprof-label">Role / Title</div>
+      <input class="myprof-input" id="new-exp-role" type="text" placeholder="e.g. Software Engineer">
+    </div>
+    <div class="myprof-field" style="margin-bottom:.75rem">
+      <div class="myprof-label">Company / Organization</div>
+      <input class="myprof-input" id="new-exp-org" type="text" placeholder="e.g. Google">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.1rem">
+      <div class="myprof-field">
+        <div class="myprof-label">Start Year</div>
+        <input class="myprof-input" id="new-exp-start" type="text" placeholder="e.g. 2022">
+      </div>
+      <div class="myprof-field">
+        <div class="myprof-label">End Year</div>
+        <input class="myprof-input" id="new-exp-end" type="text" placeholder="Present">
+      </div>
+    </div>
+    <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center" onclick="addExperience()">Add to Profile →</button>
+  </div>
+</div>
+
+<script>
+// ── JOB BOARD DATA ──
+const JOBS = [
+  {
+    id:'j1', type:'internship', ind:'Technology',
+    title:'Quantum Computing Research Intern',
+    company:'Booz Allen Hamilton', location:'McLean, VA · Hybrid',
+    applyUrl:'#',
+    note:"This is a real team — you'll be working on post-quantum cryptography problems that actually matter for national security. Great fit for anyone serious about physics, CS, or defense tech. Reach out to me before you apply and I'll put in a good word.",
+    poster:'Ray Fitzgerald', posterIni:'RF', posterGrad:'2019',
+    posterBc:'rgba(212,98,10,.1)', posterTc:'var(--crimson)'
+  },
+  {
+    id:'j2', type:'internship', ind:'Finance',
+    title:'Middle Market Banking Summer Analyst',
+    company:'J.P. Morgan', location:'Charlotte, NC · On-site',
+    applyUrl:'#',
+    note:"This is exactly what I did the summer before my senior year — it opened a lot of doors. You'll be working with real clients, real credit analysis. If you're thinking about finance or banking, this is a great place to start. Happy to chat before you apply.",
+    poster:'Meghan Lawrence', posterIni:'ML', posterGrad:'2020',
+    posterBc:'rgba(212,98,10,.1)', posterTc:'var(--crimson)'
+  },
+  {
+    id:'j3', type:'internship', ind:'Law',
+    title:'Summer Associate — Corporate M&A',
+    company:'Debevoise & Plimpton', location:'New York, NY · On-site',
+    applyUrl:'#',
+    note:"This is a top-tier program for law students serious about corporate practice. M&A work is intellectually demanding but you'll learn more in one summer than most law school semesters. Message me if you want a realistic picture of what BigLaw is actually like day-to-day.",
+    poster:'Neil Barr', posterIni:'NB', posterGrad:'1993',
+    posterBc:'rgba(139,26,47,.1)', posterTc:'var(--crimson)'
+  },
+  {
+    id:'j4', type:'internship', ind:'Government',
+    title:'U.S. State Department Student Intern Program',
+    company:'U.S. State Department', location:'Washington, D.C. · On-site',
+    applyUrl:'#',
+    note:"If you're interested in foreign policy, diplomacy, or public service, this is the internship. The application is competitive but very doable if you start early. I went through a similar path — happy to review your personal statement or just talk through whether this is the right fit for you.",
+    poster:'Mark Gul', posterIni:'MG', posterGrad:'2002',
+    posterBc:'rgba(139,26,47,.08)', posterTc:'var(--crimson)'
+  },
+];
+
+function renderJobs(list){
+  const grid=document.getElementById('jobs-grid');
+  if(!grid)return;
+  if(!list.length){grid.innerHTML='<div style="text-align:center;padding:3rem;color:var(--text3);font-size:.88rem">No opportunities match your filters.</div>';return;}
+  grid.innerHTML=list.map(j=>{
+    const typeCls=j.type==='internship'?'job-type-internship':j.type==='fulltime'?'job-type-fulltime':'job-type-contract';
+    const typeLabel=j.type==='internship'?'Internship':j.type==='fulltime'?'Full-Time':'Contract';
+    return `<div class="job-card" data-type="${j.type}" data-ind="${j.ind}">
+      <div class="job-card-top">
+        <div class="job-card-left">
+          <div class="job-card-av" style="background:${j.posterBc};color:${j.posterTc}">${j.posterIni}</div>
+          <div class="job-card-info">
+            <div class="job-card-title">${j.title}</div>
+            <div class="job-card-company">${j.company}</div>
+          </div>
+        </div>
+        <span class="job-type-pill ${typeCls}">${typeLabel}</span>
+      </div>
+      <div class="job-card-tags">
+        <span class="tag tag-blue">${j.ind}</span>
+        <span class="tag" style="background:var(--bg2);color:var(--text2);border:1px solid var(--border)">📍 ${j.location}</span>
+      </div>
+      <div class="job-card-note">"${j.note}"</div>
+      <div class="job-card-footer">
+        <div class="job-card-poster">
+          <div class="job-card-poster-av" style="background:${j.posterBc};color:${j.posterTc}">${j.posterIni}</div>
+          Posted by <strong>${j.poster}</strong> · NA '${j.posterGrad.slice(2)}
+        </div>
+        <div class="job-card-actions">
+          <button class="btn btn-outline btn-sm" onclick="showPage('messages')">Message ${j.poster.split(' ')[0]}</button>
+          <a class="btn btn-primary btn-sm" href="${j.applyUrl}" target="_blank">Apply →</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterJobs(){
+  const q=(document.querySelector('.jobs-search')||{value:''}).value.toLowerCase();
+  const type=(document.getElementById('jobs-filter-type')||{value:''}).value;
+  const ind=(document.getElementById('jobs-filter-ind')||{value:''}).value;
+  const filtered=JOBS.filter(j=>{
+    const matchQ=!q||j.title.toLowerCase().includes(q)||j.company.toLowerCase().includes(q)||j.poster.toLowerCase().includes(q);
+    const matchType=!type||j.type===type;
+    const matchInd=!ind||j.ind===ind;
+    return matchQ&&matchType&&matchInd;
+  });
+  renderJobs(filtered);
+}
+
+// ── ALUMNI DATA ──
+const ALUMNI = [
+  {i:'RF',bc:'rgba(212,98,10,.1)',tc:'var(--crimson)',name:'Ray Fitzgerald',role:'Data Scientist & Quantum Physicist',co:'Booz Allen Hamilton',grad:'2019',college:'Harvard University',deg:'B.S. Physics',ind:'Technology',tags:['Quantum Computing','Post-Quantum Cryptography','Defense'],av:'available',li:true},
+  {i:'ML',bc:'rgba(212,98,10,.1)',tc:'var(--crimson)',name:'Meghan Lawrence',role:'Healthcare Services Banking Analyst',co:'J.P. Morgan',grad:'2020',college:'Davidson College',deg:'B.S. Economics',ind:'Finance',tags:['Finance','Banking','Healthcare Finance'],av:'available',li:true},
+  {i:'RF2',bc:'rgba(26,58,110,.08)',tc:'var(--accent)',name:'Ramin Fatehi',role:"Commonwealth's Attorney",co:'City of Norfolk',grad:'1996',college:'UVA School of Law',deg:'J.D.',ind:'Law',tags:['Law','Public Service','Criminal Justice'],av:'available',li:true},
+  {i:'NB',bc:'rgba(139,26,47,.1)',tc:'var(--crimson)',name:'Neil Barr',role:'Corporate Attorney',co:'Debevoise & Plimpton',grad:'1993',college:'Yale University',deg:'J.D.',ind:'Law',tags:['Corporate Law','M&A','Finance'],av:'available',li:true},
+  {i:'AG',bc:'rgba(26,58,110,.08)',tc:'var(--accent)',name:'Amy Gravitt',role:'Executive VP, Programming',co:'HBO',grad:'1991',college:'Duke University',deg:'B.A. Film & Media',ind:'Design & Creative',tags:['Entertainment','TV','Film'],av:'unavailable',li:false},
+  {i:'MG',bc:'rgba(139,26,47,.08)',tc:'var(--crimson)',name:'Mark Gul',role:'Foreign Service Officer',co:'U.S. State Department',grad:'2002',college:'Georgetown University',deg:'B.S. Foreign Service',ind:'Education',tags:['Diplomacy','Foreign Policy','Government'],av:'available',li:true},
+  {i:'DG',bc:'rgba(26,58,110,.1)',tc:'var(--accent)',name:'Dr. Derwin Gray II',role:'Physician',co:'CHKD',grad:'2007',college:'Wake Forest University',deg:'M.D.',ind:'Medicine & Health',tags:['Medicine','Pediatrics','Healthcare'],av:'busy',li:true},
+  {i:'HR',bc:'rgba(139,26,47,.1)',tc:'var(--crimson)',name:'Hunter R. Rawlings III',role:'President Emeritus',co:'Cornell University',grad:'1962',college:'Haverford College',deg:'Ph.D. Classics',ind:'Education',tags:['Higher Ed','Leadership','Academia'],av:'available',li:false},
+];
+
+const avDot={available:'av-on',busy:'av-busy',unavailable:'av-off'};
+const avLabel={available:'Available',busy:'Busy this week',unavailable:'Not accepting'};
+
+function renderAlumni(data){
+  const g=document.getElementById('alumni-grid');
+  if(!g)return;
+  g.innerHTML=data.map(a=>`
+    <div class="alum-card" onclick="showPage('profile')">
+      <div class="ac-head">
+        <div class="ac-av" style="background:${a.bc};color:${a.tc}">${a.i.length>2?a.i.slice(0,2):a.i}</div>
+        <div style="flex:1;min-width:0">
+          <div class="ac-name">${a.name}</div>
+          <div class="ac-role">${a.role}</div>
+          <div class="ac-co">${a.co} · Class of ${a.grad}</div>
+        </div>
+        ${a.li?'<span class="li-sync"><span class="li-sync-sq">in</span> Synced <span class="li-sync-check">✓</span></span>':''}
+      </div>
+      <div class="ac-college">🎓 <span>${a.college}</span> — ${a.deg}</div>
+      <div class="ac-tags">${a.tags.map(t=>`<span class="tag tag-blue">${t}</span>`).join('')}</div>
+      <div class="ac-foot">
+        <div class="ac-avail"><span class="avail-dot ${avDot[a.av]}"></span>${avLabel[a.av]}</div>
+        <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();showPage('messages')">Message</button>
+        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();showPage('profile')">Book →</button>
+      </div>
+    </div>`).join('');
+}
+
+function filterAlumni(){
+  const s=(document.getElementById('alumni-search')||{value:''}).value.toLowerCase();
+  const ind=(document.getElementById('ind-filter')||{value:''}).value;
+  const col=(document.getElementById('col-filter')||{value:''}).value;
+  const av=(document.getElementById('av-filter')||{value:''}).value;
+  renderAlumni(ALUMNI.filter(a=>{
+    if(s&&!a.name.toLowerCase().includes(s)&&!a.co.toLowerCase().includes(s)&&!a.role.toLowerCase().includes(s)&&!a.tags.some(t=>t.toLowerCase().includes(s)))return false;
+    if(ind&&a.ind!==ind)return false;
+    if(col&&!a.college.includes(col))return false;
+    if(av&&a.av!==av)return false;
+    return true;
+  }));
+}
+
+// ── PAGE NAV ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const nb=document.getElementById('nav-'+id);
+  if(nb)nb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='home')renderAlumni(ALUMNI);
+  if(id==='jobs'){
+    if(ROLE==='alumni') switchJobsTab('my');
+    else renderJobs(JOBS);
+  }
+}
+
+// ── MOBILE NAV ──
+function setMobNav(id){
+  document.querySelectorAll('.mob-nav-item').forEach(i=>i.classList.remove('active'));
+  const el=document.getElementById('mob-'+id);
+  if(el)el.classList.add('active');
+}
+
+// ── PROFILE TABS ──
+function switchProfileTab(btn,tab){
+  document.querySelectorAll('.profile-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['overview','career','book'].forEach(t=>{
+    const el=document.getElementById('tab-'+t);
+    if(el)el.style.display=t===tab?'block':'none';
+  });
+}
+
+// ── MESSAGING THREADS ──
+function openThread(id){
+  document.querySelectorAll('.msg-thread').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  const dot=event.currentTarget.querySelector('.msg-thread-unread-dot');
+  const badge=event.currentTarget.querySelector('.msg-unread-badge');
+  if(dot)dot.remove();
+  if(badge)badge.remove();
+  event.currentTarget.classList.remove('unread');
+  document.querySelectorAll('[id^="thread-"]').forEach(t=>{t.style.display='none'});
+  const th=document.getElementById('thread-'+id);
+  if(th){th.style.display='flex';setTimeout(()=>{th.querySelector('.msg-body').scrollTop=99999},50)}
+  if(window.innerWidth<=600){
+    const sb=document.getElementById('msg-sidebar');
+    const mn=document.getElementById('msg-main');
+    if(sb)sb.style.display='none';
+    if(mn)mn.style.display='flex';
+  }
+}
+
+// ── STUDENT ONBOARDING STEPS ──
+function nextStep(n){
+  for(let i=1;i<=4;i++){
+    const s=document.getElementById('onboard-step-'+i);
+    if(s)s.style.display=i===n?'block':'none';
+  }
+}
+
+// ── ALUMNI REG STEPS ──
+function alumRegStep(n){
+  for(let i=1;i<=4;i++){
+    const s=document.getElementById('areg-step-'+i);
+    if(s)s.style.display=i===n?'block':'none';
+  }
+  ['1','2','3','4'].forEach((v,idx)=>{
+    const num=document.getElementById('rp'+v);
+    const lbl=document.getElementById('rl'+v);
+    const step=idx+1;
+    if(!num||!lbl)return;
+    num.className='alum-reg-prog-num '+(step<n?'done':step===n?'active':'future');
+    lbl.className='alum-reg-prog-label '+(step<n?'done':step===n?'active':'');
+    num.textContent=step<n?'✓':v;
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── INTEREST TOGGLE ──
+function toggleInterest(btn){btn.classList.toggle('selected')}
+
+// ── SLOT PICKER ──
+function pickSlot(el){
+  const wrap=el.closest('.card,.sidebar-card');
+  if(wrap)wrap.querySelectorAll('.avail-slot').forEach(s=>s.classList.remove('picked'));
+  el.classList.add('picked');
+}
+
+// ── MSG FILTER TABS ──
+document.addEventListener('click',function(e){
+  if(e.target.classList.contains('msg-filter-tab')){
+    e.target.closest('.msg-filter-tabs').querySelectorAll('.msg-filter-tab').forEach(t=>t.classList.remove('active'));
+    e.target.classList.add('active');
+  }
+});
+
+// ── AUTO-RESIZE MSG TEXTAREA ──
+document.addEventListener('input',function(e){
+  if(e.target.classList.contains('msg-textarea')){
+    e.target.style.height='auto';
+    e.target.style.height=Math.min(e.target.scrollHeight,120)+'px';
+  }
+});
+
+// ── ROLE DETECTION ──
+const ROLE = new URLSearchParams(window.location.search).get('role') || 'student';
+
+function initRole() {
+  if (ROLE === 'alumni') {
+    // Show alumni job tabs
+    document.getElementById('jobs-role-tabs').style.display = 'flex';
+    // Hide the top-level post button (CTA in the tab handles it)
+    const postBtn = document.getElementById('jobs-post-btn');
+    if (postBtn) postBtn.style.display = 'none';
+    // Show alumni profile sections, hide student
+    document.getElementById('myprof-student-sections').style.display = 'none';
+    document.getElementById('myprof-alumni-sections').style.display = 'block';
+    // Update hero for alumni
+    document.getElementById('myprof-display-name').textContent = 'Ray Fitzgerald';
+    document.getElementById('myprof-display-sub').textContent = 'Norfolk Academy Class of 2019 · Booz Allen Hamilton';
+    document.getElementById('myprof-av-initials').textContent = 'RF';
+    document.getElementById('myprof-display-badges').innerHTML = '<span class="myprof-badge">Alumni</span><span class="myprof-badge">Class of 2019</span>';
+  } else {
+    // Student: rename nav and section title
+    const navHome = document.getElementById('nav-home');
+    if (navHome) navHome.textContent = 'Browse Alumni';
+    const sectionTitle = document.getElementById('browse-section-title');
+    if (sectionTitle) sectionTitle.textContent = 'Find your mentor';
+    // Hide post opportunity button
+    const postBtn = document.getElementById('jobs-post-btn');
+    if (postBtn) postBtn.style.display = 'none';
+    // Show student profile sections, hide alumni
+    document.getElementById('myprof-student-sections').style.display = 'block';
+    document.getElementById('myprof-alumni-sections').style.display = 'none';
+  }
+}
+
+// ── MY PROFILE HELPERS ──
+function updateStudentDisplay() {
+  const first = document.getElementById('stu-first').value || 'Alex';
+  const last = document.getElementById('stu-last').value || 'Carter';
+  const year = document.getElementById('stu-grad-year').value;
+  document.getElementById('myprof-display-name').textContent = first + ' ' + last;
+  document.getElementById('myprof-display-sub').textContent = 'Norfolk Academy · Class of ' + year;
+  const initials = (first[0]||'') + (last[0]||'');
+  document.getElementById('myprof-av-initials').textContent = initials.toUpperCase();
+}
+
+function updateAlumDisplay() {
+  const first = document.getElementById('alum-first').value || 'Ray';
+  const last = document.getElementById('alum-last').value || 'Fitzgerald';
+  const year = document.getElementById('alum-na-year').value;
+  const company = document.getElementById('alum-company').value;
+  const role = document.getElementById('alum-role').value;
+  document.getElementById('myprof-display-name').textContent = first + ' ' + last;
+  document.getElementById('myprof-display-sub').textContent = 'Norfolk Academy Class of ' + year + ' · ' + company;
+  const initials = (first[0]||'') + (last[0]||'');
+  document.getElementById('myprof-av-initials').textContent = initials.toUpperCase();
+  document.getElementById('myprof-display-badges').innerHTML = '<span class="myprof-badge">Alumni</span><span class="myprof-badge">Class of ' + year + '</span>';
+}
+
+function addChip(inputId, wrapId) {
+  const input = document.getElementById(inputId);
+  const val = input.value.trim();
+  if (!val) return;
+  const wrap = document.getElementById(wrapId);
+  const chip = document.createElement('span');
+  chip.className = 'chip';
+  chip.innerHTML = val + ' <span class="chip-remove" onclick="removeChip(this,\'' + wrapId + '\')">✕</span>';
+  wrap.appendChild(chip);
+  input.value = '';
+}
+
+function removeChip(btn, wrapId) {
+  btn.closest('.chip').remove();
+}
+
+function addExperience() {
+  const role = document.getElementById('new-exp-role').value.trim();
+  const org = document.getElementById('new-exp-org').value.trim();
+  const start = document.getElementById('new-exp-start').value.trim();
+  const end = document.getElementById('new-exp-end').value.trim() || 'Present';
+  if (!role || !org) return;
+  const ini = (org.split(' ').map(w=>w[0]).join('').slice(0,2)).toUpperCase();
+  const timeline = document.getElementById('exp-timeline');
+  const entry = document.createElement('div');
+  entry.className = 'exp-entry';
+  entry.innerHTML = '<div class="exp-dot">' + ini + '</div><div class="exp-content"><div class="exp-role">' + role + '</div><div class="exp-org">' + org + '</div><div class="exp-dates">' + (start ? start + ' – ' + end : '') + '</div></div>';
+  timeline.insertBefore(entry, timeline.firstChild);
+  document.getElementById('new-exp-role').value = '';
+  document.getElementById('new-exp-org').value = '';
+  document.getElementById('new-exp-start').value = '';
+  document.getElementById('new-exp-end').value = '';
+  document.getElementById('exp-add-overlay').classList.remove('open');
+}
+
+function handleLinkedInUpload(input) {
+  if (!input.files.length) return;
+  const name = input.files[0].name;
+  const zone = input.closest('.li-upload-zone');
+  zone.innerHTML = '<div class="li-upload-icon">✅</div><div class="li-upload-title">' + name + ' uploaded</div><div class="li-upload-sub" style="color:var(--accent)">Processing your LinkedIn experience… entries will appear in your timeline shortly.</div>';
+}
+
+function toggleProfileEdit() { /* future: toggle read-only / edit mode */ }
+
+function switchJobsTab(tab) {
+  const myBtn = document.getElementById('tab-my-postings');
+  const browseBtn = document.getElementById('tab-browse-opps');
+  const cta = document.getElementById('jobs-alumni-cta');
+  if (myBtn) myBtn.classList.toggle('active', tab === 'my');
+  if (browseBtn) browseBtn.classList.toggle('active', tab === 'browse');
+  if (tab === 'my') {
+    renderJobs(JOBS.filter(j => j.poster === 'Ray Fitzgerald'));
+    if (cta) cta.style.display = 'block';
+  } else {
+    renderJobs(JOBS);
+    if (cta) cta.style.display = 'none';
+  }
+}
+
+// ── INIT ──
+renderAlumni(ALUMNI);
+initRole();
+
+// ── HANDLE URL HASH (from landing page links) ──
+window.addEventListener('load', function() {
+  const hash = window.location.hash;
+  if (hash === '#onboard') showPage('onboard');
+  else if (hash === '#alumreg') showPage('alumreg');
+});
+</script>
+</body>
+</html>

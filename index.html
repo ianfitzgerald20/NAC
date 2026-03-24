@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademyConnect — Norfolk Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#faf8f4;
+  --bg2:#f3efe8;
+  --bg3:#ebe5d8;
+  --accent:#1a3a6e;
+  --accent2:#2a5298;
+  --accent-dim:rgba(26,58,110,0.08);
+  --crimson:#d4620a;
+  --crimson2:#e07010;
+  --crimson-dim:rgba(212,98,10,0.08);
+  --gold:#b8860b;
+  --gold-dim:rgba(184,134,11,0.10);
+  --navy:#0d1b2a;
+  --text:#1a1208;
+  --text2:#5c4a2a;
+  --text3:#9c8866;
+  --border:rgba(90,65,30,0.12);
+  --border2:rgba(90,65,30,0.22);
+  --card:#faf8f4;
+  --r:4px;
+  --rl:6px;
+  --shadow:0 1px 6px rgba(26,18,8,0.08);
+  --shadow2:0 4px 20px rgba(26,18,8,0.13);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:16px;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(90,65,30,0.04) 28px);pointer-events:none;z-index:0}
+body>*{position:relative;z-index:1}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.5rem;border-bottom:2px solid var(--accent);background:var(--accent);position:sticky;top:0;z-index:200}
+.nav-logo{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:1.35rem;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;line-height:1.4;letter-spacing:.01em}
+.nav-logo svg{display:block;flex-shrink:0}
+.nav-auth-tabs{display:flex;align-items:center;gap:6px}
+.auth-tab{font-family:'Source Serif 4',serif;font-size:.83rem;font-weight:500;padding:.5rem 1.15rem;border-radius:var(--r);cursor:pointer;transition:all .18s;border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85);background:transparent;letter-spacing:.02em}
+.auth-tab:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.6)}
+.auth-tab.active{background:#fff;color:var(--accent);border-color:#fff;font-weight:600}
+.auth-tab-primary{background:var(--crimson);color:#fff !important;border:1px solid var(--crimson) !important}
+.auth-tab-primary:hover{background:var(--crimson2) !important;border-color:var(--crimson2) !important}
+.auth-tab-primary.active{background:#fff !important;color:var(--crimson) !important;border-color:#fff !important}
+
+/* ── AUTH DRAWER ── */
+.auth-drawer{background:var(--bg);border-bottom:2px solid var(--border2);overflow:hidden;max-height:0;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.auth-drawer.open{max-height:500px}
+.auth-inner{max-width:480px;margin:0 auto;padding:2rem 1.5rem}
+.auth-form-title{font-family:'EB Garamond',Georgia,serif;font-size:1.45rem;font-weight:700;margin-bottom:.3rem;letter-spacing:-.01em}
+.auth-form-sub{font-size:.83rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.65}
+.form-field{margin-bottom:1rem}
+.form-label{font-size:.72rem;font-weight:500;color:var(--text2);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.form-input{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:.65rem .9rem;color:var(--text);font-family:'Source Serif 4',serif;font-size:.875rem;outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--accent);background:var(--bg)}
+.form-input::placeholder{color:var(--text3)}
+.btn{font-family:'Source Serif 4',serif;font-size:.83rem;font-weight:500;padding:.5rem 1.15rem;border-radius:var(--r);cursor:pointer;transition:all .18s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border:none;letter-spacing:.02em}
+.btn-primary{background:var(--crimson);color:#fff;border:1px solid var(--crimson)}
+.btn-primary:hover{background:var(--crimson2)}
+.btn-accent{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.btn-accent:hover{background:var(--accent2)}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.btn-outline:hover{background:var(--accent-dim)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85)}
+.btn-lg{padding:.7rem 1.75rem;font-size:.92rem}
+.btn-full{width:100%;justify-content:center}
+.auth-footer-link{font-size:.78rem;color:var(--text3);text-align:center;margin-top:1rem}
+.auth-footer-link a{color:var(--crimson);text-decoration:none;font-weight:500;cursor:pointer}
+.auth-join-benefits{display:flex;flex-direction:column;gap:.5rem;margin:.75rem 0 1.25rem}
+.auth-join-benefit{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--text2);line-height:1.5}
+.auth-join-benefit::before{content:'✓';color:var(--crimson);font-weight:700;font-size:.8rem;flex-shrink:0;margin-top:.1rem}
+
+/* ── HERO ── */
+.hero{padding:5rem 2.5rem 4rem;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);border:1px solid rgba(184,134,11,.28);border-radius:2px;padding:.3rem .9rem;font-family:"EB Garamond",serif;font-size:.8rem;color:var(--gold);font-weight:600;margin-bottom:1.3rem;letter-spacing:.12em;text-transform:uppercase}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:'EB Garamond',Georgia,serif;font-size:3.5rem;font-weight:700;line-height:1.2;letter-spacing:-.01em;margin-bottom:1.2rem;font-style:normal}
+.hero h1 span{color:var(--crimson);font-style:normal}
+.hero-sub{font-size:1rem;color:var(--text2);line-height:1.7;margin-bottom:2rem;font-weight:300;max-width:440px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:2rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-num{font-family:'EB Garamond',Georgia,serif;font-size:1.7rem;font-weight:700;letter-spacing:-.02em}
+.stat-label{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+
+/* ── PREVIEW CARD ── */
+.hero-visual{position:relative;height:420px}
+.preview-card{background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);padding:1.4rem;position:absolute;width:100%;box-shadow:var(--shadow2);transition:transform .3s}
+.preview-card:nth-child(2){transform:rotate(-3deg) scale(.95) translateY(12px);opacity:.5;z-index:0;top:18px}
+.preview-card:nth-child(1){z-index:2;top:0}
+.hero-visual:hover .preview-card:nth-child(2){transform:rotate(-5deg) scale(.93) translateY(22px)}
+.pcp-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem}
+.pcp-av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700}
+.li-badge{font-size:.65rem;padding:.2rem .55rem;background:var(--accent-dim);border:1px solid rgba(37,99,235,.18);border-radius:5px;color:var(--accent);font-weight:500}
+.li-badge .li-sq{width:10px;height:10px;background:#0077b5;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;margin-right:4px;font-family:'EB Garamond',Georgia,serif;vertical-align:middle}
+.pcp-name{font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:2px}
+.pcp-role{font-size:.8rem;color:var(--text2);margin-bottom:2px}
+.pcp-co{font-size:.74rem;color:var(--text3)}
+.pcp-tags{display:flex;gap:5px;flex-wrap:wrap;margin:.9rem 0}
+.pcp-college{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text3);border-top:1px solid var(--border);padding-top:.75rem;margin-top:.5rem}
+.pcp-actions{display:flex;gap:7px;margin-top:.9rem}
+.pcp-actions .btn{flex:1;justify-content:center;font-size:.78rem;padding:.45rem .7rem}
+.float-badge{position:absolute;bottom:-24px;right:-16px;background:var(--bg);border:1px solid rgba(249,115,22,.35);border-radius:3px;padding:.65rem .9rem;display:flex;align-items:center;gap:9px;font-size:.74rem;z-index:10;box-shadow:var(--shadow2);max-width:210px;animation:floatBadge 3s ease-in-out infinite}
+@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.float-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.float-text{color:var(--text2);line-height:1.4}
+.float-text strong{color:var(--text);display:block;font-weight:500;font-size:.75rem}
+.tag{font-family:'Source Serif 4',serif;font-size:.68rem;padding:.25rem .6rem;border-radius:2px;font-weight:400;letter-spacing:.04em}
+.tag-blue{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(26,58,110,.18)}
+.tag-orange{background:var(--crimson-dim);color:var(--crimson);border:1px solid rgba(139,26,47,.18)}
+.tag-gray{background:var(--bg2);color:var(--text2);border:1px solid var(--border2)}
+
+/* ── FEATURES STRIP ── */
+.features-strip{background:var(--accent);padding:3.5rem 2.5rem;color:#fff;margin-top:2rem}
+.features-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+.feature-icon{font-size:1.5rem;margin-bottom:.75rem}
+.feature-title{font-family:'EB Garamond',Georgia,serif;font-size:1.1rem;font-weight:700;margin-bottom:.4rem;color:#fff}
+.feature-desc{font-size:.82rem;color:rgba(255,255,255,.62);line-height:1.7}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:2.5rem}
+  .hero-visual{height:320px}
+  .features-inner{grid-template-columns:1fr;gap:1.75rem}
+}
+@media(max-width:600px){
+  nav{padding:.75rem 1.25rem}
+  .hero{padding:3rem 1.25rem 2.5rem}
+  .hero h1{font-size:2.4rem}
+  .nav-auth-tabs{gap:4px}
+  .auth-tab{padding:.4rem .7rem;font-size:.75rem}
+  .features-strip{padding:2.5rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="NA Logo Transparent.png" alt="Norfolk Academy" style="height:38px;width:38px;object-fit:contain;display:block">
+    AcademyConnect
+  </a>
+  <div class="nav-auth-tabs">
+    <button class="auth-tab" id="tab-signin" onclick="showAuth('signin')">Sign In</button>
+    <button class="auth-tab" id="tab-student" onclick="showAuth('student')">Join as Student</button>
+    <button class="auth-tab auth-tab-primary" id="tab-alumni" onclick="showAuth('alumni')">Join as Alumni ↗</button>
+  </div>
+</nav>
+
+<!-- ══ AUTH DRAWER ══ -->
+<div id="auth-drawer" class="auth-drawer">
+
+  <!-- SIGN IN -->
+  <div id="auth-signin" class="auth-inner" style="display:none">
+    <div class="auth-form-title">Welcome back</div>
+    <div class="auth-form-sub">Sign in to your AcademyConnect account to connect with alumni.</div>
+    <div class="form-field">
+      <label class="form-label">I am a</label>
+      <div style="display:flex;gap:.5rem;margin-top:.25rem">
+        <button id="signin-role-student" onclick="setSignInRole('student')" style="flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--crimson);background:var(--crimson);color:#fff;font-family:'Source Serif 4',serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s">Student</button>
+        <button id="signin-role-alumni" onclick="setSignInRole('alumni')" style="flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:'Source Serif 4',serif;font-size:.83rem;font-weight:400;cursor:pointer;transition:all .15s">Alumni</button>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" placeholder="you@norfolkacademy.org">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" placeholder="••••••••">
+    </div>
+    <button class="btn btn-accent btn-lg btn-full" id="signin-btn" onclick="window.location='bulldogconnect-v3.html?role=student'">Sign In →</button>
+    <div class="auth-footer-link">Don't have an account? <a onclick="showAuth('student')">Join as Student</a> or <a onclick="showAuth('alumni')">Join as Alumni</a></div>
+  </div>
+
+  <!-- JOIN AS STUDENT -->
+  <div id="auth-student" class="auth-inner" style="display:none">
+    <div class="auth-form-title">Join as a Student</div>
+    <div class="auth-form-sub">Connect with Norfolk Academy alumni for mentoring, career advice, and real-world guidance.</div>
+    <div class="auth-join-benefits">
+      <div class="auth-join-benefit">Browse 240+ verified NA alumni profiles across every industry</div>
+      <div class="auth-join-benefit">Message alumni directly and arrange mentoring sessions</div>
+      <div class="auth-join-benefit">Explore internships and jobs posted by NA graduates</div>
+      <div class="auth-join-benefit">Get honest college application and career advice from those who've been there</div>
+    </div>
+    <button class="btn btn-primary btn-lg btn-full" onclick="window.location='bulldogconnect-v3.html?role=student#onboard'">Get Started →</button>
+    <div class="auth-footer-link">Already have an account? <a onclick="showAuth('signin')">Sign In</a></div>
+  </div>
+
+  <!-- JOIN AS ALUMNI -->
+  <div id="auth-alumni" class="auth-inner" style="display:none">
+    <div class="auth-form-title">Join as an Alumni</div>
+    <div class="auth-form-sub">Give back to the NA community — share your experience and help guide the next generation of Bulldogs.</div>
+    <div class="auth-join-benefits">
+      <div class="auth-join-benefit">Create a verified alumni profile, synced with LinkedIn</div>
+      <div class="auth-join-benefit">Set your availability and accept mentoring session requests</div>
+      <div class="auth-join-benefit">Post internship and job opportunities for students</div>
+      <div class="auth-join-benefit">Stay connected with the Norfolk Academy network</div>
+    </div>
+    <button class="btn btn-primary btn-lg btn-full" onclick="window.location='bulldogconnect-v3.html?role=alumni#alumreg'">Register as Alumni →</button>
+    <div class="auth-footer-link">Already registered? <a onclick="showAuth('signin')">Sign In</a></div>
+  </div>
+
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Live — LinkedIn Sync Enabled</div>
+    <h1>Connect with <span>NA Alumni</span> who've been where you're going.</h1>
+    <p class="hero-sub">Talk to Bulldogs who've graduated and dive into their college choices and career stories. If you want to learn more about them, drop them a message to arrange a mentoring session.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary btn-lg" onclick="showAuth('student')">Join as Student →</button>
+      <button class="btn btn-outline btn-lg" onclick="showAuth('alumni')">Join as Alumni</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">240+</div><div class="stat-label">Active Alumni</div></div>
+      <div><div class="stat-num">1,800+</div><div class="stat-label">Sessions Booked</div></div>
+      <div><div class="stat-num">38</div><div class="stat-label">Career Fields</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="preview-card">
+      <div class="pcp-top">
+        <div class="pcp-av" style="background:var(--crimson-dim);color:var(--crimson);">RF</div>
+        <span class="li-badge"><span class="li-sq">in</span>Synced</span>
+      </div>
+      <div class="pcp-name">Ray Fitzgerald</div>
+      <div class="pcp-role">Data Scientist & Quantum Physicist</div>
+      <div class="pcp-co">Booz Allen Hamilton · Class of 2019</div>
+      <div class="pcp-tags">
+        <span class="tag tag-blue">Quantum Computing</span>
+        <span class="tag tag-orange">Defense</span>
+        <span class="tag tag-gray">Harvard '23</span>
+      </div>
+      <div class="pcp-college">🎓 Harvard University, B.S. Physics</div>
+      <div class="pcp-actions">
+        <button class="btn btn-outline" onclick="showAuth('signin')">View Profile</button>
+        <button class="btn btn-primary" onclick="showAuth('signin')">Message</button>
+      </div>
+    </div>
+    <div class="preview-card">
+      <div class="pcp-top">
+        <div class="pcp-av" style="background:var(--crimson-dim);color:var(--crimson);">ML</div>
+        <span class="li-badge"><span class="li-sq">in</span>Synced</span>
+      </div>
+      <div class="pcp-name">Meghan Lawrence</div>
+      <div class="pcp-role">Healthcare Services Banking Analyst</div>
+      <div class="pcp-co">J.P. Morgan · Class of 2020</div>
+    </div>
+    <div class="float-badge">
+      <span class="float-dot"></span>
+      <div class="float-text"><strong>New message from Ray F.</strong>Happy to chat about defense tech careers!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FEATURES STRIP ══ -->
+<div class="features-strip">
+  <div class="features-inner">
+    <div>
+      <div class="feature-icon">🎓</div>
+      <div class="feature-title">Alumni Mentoring</div>
+      <div class="feature-desc">Connect with Norfolk Academy graduates across every industry for one-on-one mentoring sessions, college advice, and career guidance.</div>
+    </div>
+    <div>
+      <div class="feature-icon">💼</div>
+      <div class="feature-title">Job & Internship Board</div>
+      <div class="feature-desc">Discover opportunities posted directly by NA alumni — internships, full-time roles, and more across finance, law, tech, medicine, and beyond.</div>
+    </div>
+    <div>
+      <div class="feature-icon">🔗</div>
+      <div class="feature-title">LinkedIn Sync</div>
+      <div class="feature-desc">Alumni profiles stay current automatically — always see the most up-to-date career info, roles, and contact details from the NA network.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let activeAuth = null;
+let signinRole = 'student';
+
+function setSignInRole(role) {
+  signinRole = role;
+  const sBtn = document.getElementById('signin-role-student');
+  const aBtn = document.getElementById('signin-role-alumni');
+  const signInBtn = document.getElementById('signin-btn');
+  if (role === 'student') {
+    sBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--crimson);background:var(--crimson);color:#fff;font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s';
+    aBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:400;cursor:pointer;transition:all .15s';
+    signInBtn.onclick = () => window.location = 'bulldogconnect-v3.html?role=student';
+  } else {
+    aBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--crimson);background:var(--crimson);color:#fff;font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s';
+    sBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:400;cursor:pointer;transition:all .15s';
+    signInBtn.onclick = () => window.location = 'bulldogconnect-v3.html?role=alumni';
+  }
+}
+
+function showAuth(tab) {
+  const drawer = document.getElementById('auth-drawer');
+  const tabs = ['signin', 'student', 'alumni'];
+
+  if (activeAuth === tab) {
+    drawer.classList.remove('open');
+    document.getElementById('tab-' + tab).classList.remove('active');
+    activeAuth = null;
+    return;
+  }
+
+  tabs.forEach(t => {
+    document.getElementById('auth-' + t).style.display = 'none';
+    const el = document.getElementById('tab-' + t);
+    if (el) el.classList.remove('active');
+  });
+
+  document.getElementById('auth-' + tab).style.display = 'block';
+  document.getElementById('tab-' + tab).classList.add('active');
+  drawer.classList.add('open');
+  activeAuth = tab;
+
+  // Scroll drawer into view smoothly
+  setTimeout(() => {
+    document.getElementById('auth-drawer').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+}
+</script>
+</body>
+</html>
