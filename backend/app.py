@@ -14,10 +14,15 @@ app.register_blueprint(jobs_bp)
 app.register_blueprint(auth_bp)
 
 FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "../frontend")
+PAGES_DIR = os.path.join(FRONTEND_DIR, "pages")
 
 @app.get("/")
 def root():
-    return send_from_directory(FRONTEND_DIR, "index.html")
+    return send_from_directory(PAGES_DIR, "index.html")
+
+@app.get("/app")
+def app_page():
+    return send_from_directory(PAGES_DIR, "app.html")
 
 @app.get("/<path:path>")
 def static_files(path):
