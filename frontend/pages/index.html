@@ -145,7 +145,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 <!-- ══ NAV ══ -->
 <nav>
   <a href="#" class="nav-logo">
-    <img src="NA Logo Transparent.png" alt="Norfolk Academy" style="height:38px;width:38px;object-fit:contain;display:block">
+    <img src="/assets/images/NA Logo Transparent.png" alt="Norfolk Academy" style="height:38px;width:38px;object-fit:contain;display:block">
     AcademyConnect
   </a>
   <div class="nav-auth-tabs">
@@ -171,13 +171,14 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
     </div>
     <div class="form-field">
       <label class="form-label">Email</label>
-      <input class="form-input" type="email" placeholder="you@norfolkacademy.org">
+      <input class="form-input" id="signin-email" type="email" placeholder="you@norfolkacademy.org">
     </div>
     <div class="form-field">
       <label class="form-label">Password</label>
-      <input class="form-input" type="password" placeholder="••••••••">
+      <input class="form-input" id="signin-password" type="password" placeholder="••••••••">
     </div>
-    <button class="btn btn-accent btn-lg btn-full" id="signin-btn" onclick="window.location='bulldogconnect-v3.html?role=student'">Sign In →</button>
+    <button class="btn btn-accent btn-lg btn-full" id="signin-btn" onclick="doSignIn()">Sign In →</button>
+    <div id="signin-error" style="color:var(--crimson);font-size:.8rem;margin-top:.5rem;display:none"></div>
     <div class="auth-footer-link">Don't have an account? <a onclick="showAuth('student')">Join as Student</a> or <a onclick="showAuth('alumni')">Join as Alumni</a></div>
   </div>
 
@@ -191,7 +192,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
       <div class="auth-join-benefit">Explore internships and jobs posted by NA graduates</div>
       <div class="auth-join-benefit">Get honest college application and career advice from those who've been there</div>
     </div>
-    <button class="btn btn-primary btn-lg btn-full" onclick="window.location='bulldogconnect-v3.html?role=student#onboard'">Get Started →</button>
+    <button class="btn btn-primary btn-lg btn-full" onclick="window.location='/app?role=student#onboard'">Get Started →</button>
     <div class="auth-footer-link">Already have an account? <a onclick="showAuth('signin')">Sign In</a></div>
   </div>
 
@@ -205,7 +206,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
       <div class="auth-join-benefit">Post internship and job opportunities for students</div>
       <div class="auth-join-benefit">Stay connected with the Norfolk Academy network</div>
     </div>
-    <button class="btn btn-primary btn-lg btn-full" onclick="window.location='bulldogconnect-v3.html?role=alumni#alumreg'">Register as Alumni →</button>
+    <button class="btn btn-primary btn-lg btn-full" onclick="window.location='/app?role=alumni#alumreg'">Register as Alumni →</button>
     <div class="auth-footer-link">Already registered? <a onclick="showAuth('signin')">Sign In</a></div>
   </div>
 
@@ -296,11 +297,11 @@ function setSignInRole(role) {
   if (role === 'student') {
     sBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--crimson);background:var(--crimson);color:#fff;font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s';
     aBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:400;cursor:pointer;transition:all .15s';
-    signInBtn.onclick = () => window.location = 'bulldogconnect-v3.html?role=student';
+    signInBtn.onclick = () => window.location = '/app?role=student';
   } else {
     aBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--crimson);background:var(--crimson);color:#fff;font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s';
     sBtn.style.cssText = 'flex:1;padding:.55rem;border-radius:var(--r);border:2px solid var(--border2);background:transparent;color:var(--text2);font-family:\'Source Serif 4\',serif;font-size:.83rem;font-weight:400;cursor:pointer;transition:all .15s';
-    signInBtn.onclick = () => window.location = 'bulldogconnect-v3.html?role=alumni';
+    signInBtn.onclick = () => window.location = '/app?role=alumni';
   }
 }
 
@@ -330,6 +331,47 @@ function showAuth(tab) {
   setTimeout(() => {
     document.getElementById('auth-drawer').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 50);
+}
+
+async function doSignIn() {
+  const email = document.getElementById('signin-email').value.trim();
+  const password = document.getElementById('signin-password').value;
+  const errEl = document.getElementById('signin-error');
+  errEl.style.display = 'none';
+
+  if (!email || !password) {
+    errEl.textContent = 'Please enter your email and password.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('signin-btn');
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email, password})
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Sign in failed.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Sign In →';
+      btn.disabled = false;
+      return;
+    }
+    localStorage.setItem('ac_token', data.token);
+    localStorage.setItem('ac_role', data.role);
+    window.location = '/app?role=' + data.role;
+  } catch (e) {
+    errEl.textContent = 'Network error. Please try again.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Sign In →';
+    btn.disabled = false;
+  }
 }
 </script>
 </body>

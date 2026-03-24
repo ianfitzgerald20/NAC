@@ -1,28 +1,86 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from database import db
+from models.user import User
+from models.alumni_profile import AlumniProfile
+from models.student_profile import StudentProfile
 
 auth_bp = Blueprint("auth", __name__)
 
-# Stub auth — replace with real DB + hashed passwords
-USERS = {}
 
 @auth_bp.post("/api/auth/register")
 def register():
     body = request.get_json(silent=True) or {}
     email = body.get("email", "").strip().lower()
+    password = body.get("password", "")
     role = body.get("role", "student")
-    if not email:
-        return jsonify({"error": "email required"}), 400
-    if email in USERS:
-        return jsonify({"error": "already registered"}), 409
-    USERS[email] = {"email": email, "role": role, "profile": body}
-    return jsonify({"token": f"stub-token-{email}", "role": role}), 201
+    first_name = body.get("firstName", "").strip()
+    last_name = body.get("lastName", "").strip()
+
+    if not all([email, password, first_name, last_name]):
+        return jsonify({"error": "All fields are required"}), 400
+    if len(password) < 8:
+        return jsonify({"error": "Password must be at least 8 characters"}), 400
+    if role not in ("student", "alumni"):
+        return jsonify({"error": "Invalid role"}), 400
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "Email already registered"}), 409
+
+    user = User(
+        email=email,
+        password_hash=generate_password_hash(password),
+        role=role,
+        first_name=first_name,
+        last_name=last_name,
+    )
+    db.session.add(user)
+    db.session.flush()
+
+    if role == "alumni":
+        db.session.add(AlumniProfile(
+            user_id=user.id,
+            company=body.get("company", ""),
+            job_title=body.get("jobTitle", ""),
+            grad_year=body.get("gradYear"),
+            college=body.get("college", ""),
+            industry=body.get("industry", ""),
+            availability="available",
+        ))
+    else:
+        db.session.add(StudentProfile(
+            user_id=user.id,
+            grad_year=body.get("gradYear"),
+            grade=body.get("grade", ""),
+        ))
+
+    db.session.commit()
+    token = create_access_token(identity=str(user.id))
+    return jsonify({"token": token, "role": role, "user": user.to_dict()}), 201
+
 
 @auth_bp.post("/api/auth/login")
 def login():
     body = request.get_json(silent=True) or {}
     email = body.get("email", "").strip().lower()
-    role = body.get("role", "student")
-    if not email:
-        return jsonify({"error": "email required"}), 400
-    # Stub: accept any credentials
-    return jsonify({"token": f"stub-token-{email}", "role": role})
+    password = body.get("password", "")
+
+    if not email or not password:
+        return jsonify({"error": "Email and password required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password_hash, password):
+        return jsonify({"error": "Invalid email or password"}), 401
+
+    token = create_access_token(identity=str(user.id))
+    return jsonify({"token": token, "role": user.role, "user": user.to_dict()})
+
+
+@auth_bp.get("/api/auth/me")
+@jwt_required()
+def me():
+    user = User.query.get(int(get_jwt_identity()))
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify(user.to_dict())

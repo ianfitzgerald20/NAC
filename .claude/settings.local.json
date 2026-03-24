@@ -1,4 +1,18 @@
 {
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /c/Users/ipfit/Downloads/BulldogConnect && git add -A && if ! git diff --cached --quiet; then git commit -m \"Auto-commit $(date +%s)\" && git push origin main; fi 2>/dev/null || true",
+            "statusMessage": "Committing and pushing to GitHub..."
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/bulldogconnect-v3.html)",

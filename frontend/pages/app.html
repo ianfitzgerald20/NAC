@@ -588,8 +588,8 @@ tbody tr:hover{background:var(--bg2)}
 
 <!-- ══ NAV ══ -->
 <nav>
-  <a href="index.html" class="nav-logo">
-    <img src="NA Logo Transparent.png" alt="Norfolk Academy" style="height:38px;width:38px;object-fit:contain;display:block">
+  <a href="/" class="nav-logo">
+    <img src="/assets/images/NA Logo Transparent.png" alt="Norfolk Academy" style="height:38px;width:38px;object-fit:contain;display:block">
     AcademyConnect
   </a>
   <ul class="nav-links">
@@ -853,24 +853,25 @@ tbody tr:hover{background:var(--bg2)}
         </div>
         <div class="onboard-body">
           <div class="form-row">
-            <div class="form-field"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="e.g. James"></div>
-            <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="e.g. Thompson"></div>
+            <div class="form-field"><label class="form-label">First Name</label><input class="form-input" id="ob-fname" type="text" placeholder="e.g. James"></div>
+            <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" id="ob-lname" type="text" placeholder="e.g. Thompson"></div>
           </div>
-          <div class="form-field"><label class="form-label">NA Email Address</label><input class="form-input" type="email" placeholder="jthompson@norfolkacademy.org"></div>
-          <div class="form-field"><label class="form-label">Create Password</label><input class="form-input" type="password" placeholder="Min. 8 characters"></div>
+          <div class="form-field"><label class="form-label">NA Email Address</label><input class="form-input" id="ob-email" type="email" placeholder="jthompson@norfolkacademy.org"></div>
+          <div class="form-field"><label class="form-label">Create Password</label><input class="form-input" id="ob-password" type="password" placeholder="Min. 8 characters"></div>
           <div class="form-row">
             <div class="form-field"><label class="form-label">Grade</label>
-              <select class="form-select"><option>9th Grade</option><option>10th Grade</option><option selected>11th Grade</option><option>12th Grade</option></select>
+              <select class="form-select" id="ob-grade"><option>9th Grade</option><option>10th Grade</option><option selected>11th Grade</option><option>12th Grade</option></select>
             </div>
             <div class="form-field"><label class="form-label">Grad Year</label>
-              <select class="form-select"><option>2025</option><option selected>2026</option><option>2027</option><option>2028</option></select>
+              <select class="form-select" id="ob-gradyear"><option>2025</option><option selected>2026</option><option>2027</option><option>2028</option></select>
             </div>
           </div>
+          <div id="ob-error" style="color:var(--crimson);font-size:.8rem;margin-top:.5rem;display:none"></div>
         </div>
         <div class="onboard-footer">
           <span class="step-counter">Step 1 of 4</span>
           <div class="onboard-nav">
-            <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+            <button class="btn btn-primary" id="ob-continue-btn" onclick="registerStudent()">Continue →</button>
           </div>
         </div>
       </div>
@@ -1655,12 +1656,13 @@ tbody tr:hover{background:var(--bg2)}
           <div class="alum-reg-section">
             <div class="alum-reg-section-title"><span class="alum-reg-section-icon">👤</span> Personal Details</div>
             <div class="alum-reg-grid">
-              <div class="form-field"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="e.g. Ray"></div>
-              <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="e.g. Fitzgerald"></div>
+              <div class="form-field"><label class="form-label">First Name</label><input class="form-input" id="ar-fname" type="text" placeholder="e.g. Ray"></div>
+              <div class="form-field"><label class="form-label">Last Name</label><input class="form-input" id="ar-lname" type="text" placeholder="e.g. Fitzgerald"></div>
             </div>
-            <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="rfitzgerald@alumni.norfolkacademy.org"></div>
+            <div class="form-field"><label class="form-label">Email</label><input class="form-input" id="ar-email" type="email" placeholder="rfitzgerald@alumni.norfolkacademy.org"></div>
+            <div class="form-field"><label class="form-label">Create Password</label><input class="form-input" id="ar-password" type="password" placeholder="Min. 8 characters"></div>
             <div class="form-field"><label class="form-label">NA Graduation Year</label>
-              <select class="form-select">
+              <select class="form-select" id="ar-gradyear">
                 <option>2024</option><option>2022</option><option selected>2019</option><option>2015</option><option>2010</option><option>2005</option><option>2001</option><option>1999</option><option>1996</option><option>1993</option><option>1991</option><option>1985</option><option>Other</option>
               </select>
             </div>
@@ -1678,9 +1680,10 @@ tbody tr:hover{background:var(--bg2)}
             </button>
             <div style="font-size:.72rem;color:var(--text3);margin-top:.6rem">Or fill in your career details manually on the next step.</div>
           </div>
+          <div id="ar-error" style="color:var(--crimson);font-size:.8rem;margin-bottom:.75rem;display:none"></div>
           <div class="alum-reg-footer">
             <span style="font-size:.75rem;color:var(--text3)">Step 1 of 4</span>
-            <button class="btn btn-primary" onclick="alumRegStep(2)">Continue →</button>
+            <button class="btn btn-primary" id="ar-continue-btn" onclick="registerAlumni()">Continue →</button>
           </div>
         </div>
 
@@ -2241,6 +2244,109 @@ function openThread(id){
   }
 }
 
+// ── AUTH HELPERS ──
+function saveAuth(token, role) {
+  localStorage.setItem('ac_token', token);
+  localStorage.setItem('ac_role', role);
+}
+
+async function registerStudent() {
+  const firstName = document.getElementById('ob-fname').value.trim();
+  const lastName  = document.getElementById('ob-lname').value.trim();
+  const email     = document.getElementById('ob-email').value.trim();
+  const password  = document.getElementById('ob-password').value;
+  const grade     = document.getElementById('ob-grade').value;
+  const gradYear  = parseInt(document.getElementById('ob-gradyear').value);
+  const errEl     = document.getElementById('ob-error');
+  const btn       = document.getElementById('ob-continue-btn');
+  errEl.style.display = 'none';
+
+  if (!firstName || !lastName || !email || !password) {
+    errEl.textContent = 'Please fill in all fields.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (password.length < 8) {
+    errEl.textContent = 'Password must be at least 8 characters.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Creating account…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({firstName, lastName, email, password, role: 'student', grade, gradYear})
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Registration failed.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Continue →';
+      btn.disabled = false;
+      return;
+    }
+    saveAuth(data.token, 'student');
+    nextStep(2);
+  } catch (e) {
+    errEl.textContent = 'Network error. Please try again.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Continue →';
+    btn.disabled = false;
+  }
+}
+
+async function registerAlumni() {
+  const firstName = document.getElementById('ar-fname').value.trim();
+  const lastName  = document.getElementById('ar-lname').value.trim();
+  const email     = document.getElementById('ar-email').value.trim();
+  const password  = document.getElementById('ar-password').value;
+  const gradYear  = document.getElementById('ar-gradyear').value;
+  const errEl     = document.getElementById('ar-error');
+  const btn       = document.getElementById('ar-continue-btn');
+  errEl.style.display = 'none';
+
+  if (!firstName || !lastName || !email || !password) {
+    errEl.textContent = 'Please fill in all fields.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (password.length < 8) {
+    errEl.textContent = 'Password must be at least 8 characters.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Creating account…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({firstName, lastName, email, password, role: 'alumni', gradYear})
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Registration failed.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Continue →';
+      btn.disabled = false;
+      return;
+    }
+    saveAuth(data.token, 'alumni');
+    alumRegStep(2);
+  } catch (e) {
+    errEl.textContent = 'Network error. Please try again.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Continue →';
+    btn.disabled = false;
+  }
+}
+
 // ── STUDENT ONBOARDING STEPS ──
 function nextStep(n){
   for(let i=1;i<=4;i++){
@@ -2414,11 +2520,9 @@ renderAlumni(ALUMNI);
 initRole();
 
 // ── HANDLE URL HASH (from landing page links) ──
-window.addEventListener('load', function() {
-  const hash = window.location.hash;
-  if (hash === '#onboard') showPage('onboard');
-  else if (hash === '#alumreg') showPage('alumreg');
-});
+const _initHash = window.location.hash;
+if (_initHash === '#onboard') showPage('onboard');
+else if (_initHash === '#alumreg') showPage('alumreg');
 </script>
 </body>
 </html>
