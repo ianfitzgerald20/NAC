@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "type": "internship",
+    "industry": "Engineering",
+    "title": "Quantum Computing Research Intern",
+    "company": "Booz Allen Hamilton",
+    "location": "McLean, VA (Hybrid)",
+    "applyUrl": "#",
+    "note": "Great opportunity for CS/physics students. Happy to chat before you apply.",
+    "postedBy": "mark-gul"
+  },
+  {
+    "id": 2,
+    "type": "internship",
+    "industry": "Finance",
+    "title": "Middle Market Banking Analyst",
+    "company": "J.P. Morgan",
+    "location": "New York, NY",
+    "applyUrl": "#",
+    "note": "Reach out if you want tips on the interview process — it's rigorous but very doable.",
+    "postedBy": "meghan-lawrence"
+  },
+  {
+    "id": 3,
+    "type": "fulltime",
+    "industry": "Law",
+    "title": "Corporate M&A Summer Associate",
+    "company": "Debevoise & Plimpton",
+    "location": "New York, NY",
+    "applyUrl": "#",
+    "note": "Top firm for M&A work. Ideal for 2L law students. DM me with questions.",
+    "postedBy": "ray-fitzgerald"
+  },
+  {
+    "id": 4,
+    "type": "internship",
+    "industry": "Government",
+    "title": "State Department Student Intern",
+    "company": "U.S. Department of State",
+    "location": "Washington, D.C.",
+    "applyUrl": "#",
+    "note": "Competitive but worth every application. I can review your personal statement.",
+    "postedBy": "hunter-rawlings"
+  }
+]
