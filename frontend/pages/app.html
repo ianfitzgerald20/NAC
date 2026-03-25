@@ -2546,6 +2546,12 @@ else if (_initHash === '#alumreg') showPage('alumreg');
     document.getElementById('myprof-display-name').textContent = fullName || 'My Profile';
     document.getElementById('myprof-av-initials').textContent  = initials.toUpperCase() || '?';
 
+    // helper to safely set a field value
+    function setField(id, val) {
+      const el = document.getElementById(id);
+      if (el && val) el.value = val;
+    }
+
     if (user.role === 'student') {
       const gradYear = p.gradYear || '';
       const grade    = p.grade    || '';
@@ -2555,12 +2561,10 @@ else if (_initHash === '#alumreg') showPage('alumreg');
         '<span class="myprof-badge">Student</span>' +
         (grade ? '<span class="myprof-badge">' + grade + '</span>' : '');
 
-      // Populate form fields
-      const stuFirst = document.getElementById('stu-first');
-      const stuLast  = document.getElementById('stu-last');
-      const stuYear  = document.getElementById('stu-grad-year');
-      if (stuFirst) stuFirst.value = firstName;
-      if (stuLast)  stuLast.value  = lastName;
+      // Populate student form fields
+      setField('stu-first', firstName);
+      setField('stu-last',  lastName);
+      const stuYear = document.getElementById('stu-grad-year');
       if (stuYear && gradYear) {
         [...stuYear.options].forEach(o => { o.selected = o.value == gradYear; });
       }
@@ -2568,7 +2572,6 @@ else if (_initHash === '#alumreg') showPage('alumreg');
     } else if (user.role === 'alumni') {
       const gradYear = p.gradYear || '';
       const company  = p.company  || '';
-      const jobTitle = p.jobTitle || '';
       document.getElementById('myprof-display-sub').textContent =
         'Norfolk Academy' +
         (gradYear ? ' Class of ' + gradYear : '') +
@@ -2576,6 +2579,22 @@ else if (_initHash === '#alumreg') showPage('alumreg');
       document.getElementById('myprof-display-badges').innerHTML =
         '<span class="myprof-badge">Alumni</span>' +
         (gradYear ? '<span class="myprof-badge">Class of ' + gradYear + '</span>' : '');
+
+      // Populate alumni form fields
+      setField('alum-first',   firstName);
+      setField('alum-last',    lastName);
+      setField('alum-na-year', gradYear);
+      setField('alum-college', p.college  || '');
+      setField('alum-role',    p.jobTitle || '');
+      setField('alum-company', p.company  || '');
+
+      // Set industry dropdown
+      const industryEl = document.getElementById('alum-industry');
+      if (industryEl && p.industry) {
+        [...industryEl.options].forEach(o => {
+          o.selected = o.value.toLowerCase() === p.industry.toLowerCase();
+        });
+      }
     }
 
     // Store user globally for other parts of the app
