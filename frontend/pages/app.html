@@ -1695,7 +1695,7 @@ tbody tr:hover{background:var(--bg2)}
           </div>
           <div class="alum-reg-section">
             <div class="alum-reg-section-title"><span class="alum-reg-section-icon">🎓</span> Education</div>
-            <div class="form-field"><label class="form-label">College / University</label><input class="form-input" type="text" placeholder="e.g. Harvard University"></div>
+            <div class="form-field"><label class="form-label">College / University</label><input class="form-input" id="ar-college" type="text" placeholder="Type to search…" list="college-list" autocomplete="off"></div>
             <div class="alum-reg-grid">
               <div class="form-field"><label class="form-label">Degree</label><select class="form-select"><option>B.A.</option><option>B.S.</option><option>M.A.</option><option>M.S.</option><option>M.B.A.</option><option>J.D.</option><option>M.D.</option><option>Ph.D.</option></select></div>
               <div class="form-field"><label class="form-label">Field of Study</label><input class="form-input" type="text" placeholder="e.g. Physics"></div>
@@ -1706,8 +1706,8 @@ tbody tr:hover{background:var(--bg2)}
             <div class="form-field"><label class="form-label">Job Title</label><input class="form-input" type="text" placeholder="e.g. Data Scientist & Quantum Physicist"></div>
             <div class="form-field"><label class="form-label">Company / Organization</label><input class="form-input" type="text" placeholder="e.g. Booz Allen Hamilton"></div>
             <div class="form-field"><label class="form-label">Industry</label>
-              <select class="form-select">
-                <option selected>Finance & Banking</option><option>Medicine & Health</option><option>Law</option><option>Technology</option><option>Government & Diplomacy</option><option>Media & Entertainment</option><option>Education</option><option>Entrepreneurship</option><option>Engineering</option><option>Non-Profit</option>
+              <select class="form-select" id="ar-industry">
+                <option value="" selected>Select industry…</option><option>Finance & Banking</option><option>Medicine & Health</option><option>Law</option><option>Technology</option><option>Government & Diplomacy</option><option>Media & Entertainment</option><option>Education</option><option>Entrepreneurship</option><option>Engineering</option><option>Non-Profit</option><option>Consulting</option><option>Real Estate</option><option>Other</option>
               </select>
             </div>
             <div class="form-field"><label class="form-label">Short Bio (shown on your profile)</label><textarea class="form-textarea" placeholder="e.g. I'm a Data Scientist & Quantum Physicist at Booz Allen Hamilton working on post-quantum cryptography for national security. I graduated from Norfolk Academy in 2019 and studied Physics at Harvard. Happy to talk about STEM careers, defense tech, and quantum computing…"></textarea></div>
@@ -1931,11 +1931,12 @@ tbody tr:hover{background:var(--bg2)}
           <div class="myprof-field-row">
             <div class="myprof-field">
               <div class="myprof-label">Year Graduated NA</div>
-              <input class="myprof-input" id="alum-na-year" type="text" value="2019" placeholder="e.g. 2019" onchange="updateAlumDisplay()">
+              <input class="myprof-input" id="alum-na-year" type="text" value="" placeholder="e.g. 2019" onchange="updateAlumDisplay()">
             </div>
             <div class="myprof-field">
               <div class="myprof-label">College / University</div>
-              <input class="myprof-input" id="alum-college" type="text" value="Harvard University" placeholder="e.g. UVA, W&amp;M…" onchange="updateAlumDisplay()">
+              <input class="myprof-input" id="alum-college" type="text" placeholder="Type to search…" list="college-list" onchange="updateAlumDisplay()" autocomplete="off">
+              <datalist id="college-list"></datalist>
             </div>
           </div>
           <div class="myprof-field-row">
@@ -1943,25 +1944,31 @@ tbody tr:hover{background:var(--bg2)}
               <div class="myprof-label">Industry</div>
               <select class="myprof-input myprof-select" id="alum-industry" onchange="updateAlumDisplay()">
                 <option value="" selected>Select industry…</option>
+                <option>Finance & Banking</option>
                 <option>Technology</option>
-                <option>Defense & Government</option>
-                <option>Finance</option>
                 <option>Law</option>
                 <option>Medicine & Health</option>
+                <option>Government & Diplomacy</option>
+                <option>Media & Entertainment</option>
                 <option>Design & Creative</option>
                 <option>Education</option>
+                <option>Engineering</option>
+                <option>Entrepreneurship</option>
+                <option>Non-Profit</option>
+                <option>Real Estate</option>
+                <option>Consulting</option>
                 <option>Other</option>
               </select>
             </div>
             <div class="myprof-field">
               <div class="myprof-label">Current Role</div>
-              <input class="myprof-input" id="alum-role" type="text" value="Data Scientist & Quantum Physicist" placeholder="e.g. Software Engineer" onchange="updateAlumDisplay()">
+              <input class="myprof-input" id="alum-role" type="text" value="" placeholder="e.g. Software Engineer" onchange="updateAlumDisplay()">
             </div>
           </div>
           <div class="myprof-field-row">
             <div class="myprof-field myprof-field-full">
               <div class="myprof-label">Current Company</div>
-              <input class="myprof-input" id="alum-company" type="text" value="Booz Allen Hamilton" placeholder="e.g. Google, Morgan Stanley…" onchange="updateAlumDisplay()">
+              <input class="myprof-input" id="alum-company" type="text" value="" placeholder="e.g. Google, Morgan Stanley…" onchange="updateAlumDisplay()">
             </div>
           </div>
         </div>
@@ -2390,11 +2397,11 @@ function initRole() {
     // Show alumni profile sections, hide student
     document.getElementById('myprof-student-sections').style.display = 'none';
     document.getElementById('myprof-alumni-sections').style.display = 'block';
-    // Update hero for alumni
-    document.getElementById('myprof-display-name').textContent = 'Ray Fitzgerald';
-    document.getElementById('myprof-display-sub').textContent = 'Norfolk Academy Class of 2019 · Booz Allen Hamilton';
-    document.getElementById('myprof-av-initials').textContent = 'RF';
-    document.getElementById('myprof-display-badges').innerHTML = '<span class="myprof-badge">Alumni</span><span class="myprof-badge">Class of 2019</span>';
+    // Clear hero placeholders — loadUserProfile() will fill in real data
+    document.getElementById('myprof-display-name').textContent = '';
+    document.getElementById('myprof-display-sub').textContent = '';
+    document.getElementById('myprof-av-initials').textContent = '';
+    document.getElementById('myprof-display-badges').innerHTML = '<span class="myprof-badge">Alumni</span>';
   } else {
     // Student: rename nav and section title
     const navHome = document.getElementById('nav-home');
@@ -2493,6 +2500,99 @@ function switchJobsTab(tab) {
   }
 }
 
+// ── US COLLEGES ──
+const US_COLLEGES = [
+  "Abilene Christian University","Adelphi University","Agnes Scott College","Alabama A&M University",
+  "Alfred University","Allegheny College","American University","Amherst College",
+  "Appalachian State University","Arizona State University","Auburn University",
+  "Babson College","Barnard College","Barry University","Bates College","Baylor University",
+  "Belmont University","Beloit College","Bentley University","Berklee College of Music",
+  "Berry College","Biola University","Boise State University","Boston College",
+  "Boston University","Bowdoin College","Brandeis University","Brigham Young University",
+  "Brown University","Bryant University","Bryn Mawr College","Bucknell University",
+  "California College of the Arts","California Institute of Technology",
+  "California Polytechnic State University San Luis Obispo","California State University Long Beach",
+  "Calvin University","Canisius University","Carleton College","Carnegie Mellon University",
+  "Carson-Newman University","Case Western Reserve University","Centre College",
+  "Christopher Newport University","Citadel Military College of South Carolina",
+  "Clarkson University","Clemson University","Coastal Carolina University",
+  "Colby College","Colgate University","College of Charleston","College of William and Mary",
+  "Colorado College","Colorado School of Mines","Colorado State University",
+  "Columbia University","Connecticut College","Cornell University",
+  "Creighton University","Dartmouth College","Davidson College","DePaul University",
+  "DePauw University","Denison University","Dickinson College","Drake University",
+  "Drexel University","Duke University","Duquesne University","East Carolina University",
+  "Eastman School of Music","Eckerd College","Elon University","Embry-Riddle Aeronautical University",
+  "Emory University","Fairfield University","Fairleigh Dickinson University","Fisk University",
+  "Florida A&M University","Florida International University","Florida Southern College",
+  "Florida State University","Fordham University","Furman University",
+  "George Mason University","George Washington University","Georgetown University",
+  "Georgia College and State University","Georgia Institute of Technology",
+  "Georgia Southern University","Gettysburg College","Gonzaga University",
+  "Gordon College","Grinnell College","Grove City College","Hamilton College",
+  "Hampton University","Harvard University","Harvey Mudd College","Haverford College",
+  "High Point University","Hillsdale College","Holy Cross College","Hope College",
+  "Howard University","Indiana University","Iowa State University",
+  "James Madison University","Johns Hopkins University","Juilliard School",
+  "Kansas State University","Kennesaw State University","Kenyon College",
+  "Kettering University","King University","Lafayette College","Lawrence University",
+  "Lehigh University","Liberty University","Lipscomb University","Longwood University",
+  "Long Island University","Louisiana State University","Loyola Marymount University",
+  "Loyola University Chicago","Lynn University","Macalester College",
+  "Manhattan School of Music","Marist College","Marquette University","Maryland Institute College of Art",
+  "Maryville College","Massachusetts Institute of Technology","Mercer University",
+  "Merrimack College","Messiah University","Miami University","Michigan State University",
+  "Middlebury College","Milligan University","Milwaukee School of Engineering",
+  "Mississippi State University","Monmouth University","Morehouse College","Morgan State University",
+  "Mount Holyoke College","Muhlenberg College","New Mexico Institute of Mining and Technology",
+  "New York Institute of Technology","New York University","Niagara University",
+  "Norfolk State University","North Carolina State University","Northeastern University",
+  "Northwestern University","Nova Southeastern University","Oberlin College","Ohio State University",
+  "Oklahoma State University","Old Dominion University","Oregon State University",
+  "Pace University","Parsons School of Design","Peabody Conservatory","Penn State University",
+  "Pepperdine University","Presbyterian College","Pratt Institute","Princeton University",
+  "Providence College","Purdue University","Quinnipiac University","Radford University",
+  "Rensselaer Polytechnic Institute","Rhode Island School of Design","Rhodes College",
+  "Rice University","Rider University","Rochester Institute of Technology",
+  "Rollins College","Rose-Hulman Institute of Technology","Rutgers University",
+  "Sacred Heart University","Samford University","Santa Clara University",
+  "Savannah College of Art and Design","Seattle Pacific University","Seattle University",
+  "Seton Hall University","Sewanee: The University of the South","Siena College",
+  "Smith College","Southern Methodist University","Spelman College",
+  "Stanford University","Stevens Institute of Technology","Stonehill College",
+  "St. Bonaventure University","St. John's University","St. Louis University","St. Olaf College",
+  "Stetson University","Swarthmore College","Texas A&M University",
+  "Texas Christian University","Texas State University","Texas Tech University",
+  "The Citadel","The New School","Trinity College","Troy University","Tufts University",
+  "Tulane University","Tuskegee University","Union University","United States Air Force Academy",
+  "United States Coast Guard Academy","United States Military Academy",
+  "United States Naval Academy","University of Alabama","University of Arizona",
+  "University of Arkansas","University of California Berkeley","University of California Los Angeles",
+  "University of Central Florida","University of Chicago","University of Colorado Boulder",
+  "University of Connecticut","University of Dayton","University of Delaware",
+  "University of Denver","University of Detroit Mercy","University of Florida",
+  "University of Georgia","University of Hawaii","University of Houston",
+  "University of Idaho","University of Illinois Urbana-Champaign","University of Iowa",
+  "University of Kansas","University of Kentucky","University of Louisville",
+  "University of Maryland","University of Massachusetts Amherst","University of Miami",
+  "University of Michigan","University of Minnesota","University of Mississippi",
+  "University of Missouri","University of Montana","University of Nebraska",
+  "University of Nevada Las Vegas","University of New Mexico","University of North Carolina at Chapel Hill",
+  "University of North Texas","University of Notre Dame","University of Oklahoma",
+  "University of Oregon","University of Pennsylvania","University of Pittsburgh",
+  "University of Portland","University of Richmond","University of San Diego",
+  "University of San Francisco","University of South Carolina","University of Southern California",
+  "University of Tennessee","University of Texas at Austin","University of Utah",
+  "University of Vermont","University of Virginia","University of Washington",
+  "University of Wisconsin-Madison","University of Wyoming","Vanderbilt University",
+  "Vassar College","Villanova University","Virginia Commonwealth University",
+  "Virginia Military Institute","Virginia Tech","Wake Forest University",
+  "Washington State University","Washington University in St. Louis",
+  "Wellesley College","Wesleyan University","Wheaton College","Williams College",
+  "Wofford College","Worcester Polytechnic Institute","Xavier University",
+  "Xavier University of Louisiana","Yale University"
+];
+
 // ── INIT ──
 renderAlumni(ALUMNI);
 initRole();
@@ -2566,12 +2666,15 @@ else if (_initHash === '#alumreg') showPage('alumreg');
       setField('alum-role',    p.jobTitle || '');
       setField('alum-company', p.company  || '');
 
-      // Set industry dropdown
+      // Set industry dropdown — always reset, default to "Select" if no industry saved
       const industryEl = document.getElementById('alum-industry');
-      if (industryEl && p.industry) {
-        [...industryEl.options].forEach(o => {
-          o.selected = o.value.toLowerCase() === p.industry.toLowerCase();
-        });
+      if (industryEl) {
+        industryEl.value = '';
+        if (p.industry) {
+          [...industryEl.options].forEach(o => {
+            o.selected = o.text.toLowerCase() === p.industry.toLowerCase();
+          });
+        }
       }
 
       // Populate experience timeline from real data
@@ -2599,6 +2702,18 @@ else if (_initHash === '#alumreg') showPage('alumreg');
 
   } catch(e) {
     console.error('Could not load profile:', e);
+  }
+})();
+
+// Populate college datalist — always runs regardless of login state
+(function() {
+  const dl = document.getElementById('college-list');
+  if (dl) {
+    US_COLLEGES.forEach(function(name) {
+      const opt = document.createElement('option');
+      opt.value = name;
+      dl.appendChild(opt);
+    });
   }
 })();
 </script>

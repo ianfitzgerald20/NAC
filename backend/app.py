@@ -1,6 +1,7 @@
 from flask import Flask, send_from_directory, make_response
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from datetime import timedelta
 import os
 
 from database import db
@@ -20,6 +21,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "dev-secret-change-in-production")
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 
 db.init_app(app)
 JWTManager(app)
