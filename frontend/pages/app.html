@@ -2002,6 +2002,12 @@ tbody tr:hover{background:var(--bg2)}
 
       </div><!-- /alumni sections -->
 
+      <!-- Save Button -->
+      <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border1);display:flex;align-items:center;gap:1rem">
+        <button class="btn btn-primary btn-lg" id="save-profile-btn" onclick="saveProfile()">Save Profile</button>
+        <div id="save-profile-msg" style="font-size:.85rem;display:none"></div>
+      </div>
+
     </div><!-- /myprof-inner -->
   </div><!-- /myprof-wrap -->
 </div><!-- /page-my-profile -->
@@ -2498,6 +2504,63 @@ function switchJobsTab(tab) {
     renderJobs(JOBS);
     if (cta) cta.style.display = 'none';
   }
+}
+
+// ── SAVE PROFILE ──
+async function saveProfile() {
+  const token = localStorage.getItem('ac_token');
+  const role  = localStorage.getItem('ac_role');
+  if (!token) { alert('You must be signed in to save your profile.'); return; }
+
+  const btn = document.getElementById('save-profile-btn');
+  const msg = document.getElementById('save-profile-msg');
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+  msg.style.display = 'none';
+
+  let body = {};
+  if (role === 'alumni') {
+    body = {
+      firstName:    (document.getElementById('alum-first')   || {}).value || '',
+      lastName:     (document.getElementById('alum-last')    || {}).value || '',
+      jobTitle:     (document.getElementById('alum-role')    || {}).value || '',
+      company:      (document.getElementById('alum-company') || {}).value || '',
+      college:      (document.getElementById('alum-college') || {}).value || '',
+      industry:     (document.getElementById('alum-industry')|| {}).value || '',
+      gradYear:     parseInt((document.getElementById('alum-na-year') || {}).value) || null,
+    };
+  } else {
+    body = {
+      firstName: (document.getElementById('stu-first')     || {}).value || '',
+      lastName:  (document.getElementById('stu-last')      || {}).value || '',
+      gradYear:  parseInt((document.getElementById('stu-grad-year') || {}).value) || null,
+      grade:     (document.getElementById('stu-grade')     || {}).value || '',
+    };
+  }
+
+  try {
+    const res = await fetch('/api/auth/me', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (res.ok) {
+      msg.textContent = '✓ Profile saved!';
+      msg.style.color = 'var(--accent)';
+    } else {
+      msg.textContent = data.error || 'Save failed.';
+      msg.style.color = 'var(--crimson)';
+    }
+    msg.style.display = 'block';
+  } catch(e) {
+    msg.textContent = 'Network error. Please try again.';
+    msg.style.color = 'var(--crimson)';
+    msg.style.display = 'block';
+  }
+
+  btn.textContent = 'Save Profile';
+  btn.disabled = false;
 }
 
 // ── US COLLEGES ──

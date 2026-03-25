@@ -94,3 +94,44 @@ def me():
         data["profile"] = {}
 
     return jsonify(data)
+
+
+@auth_bp.put("/api/auth/me")
+@jwt_required()
+def update_me():
+    user = User.query.get(int(get_jwt_identity()))
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    body = request.get_json(silent=True) or {}
+
+    # Update name fields on User
+    if body.get("firstName"):
+        user.first_name = body["firstName"].strip()
+    if body.get("lastName"):
+        user.last_name = body["lastName"].strip()
+
+    if user.role == "alumni":
+        p = user.alumni_profile
+        if not p:
+            p = AlumniProfile(user_id=user.id)
+            db.session.add(p)
+        p.job_title   = body.get("jobTitle",   p.job_title   or "")
+        p.company     = body.get("company",    p.company     or "")
+        p.college     = body.get("college",    p.college     or "")
+        p.industry    = body.get("industry",   p.industry    or "")
+        p.grad_year   = body.get("gradYear",   p.grad_year)
+        p.bio         = body.get("bio",        p.bio         or "")
+        p.linkedin_url = body.get("linkedinUrl", p.linkedin_url or "")
+        p.availability = body.get("availability", p.availability or "available")
+
+    elif user.role == "student":
+        p = user.student_profile
+        if not p:
+            p = StudentProfile(user_id=user.id)
+            db.session.add(p)
+        p.grad_year = body.get("gradYear", p.grad_year)
+        p.grade     = body.get("grade",    p.grade or "")
+
+    db.session.commit()
+    return jsonify({"message": "Profile saved"})
