@@ -2546,10 +2546,10 @@ else if (_initHash === '#alumreg') showPage('alumreg');
     document.getElementById('myprof-display-name').textContent = fullName || 'My Profile';
     document.getElementById('myprof-av-initials').textContent  = initials.toUpperCase() || '?';
 
-    // helper to safely set a field value
+    // helper — always sets value, clearing dummy defaults even if val is empty
     function setField(id, val) {
       const el = document.getElementById(id);
-      if (el && val) el.value = val;
+      if (el) el.value = val || '';
     }
 
     if (user.role === 'student') {
