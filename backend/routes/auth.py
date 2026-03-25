@@ -83,4 +83,14 @@ def me():
     user = User.query.get(int(get_jwt_identity()))
     if not user:
         return jsonify({"error": "User not found"}), 404
-    return jsonify(user.to_dict())
+
+    data = user.to_dict()
+
+    if user.role == "student" and user.student_profile:
+        data["profile"] = user.student_profile.to_dict()
+    elif user.role == "alumni" and user.alumni_profile:
+        data["profile"] = user.alumni_profile.to_dict()
+    else:
+        data["profile"] = {}
+
+    return jsonify(data)

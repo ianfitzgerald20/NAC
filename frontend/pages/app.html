@@ -2523,6 +2523,68 @@ initRole();
 const _initHash = window.location.hash;
 if (_initHash === '#onboard') showPage('onboard');
 else if (_initHash === '#alumreg') showPage('alumreg');
+
+// ── LOAD REAL USER PROFILE ──
+(async function loadUserProfile() {
+  const token = localStorage.getItem('ac_token');
+  if (!token) return; // not logged in, stay as guest/demo
+
+  try {
+    const res = await fetch('/api/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (!res.ok) return; // token expired or invalid — stay in demo mode
+
+    const user = await res.json();
+    const p = user.profile || {};
+    const firstName = user.firstName || '';
+    const lastName  = user.lastName  || '';
+    const initials  = (firstName[0] || '') + (lastName[0] || '');
+    const fullName  = (firstName + ' ' + lastName).trim();
+
+    // Update hero banner
+    document.getElementById('myprof-display-name').textContent = fullName || 'My Profile';
+    document.getElementById('myprof-av-initials').textContent  = initials.toUpperCase() || '?';
+
+    if (user.role === 'student') {
+      const gradYear = p.gradYear || '';
+      const grade    = p.grade    || '';
+      document.getElementById('myprof-display-sub').textContent =
+        'Norfolk Academy' + (gradYear ? ' · Class of ' + gradYear : '');
+      document.getElementById('myprof-display-badges').innerHTML =
+        '<span class="myprof-badge">Student</span>' +
+        (grade ? '<span class="myprof-badge">' + grade + '</span>' : '');
+
+      // Populate form fields
+      const stuFirst = document.getElementById('stu-first');
+      const stuLast  = document.getElementById('stu-last');
+      const stuYear  = document.getElementById('stu-grad-year');
+      if (stuFirst) stuFirst.value = firstName;
+      if (stuLast)  stuLast.value  = lastName;
+      if (stuYear && gradYear) {
+        [...stuYear.options].forEach(o => { o.selected = o.value == gradYear; });
+      }
+
+    } else if (user.role === 'alumni') {
+      const gradYear = p.gradYear || '';
+      const company  = p.company  || '';
+      const jobTitle = p.jobTitle || '';
+      document.getElementById('myprof-display-sub').textContent =
+        'Norfolk Academy' +
+        (gradYear ? ' Class of ' + gradYear : '') +
+        (company  ? ' · ' + company : '');
+      document.getElementById('myprof-display-badges').innerHTML =
+        '<span class="myprof-badge">Alumni</span>' +
+        (gradYear ? '<span class="myprof-badge">Class of ' + gradYear + '</span>' : '');
+    }
+
+    // Store user globally for other parts of the app
+    window.CURRENT_USER = user;
+
+  } catch(e) {
+    console.error('Could not load profile:', e);
+  }
+})();
 </script>
 </body>
 </html>
