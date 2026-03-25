@@ -1921,11 +1921,11 @@ tbody tr:hover{background:var(--bg2)}
           <div class="myprof-field-row">
             <div class="myprof-field">
               <div class="myprof-label">First Name</div>
-              <input class="myprof-input" id="alum-first" type="text" value="Ray" onchange="updateAlumDisplay()">
+              <input class="myprof-input" id="alum-first" type="text" value="" placeholder="First name" onchange="updateAlumDisplay()">
             </div>
             <div class="myprof-field">
               <div class="myprof-label">Last Name</div>
-              <input class="myprof-input" id="alum-last" type="text" value="Fitzgerald" onchange="updateAlumDisplay()">
+              <input class="myprof-input" id="alum-last" type="text" value="" placeholder="Last name" onchange="updateAlumDisplay()">
             </div>
           </div>
           <div class="myprof-field-row">
@@ -2548,8 +2548,13 @@ async function saveProfile() {
     if (res.ok) {
       msg.textContent = '✓ Profile saved!';
       msg.style.color = 'var(--accent)';
+    } else if (res.status === 401 || res.status === 422) {
+      msg.textContent = 'Session expired — please sign in again.';
+      msg.style.color = 'var(--crimson)';
+      localStorage.removeItem('ac_token');
+      localStorage.removeItem('ac_role');
     } else {
-      msg.textContent = data.error || 'Save failed.';
+      msg.textContent = data.error || data.msg || 'Save failed.';
       msg.style.color = 'var(--crimson)';
     }
     msg.style.display = 'block';
