@@ -1942,8 +1942,9 @@ tbody tr:hover{background:var(--bg2)}
             <div class="myprof-field">
               <div class="myprof-label">Industry</div>
               <select class="myprof-input myprof-select" id="alum-industry" onchange="updateAlumDisplay()">
+                <option value="" selected>Select industry…</option>
                 <option>Technology</option>
-                <option selected>Defense & Government</option>
+                <option>Defense & Government</option>
                 <option>Finance</option>
                 <option>Law</option>
                 <option>Medicine & Health</option>
@@ -1972,30 +1973,7 @@ tbody tr:hover{background:var(--bg2)}
             <button class="myprof-section-action" onclick="document.getElementById('exp-add-overlay').classList.add('open')">+ Add</button>
           </div>
           <div class="exp-timeline" id="exp-timeline">
-            <div class="exp-entry">
-              <div class="exp-dot">BA</div>
-              <div class="exp-content">
-                <div class="exp-role">Data Scientist & Quantum Physicist</div>
-                <div class="exp-org">Booz Allen Hamilton</div>
-                <div class="exp-dates">2023 – Present</div>
-              </div>
-            </div>
-            <div class="exp-entry">
-              <div class="exp-dot">RA</div>
-              <div class="exp-content">
-                <div class="exp-role">Research Associate — Quantum Information Science</div>
-                <div class="exp-org">Harvard Quantum Initiative</div>
-                <div class="exp-dates">2021 – 2023</div>
-              </div>
-            </div>
-            <div class="exp-entry">
-              <div class="exp-dot">IN</div>
-              <div class="exp-content">
-                <div class="exp-role">Summer Analyst — Quantum Computing</div>
-                <div class="exp-org">IBM Research</div>
-                <div class="exp-dates">Summer 2021</div>
-              </div>
-            </div>
+            <div id="exp-empty" style="font-size:.85rem;color:var(--text3);padding:.5rem 0">No experience added yet. Use the button below to add your first entry.</div>
           </div>
           <button class="exp-add-btn" onclick="document.getElementById('exp-add-overlay').classList.add('open')">+ Add Experience</button>
         </div>
@@ -2594,6 +2572,25 @@ else if (_initHash === '#alumreg') showPage('alumreg');
         [...industryEl.options].forEach(o => {
           o.selected = o.value.toLowerCase() === p.industry.toLowerCase();
         });
+      }
+
+      // Populate experience timeline from real data
+      const timeline = document.getElementById('exp-timeline');
+      const emptyMsg = document.getElementById('exp-empty');
+      if (timeline && (p.jobTitle || p.company)) {
+        // Has at least a current role — show it
+        const dot = ((p.company || '') + ' ').slice(0, 2).toUpperCase();
+        if (emptyMsg) emptyMsg.style.display = 'none';
+        const entry = document.createElement('div');
+        entry.className = 'exp-entry';
+        entry.innerHTML = `
+          <div class="exp-dot">${dot}</div>
+          <div class="exp-content">
+            <div class="exp-role">${p.jobTitle || 'Current Role'}</div>
+            <div class="exp-org">${p.company || ''}</div>
+            <div class="exp-dates">Present</div>
+          </div>`;
+        timeline.appendChild(entry);
       }
     }
 
