@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, make_response
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 import os
@@ -31,13 +31,19 @@ app.register_blueprint(auth_bp)
 FRONTEND_DIR = os.path.join(BASE_DIR, "../frontend")
 PAGES_DIR = os.path.join(FRONTEND_DIR, "pages")
 
+def no_cache(response):
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
 @app.get("/")
 def root():
-    return send_from_directory(PAGES_DIR, "index.html")
+    return no_cache(make_response(send_from_directory(PAGES_DIR, "index.html")))
 
 @app.get("/app")
 def app_page():
-    return send_from_directory(PAGES_DIR, "app.html")
+    return no_cache(make_response(send_from_directory(PAGES_DIR, "app.html")))
 
 @app.get("/<path:path>")
 def static_files(path):
